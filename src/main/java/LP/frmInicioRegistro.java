@@ -43,7 +43,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		setTitle("EasyBooking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 100, 600, 431);
-		//setContentPane(VentanaInicial());
+		setContentPane(VentanaInicial());
 		//cargaProperties();
 		this.addWindowListener( new WindowAdapter() {
 			@Override
