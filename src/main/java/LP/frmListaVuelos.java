@@ -61,10 +61,15 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		inicio.setMnemonic(KeyEvent.VK_I); 
 		menuBar.add(inicio);
 		
+		JMenuItem mntmIrAInicio = new JMenuItem("Ir a Inicio");
+		inicio.add(mntmIrAInicio);
+		mntmIrAInicio.setActionCommand(CMD_BTN_LOGOTIPO_INICIAL);
+		mntmIrAInicio.addActionListener(this);
+		
 		JMenu cuenta = new JMenu("Cuenta");
 		cuenta.setMnemonic(KeyEvent.VK_C); 
 		menuBar.add(cuenta);
-			
+		
 		JMenuItem iniciosesion = new JMenuItem("Inicio sesión");
 		cuenta.add(iniciosesion);
 		
@@ -215,6 +220,11 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 	{
 		switch(e.getActionCommand())
 		{
+			case CMD_BTN_LOGOTIPO_INICIAL:
+				frmLogotipoInicial portada = new frmLogotipoInicial();
+				portada.setVisible(true);
+				this.setVisible(false);
+				break;
 			case CMD_BTN_IR_INICIO_REGISTRO:
 				frmInicioRegistro inicioregistro = new frmInicioRegistro();
 				inicioregistro.setVisible(true);

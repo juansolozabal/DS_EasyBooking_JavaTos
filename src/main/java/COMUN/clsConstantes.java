@@ -1,7 +1,7 @@
 package COMUN;
 
 public class clsConstantes {
-
+	public static final String CMD_BTN_LOGOTIPO_INICIAL = "CMD_BTN_LOGOTIPO_INICIAL";
 	public static final String CMD_BTN_INICIAR_SESION = "CMD_BTN_INICIAR_SESION";
 	public static final String CMD_BTN_REGISTRARSE = "CMD_BTN_REGISTRARSE";
 	public static final String CMD_BTN_INICIAR_SESION2 = "CMD_BTN_INICIAR_SESION2";
