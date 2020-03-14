@@ -3,4 +3,13 @@
   <groupId>DS_EasyBooking_JavaTos</groupId>
   <artifactId>DS_EasyBooking_JavaTos</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+
+<dependencies>
+	<dependency>
+  		<groupId>com.toedter</groupId>
+  		<artifactId>jcalendar</artifactId>
+  		<version>1.4</version>
+	</dependency>
+</dependencies>
+
 </project>

@@ -7,4 +7,5 @@ public class clsConstantes {
 	public static final String CMD_BTN_INICIAR_SESION2 = "CMD_BTN_INICIAR_SESION2";
 	public static final String CMD_BTN_REGISTRARSE2 = "CMD_BTN_REGISTRARSE2";
 	public static final String CMD_BTN_ATRAS = "CMD_BTN_ATRAS";
+	public static final String CMD_BTN_IR_INICIO_REGISTRO = "CMD_BTN_IR_INICIO_REGISTRO";
 }
