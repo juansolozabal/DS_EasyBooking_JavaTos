@@ -196,8 +196,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		switch(e.getActionCommand())
 		{
 			case CMD_BTN_IR_INICIO_REGISTRO:
-				frmInicioRegistro frInicioRegistro = new frmInicioRegistro();
-				frInicioRegistro.setVisible(true);
+
 				break;
 			default: break;	
 		}	

@@ -24,7 +24,7 @@ public class clsMain
 			logger.log( Level.SEVERE, e.toString(), e );
 		}
 		
-		frmListaVuelos frPantalla = new frmListaVuelos();
+		frmInicioRegistro frPantalla = new frmInicioRegistro();
 		frPantalla.setVisible(true);
 		logger.log( Level.INFO, "Ejecutando programa. ");
 	}

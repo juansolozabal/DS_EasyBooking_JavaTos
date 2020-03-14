@@ -137,6 +137,11 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 			}				
 			break;
 		*/
+			frmListaVuelos frVuelos = new frmListaVuelos();
+			frVuelos.setVisible(true);
+			this.setVisible(false);
+			break;	
+			
 			
 		case CMD_BTN_REGISTRARSE2:
 			
@@ -159,12 +164,17 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
 //			this.setVisible(false);
-//			salvaProperties();
-//			frmMenuPrincipal frame = new frmMenuPrincipal();
-//			frame.setVisible(true);
+			salvaProperties();
+			frmMenuPrincipal frame = new frmMenuPrincipal();
+			frame.setVisible(true);
 			break;
 			}	
 		*/
+			frmListaVuelos frVuelos2 = new frmListaVuelos();
+			frVuelos2.setVisible(true);
+			this.setVisible(false);
+			break;
+		    default: break;	
 		}
 	}
 
