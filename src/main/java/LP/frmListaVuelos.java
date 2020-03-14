@@ -32,6 +32,8 @@ import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import java.awt.Scrollbar;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -47,14 +49,11 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 	
 	public frmListaVuelos() 
 	{
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\workspace\\DS_EasyBooking_JavaTos\\src\\main\\resources\\img\\Logo EasyBooking_Azul.png"));
+		setResizable(false);
 		setTitle("Lista de Vuelos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 454, 452);
-		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(100, 100, 444, 577);
 		
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -68,8 +67,6 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 			
 		JMenuItem iniciosesion = new JMenuItem("Inicio sesión");
 		cuenta.add(iniciosesion);
-		iniciosesion.setActionCommand(CMD_BTN_IR_INICIO_REGISTRO);
-		iniciosesion.addActionListener(this);
 		
 		JMenuItem registro = new JMenuItem("Registro");
 		cuenta.add(registro);
@@ -77,6 +74,34 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		JMenu salir = new JMenu("Salir");
 		salir.setMnemonic(KeyEvent.VK_S); 
 		menuBar.add(salir);
+		
+		JMenuBar menuBar_1 = new JMenuBar();
+		setJMenuBar(menuBar_1);
+		
+		JMenu mnNewMenu = new JMenu("Inicio");
+		menuBar_1.add(mnNewMenu);
+		
+		JMenu mnNewMenu_1 = new JMenu("Mi cuenta");
+		menuBar_1.add(mnNewMenu_1);
+		
+		JMenuItem mntmIniciarSesin = new JMenuItem("Iniciar sesi\u00F3n");
+		mnNewMenu_1.add(mntmIniciarSesin);
+		mntmIniciarSesin.setActionCommand(CMD_BTN_IR_INICIO_REGISTRO);
+		mntmIniciarSesin.addActionListener(this);
+		
+		JMenuItem mntmMisReservas = new JMenuItem("Mis reservas");
+		mnNewMenu_1.add(mntmMisReservas);
+		
+		JMenuItem mntmRegistrarse = new JMenuItem("Cerrar sesi\u00F3n");
+		mnNewMenu_1.add(mntmRegistrarse);
+		
+		JMenu mnNewMenu_3 = new JMenu("Cont\u00E1ctanos\r\n");
+		menuBar_1.add(mnNewMenu_3);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		ButtonGroup idaOidavuelta = new ButtonGroup(); //Para que solo se pueda seleccionar ida o ida y vuelta
 		
@@ -122,18 +147,13 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(234, 50, 97, 25);
 		contentPane.add(btnBuscar);
-		//TODO no consigo que me salga el menu bar, no sé por qué. Mi idea era que saliese una opción JMenuItem que te lleve a
-		// la pantalla de iniciar sesión o registro de usuario
-		btnBuscar.setActionCommand(CMD_BTN_IR_INICIO_REGISTRO);
-		btnBuscar.addActionListener(this);
-		
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(12, 127, 385, 2);
 		contentPane.add(separator);
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(415, 0, 21, 378);
+		scrollBar.setBounds(415, 0, 21, 417);
 		contentPane.add(scrollBar);
 		
 		int offset=0;
@@ -196,7 +216,8 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		switch(e.getActionCommand())
 		{
 			case CMD_BTN_IR_INICIO_REGISTRO:
-
+				frmInicioRegistro inicioregistro = new frmInicioRegistro();
+				inicioregistro.setVisible(true);
 				break;
 			default: break;	
 		}	

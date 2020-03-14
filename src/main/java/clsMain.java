@@ -8,6 +8,7 @@ import java.util.logging.StreamHandler;
 
 import LP.frmInicioRegistro;
 import LP.frmListaVuelos;
+import LP.frmLogotipoInicial;
 
 public class clsMain 
 {
@@ -24,7 +25,7 @@ public class clsMain
 			logger.log( Level.SEVERE, e.toString(), e );
 		}
 		
-		frmInicioRegistro frPantalla = new frmInicioRegistro();
+		frmLogotipoInicial frPantalla = new frmLogotipoInicial();
 		frPantalla.setVisible(true);
 		logger.log( Level.INFO, "Ejecutando programa. ");
 	}
