@@ -31,6 +31,8 @@ import java.awt.EventQueue;
 
 import javax.swing.border.EmptyBorder;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
@@ -44,6 +46,7 @@ import java.awt.ScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import javax.swing.SingleSelectionModel;
 import javax.swing.JComboBox;
 
 public class frmListaVuelos extends JFrame implements ActionListener{
@@ -51,6 +54,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 	private JCalendar calendarVuelta;
 	private File imagen;
 	private int numPasajeros;
+	private JSpinner spinner;
 	
 	public frmListaVuelos() 
 	{
@@ -157,11 +161,10 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		//dateChooser.getDate(); para obtener la fecha de la caja
 		if (btnIda.isSelected()) calendarVuelta.setVisible(false);
 		
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
 		spinner.getEditor().getComponent(0).setBackground(azulClaro);
 		spinner.setBounds(340, 14, 36, 22);
 		contentPane.add(spinner);
-		if ((Integer)spinner.getValue()>10) JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
 		numPasajeros = (Integer) spinner.getValue();
 		System.out.println("Número de pasajeros:" + numPasajeros);
 		
@@ -178,12 +181,16 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		separator.setBounds(12, 127, 385, 2);
 		contentPane.add(separator);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(415, 0, 21, 417);
-		contentPane.add(scrollBar);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(true);
+		scrollPane.setVisible(true);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(420, 0, 18, 516);
+		contentPane.add(scrollPane);
+		
 		
 		int offset=0;
-		int numBusquedas = 5; //irá cambiando según cuántas búsquedas coincidan
+		int numBusquedas = 6; //irá cambiando según cuántas búsquedas coincidan
 		JTextArea textArea_1, textArea, textArea_2, textArea_3, textArea_4, textArea_5;
 		JLabel label, label_1;
 		JButton btnReservar;
@@ -261,8 +268,14 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 				inicioregistro.setVisible(true);
 				break;
 			case CMD_BTN_RESERVAR:
-				frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
-				datosPasajeros.setVisible(true);
+				numPasajeros=(Integer)spinner.getValue();
+				if(numPasajeros==0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
+				else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
+				else
+				{
+					frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
+					datosPasajeros.setVisible(true);
+				}
 				break;
 			default: break;	
 		}	

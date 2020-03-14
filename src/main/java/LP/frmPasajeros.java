@@ -44,8 +44,6 @@ public class frmPasajeros extends JFrame implements ActionListener
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// Vamos a poner que el número de pasajeros es 3, porque no recoje bien el número de pasajeros.
-		numPasajeros = 3;
 		int offset = 0;
 		JTextField textField, textField_1, textField_2;
 		int j = 1;
