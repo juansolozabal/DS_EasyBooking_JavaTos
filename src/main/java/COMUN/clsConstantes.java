@@ -9,4 +9,5 @@ public class clsConstantes {
 	public static final String CMD_BTN_ATRAS = "CMD_BTN_ATRAS";
 	public static final String CMD_BTN_IR_INICIO_REGISTRO = "CMD_BTN_IR_INICIO_REGISTRO";
 	public static final String CMD_BTN_ENTRAR = "CMD_BTN_ENTRAR";
+	public static final String CMD_BTN_RESERVAR = "CMD_BTN_RESERVAR";
 }

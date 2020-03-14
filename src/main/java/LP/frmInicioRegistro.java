@@ -62,19 +62,19 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 	public JPanel VentanaInicial()
 	{
 		contentPane.removeAll();
-		
 //		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+	    Color azulFondo = new Color (0, 76, 109);
+	    contentPane.setBackground(azulFondo);
+
 		JLabel EasyBooking = new JLabel("");
-		//ImageIcon logo= new ImageIcon("src/imagenes/EasyBooking.png");
-		//EasyBooking.setIcon(logo);
+		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		Image image = logo.getImage(); 
+		Image newimg = image.getScaledInstance(342, 140,  java.awt.Image.SCALE_SMOOTH);
+		logo = new ImageIcon(newimg); 
+		EasyBooking.setIcon(logo);
 		EasyBooking.setBounds(140, 53, 537, 203);
 		contentPane.add(EasyBooking);
-		//ImageIcon im= new ImageIcon("src/imagenes/bombita.jpg");
-	    //this.setIconImage(im.getImage());
-	    Color azulFondo = new Color (0, 76, 109);
-	    this.setBackground(azulFondo);
 		
 		btnIniciarSesion = new JButton("Iniciar Sesión");
 		btnIniciarSesion.setBounds(100, 267, 180, 23);
@@ -189,11 +189,11 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.removeAll();
 	
 		JLabel EasyBooking = new JLabel("");
-		/*ImageIcon logo= new ImageIcon("src/imagenes/EasyBooking.png");
+		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
-		Image newimg = image.getScaledInstance(180, 110,  java.awt.Image.SCALE_SMOOTH);
+		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 
-		EasyBooking.setIcon(logo);*/
+		EasyBooking.setIcon(logo);
 		EasyBooking.setBounds(5, 5, 180, 150);
 		contentPane.add(EasyBooking);
 		
@@ -202,16 +202,19 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.setLayout(null);
 		
 		JLabel i1 = new JLabel("Nombre de Usuario:");
+		i1.setForeground(Color.white);
 		i1.setBounds(200, 60, 150,50);
 		t1 = new JTextField(15);
 		t1.setBounds(320, 75,150,20);
 		
 		JLabel i2 = new JLabel("Dirección de correo electrónico:");
+		i2.setForeground(Color.white);
 		i2.setBounds(130, 130, 200, 50);
 		t2 = new JTextField(15);
 		t2.setBounds(320, 150,150,20);
 		
 		JLabel i3 = new JLabel("Contraseña:");
+		i3.setForeground(Color.white);
 		i3.setBounds(240, 200,200,50);
 		t3 = new JPasswordField(15);
 		t3.setBounds(320, 220,150,20);
@@ -250,15 +253,16 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.removeAll();
 		
 		JLabel EasyBooking = new JLabel("");
-		/*ImageIcon logo= new ImageIcon("src/imagenes/EasyBooking.png");
+		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
-		Image newimg = image.getScaledInstance(180, 110,  java.awt.Image.SCALE_SMOOTH);
+		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 
-		EasyBooking.setIcon(logo);*/
+		EasyBooking.setIcon(logo);
 		EasyBooking.setBounds(5, 5, 180, 150);
 		contentPane.add(EasyBooking);
 		
 		JLabel nombre = new JLabel("Nombre:");
+		nombre.setForeground(Color.white);
 		nombre.setBounds(215, 30, 80, 25);
 		contentPane.add(nombre);
 		
@@ -267,6 +271,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.add(nomtxt);
 		
 		JLabel apellido = new JLabel("Apellidos:");
+		apellido.setForeground(Color.white);
 		apellido.setBounds(215, 90, 160, 25);
 		contentPane.add(apellido);
 		
@@ -275,6 +280,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.add(apetxt);
 		
 		JLabel correo = new JLabel("Correo electrónico:");
+		correo.setForeground(Color.white);
 		correo.setBounds(155, 150, 160, 25);
 		contentPane.add(correo);
 		
@@ -283,6 +289,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.add(corretxt);
 		
 		JLabel nomusu = new JLabel("Nombre de usuario:");
+		nomusu.setForeground(Color.white);
 		nomusu.setBounds(155, 210, 160, 25);
 		contentPane.add(nomusu);
 		
@@ -291,6 +298,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.add(nomusutxt);
 		
 		JLabel contrausu = new JLabel("Contraseña:");
+		contrausu.setForeground(Color.white);
 		contrausu.setBounds(195, 270, 160, 25);
 		contentPane.add(contrausu);
 		

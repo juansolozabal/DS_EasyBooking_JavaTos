@@ -8,6 +8,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,11 +19,13 @@ import javax.swing.border.EmptyBorder;
 public class frmLogotipoInicial extends JFrame implements ActionListener
 {
 	private JPanel contentPane;
+	private File imagen;
 	
 	public frmLogotipoInicial()
 	{
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\workspace\\DS_EasyBooking_JavaTos\\src\\main\\resources\\img\\Logo EasyBooking_Azul.png"));
+		imagen = new File("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(imagen.getAbsolutePath()));
 		setTitle("Bienvenid@ a EasyBooking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1045, 455);
@@ -39,7 +42,7 @@ public class frmLogotipoInicial extends JFrame implements ActionListener
 		button.addActionListener(this);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\workspace\\DS_EasyBooking_JavaTos\\src\\main\\resources\\img\\Logo EasyBooking_Azul.png"));
+		lblNewLabel.setIcon(new ImageIcon(imagen.getAbsolutePath()));
 		lblNewLabel.setBounds(0, 0, 1039, 427);
 		contentPane.add(lblNewLabel);
 	}
