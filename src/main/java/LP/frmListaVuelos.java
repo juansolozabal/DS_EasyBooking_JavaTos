@@ -60,6 +60,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 	private JSpinner spinner;
 	private JDateChooser fechaHoy;
 	private Calendar actual;
+	private JRadioButton btnIda, btnIdaYVuelta;
 	
 	public frmListaVuelos() 
 	{
@@ -131,18 +132,22 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		
 		ButtonGroup idaOidavuelta = new ButtonGroup(); //Para que solo se pueda seleccionar ida o ida y vuelta
 		
-		JRadioButton btnIdaYVuelta = new JRadioButton("Ida y vuelta");
+		btnIdaYVuelta = new JRadioButton("Ida y vuelta");
 		btnIdaYVuelta.setBackground(azulFondo);
 		btnIdaYVuelta.setForeground(Color.white);
 		btnIdaYVuelta.setBounds(12, 13, 99, 25);
+		btnIdaYVuelta.setActionCommand(CMD_BTN_IDA_VUELTA);
+		btnIdaYVuelta.addActionListener(this);
 		contentPane.add(btnIdaYVuelta);
 		btnIdaYVuelta.setSelected(true);
 		idaOidavuelta.add(btnIdaYVuelta);
 		
-		JRadioButton btnIda = new JRadioButton("Solo ida");
+		btnIda = new JRadioButton("Solo ida");
 		btnIda.setBackground(azulFondo);
 		btnIda.setForeground(Color.white);
 		btnIda.setBounds(123, 13, 97, 25);
+		btnIda.setActionCommand(CMD_BTN_IDA);
+		btnIda.addActionListener(this);
 		contentPane.add(btnIda);
 		idaOidavuelta.add(btnIda);
 		
@@ -160,15 +165,12 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		calendarIda.setBackground(azulClaro);
 		calendarIda.setBounds(12, 89, 100, 25);
 		contentPane.add(calendarIda);
-		//dateChooser.getDate(); para obtener la fecha de la caja
 		
 		calendarVuelta = new JDateChooser(null, null, null, new JSpinnerDateEditor()); 
 		calendarVuelta.setForeground(azulClaro);
 		calendarVuelta.setBounds(123, 89, 100, 25);
 		contentPane.add(calendarVuelta);
 	//	calendarVuelta.
-		//dateChooser.getDate(); para obtener la fecha de la caja
-		if (btnIda.isSelected()) calendarVuelta.setVisible(false);
 		
 		spinner = new JSpinner();
 		spinner.getEditor().getComponent(0).setBackground(azulClaro);
@@ -268,6 +270,12 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 	{
 		switch(e.getActionCommand())
 		{
+			case CMD_BTN_IDA:
+				if(btnIda.isSelected()) calendarVuelta.setVisible(false);
+				break;
+			case CMD_BTN_IDA_VUELTA:
+				if(btnIda.isSelected()==false) calendarVuelta.setVisible(true);
+				break;
 			case CMD_BTN_LOGOTIPO_INICIAL:
 				frmLogotipoInicial portada = new frmLogotipoInicial();
 				portada.setVisible(true);
@@ -278,17 +286,49 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 				inicioregistro.setVisible(true);
 				break;
 			case CMD_BTN_RESERVAR:
-				numPasajeros=(Integer)spinner.getValue();
-				if(numPasajeros==0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
-				else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
-				else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.");
-				else if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.");
-				else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.");
-
-				else
+				numPasajeros=(Integer)spinner.getValue();	
+				boolean idaCorrecta=false;
+				try
 				{
-					frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
-					datosPasajeros.setVisible(true);
+					calendarIda.getDate();
+					if(numPasajeros<=0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
+					else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
+					else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.");
+					else
+					{
+						idaCorrecta=true;
+						if(btnIda.isSelected())
+						{
+							frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
+							datosPasajeros.setVisible(true);
+							break;
+						}
+					}
+				}
+				catch(NullPointerException e1)
+				{
+					JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de ida.");
+					break;
+				}
+				try
+				{
+					calendarVuelta.getDate();
+					if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.");
+					else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.");
+					else
+					{
+						if (idaCorrecta==true && btnIdaYVuelta.isSelected())
+						{
+							frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
+							datosPasajeros.setVisible(true);
+							break;
+						}
+					}
+				}
+				catch(NullPointerException e1)
+				{
+					JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de vuelta.");
+					break;
 				}
 				break;
 			default: break;	

@@ -13,4 +13,8 @@ public class clsConstantes {
 	public static final String CMD_BTN_PAYPAL = "CMD_BTN_PAYPAL";
 	public static final String CMD_BTN_VISA = "CMD_BTN_VISA";
 	public static final String CMD_BTN_PAGAR = "CMD_BTN_PAGAR";
+	public static final String CMD_BTN_PAGAR_VISA = "CMD_BTN_PAGAR_VISA";
+	public static final String CMD_BTN_PAGAR_PAYPAL = "CMD_BTN_PAGAR_PAYPAL";
+	public static final String CMD_BTN_IDA = "CMD_BTN_IDA";
+	public static final String CMD_BTN_IDA_VUELTA = "CMD_BTN_IDA_VUELTA";
 }

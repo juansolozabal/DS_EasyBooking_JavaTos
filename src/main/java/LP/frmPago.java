@@ -4,6 +4,8 @@ import static COMUN.clsConstantes.CMD_BTN_ATRAS;
 import static COMUN.clsConstantes.CMD_BTN_PAGAR;
 import static COMUN.clsConstantes.CMD_BTN_PAYPAL;
 import static COMUN.clsConstantes.CMD_BTN_VISA;
+import static COMUN.clsConstantes.CMD_BTN_PAGAR_VISA;
+import static COMUN.clsConstantes.CMD_BTN_PAGAR_PAYPAL;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -14,11 +16,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -37,9 +42,15 @@ public class frmPago extends JFrame implements ActionListener {
 	ImageIcon PayPalImagen;
 	ImageIcon PayPalIcono;
 	private File imagen;
+	JDateChooser vencimientoDate;
+	private JDateChooser fechaHoy;
+	private Calendar actual;
 	
 	public frmPago()
 	{
+		fechaHoy = new JDateChooser();
+		actual=new GregorianCalendar();
+		fechaHoy.setCalendar(actual);
 		setTitle("Pasarela de pago");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		imagen = new File("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
@@ -105,38 +116,6 @@ public class frmPago extends JFrame implements ActionListener {
 		return contentPane;
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
-		switch (e.getActionCommand()) 
-		{
-		
-		case CMD_BTN_ATRAS:
-			//salvaProperties();
-			setContentPane(VentanaInicial());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_PAYPAL :
-			//salvaProperties();
-			setContentPane(PayPal());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_VISA:
-	
-			//salvaProperties();
-			setContentPane(Visa());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-		}
-		
-	}
-	
 	public JPanel PayPal()
 	{
 		contentPane.removeAll();
@@ -181,7 +160,9 @@ public class frmPago extends JFrame implements ActionListener {
 		contentPane.add(contxt);
 		
 		JButton btnPagar = new JButton("Pagar");
-		btnPagar.setBounds(420, 160, 70, 45);
+		btnPagar.setBounds(420, 160, 97, 25);
+		btnPagar.setActionCommand(CMD_BTN_PAGAR_PAYPAL);
+		btnPagar.addActionListener(this);
 		contentPane.add(btnPagar);
 		
 		this.repaint();
@@ -242,9 +223,9 @@ public class frmPago extends JFrame implements ActionListener {
 //		vencitxt.setBounds(375, 135, 160, 25);
 //		contentPane.add(vencitxt);
 		
-		JDateChooser calendarIda = new JDateChooser(null, null, null, new JSpinnerDateEditor());
-		calendarIda.setBounds(375, 135, 160, 25);
-		contentPane.add(calendarIda);		
+		vencimientoDate = new JDateChooser(null, null, null, new JSpinnerDateEditor());
+		vencimientoDate.setBounds(375, 135, 160, 25);
+		contentPane.add(vencimientoDate);		
 		
 		JLabel cvc = new JLabel("Código CVC:");
 		cvc.setForeground(Color.white);
@@ -256,10 +237,57 @@ public class frmPago extends JFrame implements ActionListener {
 		contentPane.add(cvctxt);
 		
 		JButton btnPagar = new JButton("Pagar");
-		btnPagar.setBounds(420, 220, 70, 45);
+		btnPagar.setBounds(420, 220, 97, 25);
+		btnPagar.setActionCommand(CMD_BTN_PAGAR_VISA);
+		btnPagar.addActionListener(this);
 		contentPane.add(btnPagar);
 		
 		this.repaint();
 		return contentPane;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch (e.getActionCommand()) 
+		{
+		
+		case CMD_BTN_ATRAS:
+			//salvaProperties();
+			setContentPane(VentanaInicial());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+			
+		case CMD_BTN_PAYPAL :
+			//salvaProperties();
+			setContentPane(PayPal());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+			
+		case CMD_BTN_VISA:
+	
+			//salvaProperties();
+			setContentPane(Visa());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+		case CMD_BTN_PAGAR_VISA:
+			try{
+				vencimientoDate.getDate();
+				if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta está caducada.");
+			} 
+			catch(NullPointerException e1)
+			{
+				JOptionPane.showMessageDialog(null, "Introduzca una fecha.");
+			}
+		    //TODO Hacer el resto de comprobaciones
+
+			break;
+		case CMD_BTN_PAGAR_PAYPAL:
+		    //TODO Hacer el resto de comprobaciones
+
+			break;
+		}
 	}
 }
