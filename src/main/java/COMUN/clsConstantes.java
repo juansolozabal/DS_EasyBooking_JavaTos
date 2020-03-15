@@ -10,4 +10,7 @@ public class clsConstantes {
 	public static final String CMD_BTN_IR_INICIO_REGISTRO = "CMD_BTN_IR_INICIO_REGISTRO";
 	public static final String CMD_BTN_ENTRAR = "CMD_BTN_ENTRAR";
 	public static final String CMD_BTN_RESERVAR = "CMD_BTN_RESERVAR";
+	public static final String CMD_BTN_PAYPAL = "CMD_BTN_PAYPAL";
+	public static final String CMD_BTN_VISA = "CMD_BTN_VISA";
+	public static final String CMD_BTN_PAGAR = "CMD_BTN_PAGAR";
 }

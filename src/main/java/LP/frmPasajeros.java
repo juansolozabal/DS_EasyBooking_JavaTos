@@ -1,5 +1,8 @@
 package LP;
 
+import static COMUN.clsConstantes.CMD_BTN_PAGAR;
+import static COMUN.clsConstantes.CMD_BTN_REGISTRARSE;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -94,6 +97,8 @@ public class frmPasajeros extends JFrame implements ActionListener
 		}
 		JButton btnNewButton = new JButton("Pasar a pagar");
 		btnNewButton.setBounds(260, numPasajeros*161, 150, 25);
+		btnNewButton.addActionListener(this);
+		btnNewButton.setActionCommand(CMD_BTN_PAGAR);
 		contentPane.add(btnNewButton);
 		
 
@@ -101,6 +106,15 @@ public class frmPasajeros extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		switch (e.getActionCommand()) 
+		{
+		
+		case CMD_BTN_PAGAR:
+			//salvaProperties();
+			frmPago pago = new frmPago();
+			pago.setVisible(true);
+			break;
+		}
 		
 	}
 
