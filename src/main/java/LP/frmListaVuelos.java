@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -51,13 +54,18 @@ import javax.swing.JComboBox;
 
 public class frmListaVuelos extends JFrame implements ActionListener{
 	private JPanel contentPane;
-	private JCalendar calendarVuelta;
+	private JDateChooser calendarIda, calendarVuelta;
 	private File imagen;
 	private int numPasajeros;
 	private JSpinner spinner;
+	private JDateChooser fechaHoy;
+	private Calendar actual;
 	
 	public frmListaVuelos() 
 	{
+		fechaHoy = new JDateChooser();
+		actual=new GregorianCalendar();
+		fechaHoy.setCalendar(actual);
 	    Color azulFondo = new Color (0, 76, 109);
 	    Color azulClaro = new Color (184, 205, 218);
 		imagen = new File("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
@@ -148,16 +156,17 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		destino.setBounds(123, 51, 99, 22);
 		contentPane.add(destino);
 		
-		JDateChooser calendarIda = new JDateChooser(null, null, null, new JSpinnerDateEditor());
+		calendarIda = new JDateChooser(null, null, null, new JSpinnerDateEditor());
 		calendarIda.setBackground(azulClaro);
 		calendarIda.setBounds(12, 89, 100, 25);
 		contentPane.add(calendarIda);
 		//dateChooser.getDate(); para obtener la fecha de la caja
 		
-		JDateChooser calendarVuelta = new JDateChooser(null, null, null, new JSpinnerDateEditor()); 
+		calendarVuelta = new JDateChooser(null, null, null, new JSpinnerDateEditor()); 
 		calendarVuelta.setForeground(azulClaro);
 		calendarVuelta.setBounds(123, 89, 100, 25);
 		contentPane.add(calendarVuelta);
+	//	calendarVuelta.
 		//dateChooser.getDate(); para obtener la fecha de la caja
 		if (btnIda.isSelected()) calendarVuelta.setVisible(false);
 		
@@ -253,6 +262,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -271,6 +281,10 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 				numPasajeros=(Integer)spinner.getValue();
 				if(numPasajeros==0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
 				else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
+				else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.");
+				else if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.");
+				else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.");
+
 				else
 				{
 					frmPasajeros datosPasajeros = new frmPasajeros(numPasajeros);
