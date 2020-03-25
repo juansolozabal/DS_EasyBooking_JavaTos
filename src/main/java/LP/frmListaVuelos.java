@@ -91,7 +91,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		cuenta.setMnemonic(KeyEvent.VK_C); 
 		menuBar.add(cuenta);
 		
-		JMenuItem iniciosesion = new JMenuItem("Inicio sesión");
+		JMenuItem iniciosesion = new JMenuItem("Inicio sesion");
 		cuenta.add(iniciosesion);
 		
 		JMenuItem registro = new JMenuItem("Registro");
@@ -177,7 +177,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		spinner.setBounds(340, 14, 36, 22);
 		contentPane.add(spinner);
 		numPasajeros = (Integer) spinner.getValue();
-		System.out.println("Número de pasajeros:" + numPasajeros);
+		System.out.println("Numero de pasajeros:" + numPasajeros);
 		
 		JLabel lblNmeroDeBilletes = new JLabel("N\u00FAmero de billetes:");
 		lblNmeroDeBilletes.setForeground(Color.white);
@@ -201,7 +201,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 		
 		
 		int offset=0;
-		int numBusquedas = 6; //irá cambiando según cuántas búsquedas coincidan
+		int numBusquedas = 6; //ira cambiando segun cuantas busquedas coincidan
 		JTextArea textArea_1, textArea, textArea_2, textArea_3, textArea_4, textArea_5;
 		JLabel label, label_1;
 		JButton btnReservar;
@@ -292,7 +292,7 @@ public class frmListaVuelos extends JFrame implements ActionListener{
 				{
 					calendarIda.getDate();
 					if(numPasajeros<=0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
-					else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir más de 10 billetes.");
+					else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir mas de 10 billetes.");
 					else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.");
 					else
 					{

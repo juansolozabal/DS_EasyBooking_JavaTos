@@ -1,13 +1,17 @@
 package LD;
 
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable
 public class Persona {
 	
+	@PrimaryKey
 	public int dni_persona;
 	public String nombre;
 	public String apellido;
 	
 	public Persona(int dni_persona, String nombre, String apellido) {
-		super();
 		this.dni_persona = dni_persona;
 		this.nombre = nombre;
 		this.apellido = apellido;

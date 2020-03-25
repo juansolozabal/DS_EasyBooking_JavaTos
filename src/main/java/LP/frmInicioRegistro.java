@@ -53,10 +53,10 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		});
 	}
 
-	/**
-	 * Este es el content pane que se visualizará primero en la ventana que hemos creado. 
-	 * Cuando escojamos alguna de las dos opciones que se nos dan, se borrará este panel
-	 * y se visualizará otro.
+	/*
+	 * Este es el content pane que se visualizara primero en la ventana que hemos creado. 
+	 * Cuando escojamos alguna de las dos opciones que se nos dan, se borrara este panel
+	 * y se visualizara otro.
 	 * @return panel a visualizar.
 	 */
 	public JPanel VentanaInicial()
@@ -76,7 +76,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		EasyBooking.setBounds(140, 53, 537, 203);
 		contentPane.add(EasyBooking);
 		
-		btnIniciarSesion = new JButton("Iniciar Sesión");
+		btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setBounds(100, 267, 180, 23);
 		btnIniciarSesion.setActionCommand(CMD_BTN_INICIAR_SESION);
 		btnIniciarSesion.addActionListener(this);
@@ -129,7 +129,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 				salvaProperties();
 				frmMenuPrincipal frame = new frmMenuPrincipal();
 				frame.setVisible(true);
-				logger.log( Level.INFO, "Iniciando sesión.");
+				logger.log( Level.INFO, "Iniciando sesion.");
 			} 
 			catch (clsUsuarioNoRegistrado e1)
 			{
@@ -179,10 +179,10 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Este es el panel que se visualizará si escogemos la opción de inicio de sesión.
-	 * Borra el panel inicial, y después de haber definido este panel con todos sus elementos,
-	 * enseña el panel de inicio de sesión.
-	 * @return panel de inicio de sesión.
+	 * Este es el panel que se visualizara si escogemos la opcion de inicio de sesion.
+	 * Borra el panel inicial, y despues de haber definido este panel con todos sus elementos,
+	 * ensenya el panel de inicio de sesion.
+	 * @return panel de inicio de sesion.
 	 */
 	public JPanel IniciarSesion()
 	{
@@ -207,13 +207,13 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		t1 = new JTextField(15);
 		t1.setBounds(320, 75,150,20);
 		
-		JLabel i2 = new JLabel("Dirección de correo electrónico:");
+		JLabel i2 = new JLabel("Direccion de correo electronico:");
 		i2.setForeground(Color.white);
 		i2.setBounds(130, 130, 200, 50);
 		t2 = new JTextField(15);
 		t2.setBounds(320, 150,150,20);
 		
-		JLabel i3 = new JLabel("Contraseña:");
+		JLabel i3 = new JLabel("Contrasenya:");
 		i3.setForeground(Color.white);
 		i3.setBounds(240, 200,200,50);
 		t3 = new JPasswordField(15);
@@ -226,7 +226,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		contentPane.add(i3);
 		contentPane.add(t3);
 		
-		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
+		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
 		btnIniciarSesion.setBounds(200, 280, 180, 25);
 		btnIniciarSesion.addActionListener(this);
 		btnIniciarSesion.setActionCommand(CMD_BTN_INICIAR_SESION2);
@@ -243,8 +243,8 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Este es el panel que se visualizará si escogemos la opción de registro.
-	 * Borra el panel inicial, y después de haber definido este panel con todos sus elementos,
+	 * Este es el panel que se visualizara si escogemos la opcion de registro.
+	 * Borra el panel inicial, y despues de haber definido este panel con todos sus elementos,
 	 * enseña el panel de registro de usuarios.
 	 * @return panel de registro de usuarios.
 	 */
@@ -279,7 +279,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		apetxt.setBounds(275, 90, 160, 25);
 		contentPane.add(apetxt);
 		
-		JLabel correo = new JLabel("Correo electrónico:");
+		JLabel correo = new JLabel("Correo electronico:");
 		correo.setForeground(Color.white);
 		correo.setBounds(155, 150, 160, 25);
 		contentPane.add(correo);

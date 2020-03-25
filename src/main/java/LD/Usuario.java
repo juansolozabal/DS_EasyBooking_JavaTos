@@ -17,7 +17,7 @@ public class Usuario {
 	private int pin;
 	private int idAeropuerto;
 	@Element(column="dni")
-	private ArrayList<Reserva> reservasUsu;	
+	private ArrayList<Reserva> reservasUsu = new ArrayList<Reserva>();	
 	
 	
 	public Usuario(int dni, String nombre, String apellido, String correo, int pin, int idAeropuerto) {
@@ -78,5 +78,8 @@ public class Usuario {
 		this.pin = pin;
 	}
 	
+	public ArrayList<Reserva> getReservas(){
+		return reservasUsu;
+	}
 	
 }
