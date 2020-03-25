@@ -1,19 +1,26 @@
 package LD;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable
 public class Reserva {
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	private long id_reserva;
+	private float precio;
 	
-	public int id_reserva;
-	public float precio;
 	
-	public Reserva(int id_reserva, float precio) {
-		super();
-		this.id_reserva = id_reserva;
+	//Constructor
+	public Reserva(float precio) {
 		this.precio = precio;
 	}
-	public int getId_reserva() {
+	public long getId_reserva() {
 		return id_reserva;
 	}
-	public void setId_reserva(int id_reserva) {
+	public void setId_reserva(long id_reserva) {
 		this.id_reserva = id_reserva;
 	}
 	public float getPrecio() {

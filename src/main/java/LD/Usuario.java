@@ -2,6 +2,7 @@ package LD;
 
 import java.util.ArrayList;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
@@ -15,6 +16,9 @@ public class Usuario {
 	private String correo;
 	private int pin;
 	private int idAeropuerto;
+	@Element(column="dni")
+	private ArrayList<Reserva> reservasUsu;	
+	
 	
 	public Usuario(int dni, String nombre, String apellido, String correo, int pin, int idAeropuerto) {
 		super();
