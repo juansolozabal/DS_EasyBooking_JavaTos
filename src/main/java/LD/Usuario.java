@@ -1,19 +1,37 @@
 package LD;
 
+import java.util.ArrayList;
+
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable
+
 public class Usuario {
-	public int dni;
-	public String nombre;
-	public String apellido;
-	public String correo;
-	public int pin;
+	@PrimaryKey
+	private int dni;
+	private String nombre;
+	private String apellido;
+	private String correo;
+	private int pin;
+	private int idAeropuerto;
 	
-	public Usuario(int dni, String nombre, String apellido, String correo, int pin) {
+	public Usuario(int dni, String nombre, String apellido, String correo, int pin, int idAeropuerto) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
 		this.pin = pin;
+		this.idAeropuerto = idAeropuerto;
+	}
+
+	public int getIdAeropuerto() {
+		return idAeropuerto;
+	}
+
+	public void setIdAeropuerto(int idAeropuerto) {
+		this.idAeropuerto = idAeropuerto;
 	}
 
 	public int getDni() {
