@@ -56,15 +56,15 @@ public class frmLogotipoInicial extends JFrame implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand())
-		{
-			case CMD_BTN_ENTRAR:
-				frmListaVuelos lista = new frmListaVuelos();
-				lista.setVisible(true);
-				this.setVisible(false);
-				break;
-			default: break;	
-		}	
+//		switch(e.getActionCommand())
+//		{
+//			case CMD_BTN_ENTRAR:
+//				frmListaVuelos lista = new frmListaVuelos();
+//				lista.setVisible(true);
+//				this.setVisible(false);
+//				break;
+//			default: break;	
+//		}	
 		
 	}
 }

@@ -150,7 +150,7 @@ public class frmPago extends JFrame implements ActionListener {
 		contentPane.add(emailtxt);		
 		
 		
-		JLabel con = new JLabel("Contraseña:");
+		JLabel con = new JLabel("Contrasena:");
 		con.setForeground(Color.white);
 		con.setBounds(270, 130, 160, 25);
 		contentPane.add(con);
@@ -170,9 +170,9 @@ public class frmPago extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Este es el panel que se visualizará si escogemos la opción de registro.
-	 * Borra el panel inicial, y después de haber definido este panel con todos sus elementos,
-	 * enseña el panel de registro de usuarios.
+	 * Este es el panel que se visualizara si escogemos la opcion de registro.
+	 * Borra el panel inicial, y despues de haber definido este panel con todos sus elementos,
+	 * ensenya el panel de registro de usuarios.
 	 * @return panel de registro de usuarios.
 	 */
 	public JPanel Visa()
@@ -205,7 +205,7 @@ public class frmPago extends JFrame implements ActionListener {
 		titulartxt.setBounds(375, 45, 160, 25);
 		contentPane.add(titulartxt);
 		
-		JLabel n_tarjeta = new JLabel("Nº tarjeta:");
+		JLabel n_tarjeta = new JLabel("Num. tarjeta:");
 		n_tarjeta.setForeground(Color.white);
 		n_tarjeta.setBounds(285, 90, 160, 25);
 		contentPane.add(n_tarjeta);
@@ -227,7 +227,7 @@ public class frmPago extends JFrame implements ActionListener {
 		vencimientoDate.setBounds(375, 135, 160, 25);
 		contentPane.add(vencimientoDate);		
 		
-		JLabel cvc = new JLabel("Código CVC:");
+		JLabel cvc = new JLabel("Codigo CVC:");
 		cvc.setForeground(Color.white);
 		cvc.setBounds(270, 180, 160, 25);
 		contentPane.add(cvc);
@@ -247,47 +247,47 @@ public class frmPago extends JFrame implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		switch (e.getActionCommand()) 
-		{
-		
-		case CMD_BTN_ATRAS:
-			//salvaProperties();
-			setContentPane(VentanaInicial());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_PAYPAL :
-			//salvaProperties();
-			setContentPane(PayPal());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_VISA:
-	
-			//salvaProperties();
-			setContentPane(Visa());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-		case CMD_BTN_PAGAR_VISA:
-			try{
-				vencimientoDate.getDate();
-				if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta está caducada.");
-			} 
-			catch(NullPointerException e1)
-			{
-				JOptionPane.showMessageDialog(null, "Introduzca una fecha.");
-			}
-		    //TODO Hacer el resto de comprobaciones
-
-			break;
-		case CMD_BTN_PAGAR_PAYPAL:
-		    //TODO Hacer el resto de comprobaciones
-
-			break;
-		}
+//		// TODO Auto-generated method stub
+//		switch (e.getActionCommand()) 
+//		{
+//		
+//		case CMD_BTN_ATRAS:
+//			//salvaProperties();
+//			setContentPane(VentanaInicial());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//			
+//		case CMD_BTN_PAYPAL :
+//			//salvaProperties();
+//			setContentPane(PayPal());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//			
+//		case CMD_BTN_VISA:
+//	
+//			//salvaProperties();
+//			setContentPane(Visa());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//		case CMD_BTN_PAGAR_VISA:
+//			try{
+//				vencimientoDate.getDate();
+//				if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta esta caducada.");
+//			} 
+//			catch(NullPointerException e1)
+//			{
+//				JOptionPane.showMessageDialog(null, "Introduzca una fecha.");
+//			}
+//		    //TODO Hacer el resto de comprobaciones
+//
+//			break;
+//		case CMD_BTN_PAGAR_PAYPAL:
+//		    //TODO Hacer el resto de comprobaciones
+//
+//			break;
+//		}
 	}
 }

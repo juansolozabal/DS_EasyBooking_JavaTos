@@ -94,88 +94,88 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		switch (e.getActionCommand()) 
-		{
-		
-		case CMD_BTN_ATRAS:
-			//salvaProperties();
-			setContentPane(VentanaInicial());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_INICIAR_SESION :
-			//salvaProperties();
-			setContentPane(IniciarSesion());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-			
-		case CMD_BTN_REGISTRARSE:
-	
-			//salvaProperties();
-			setContentPane(Registrarse());
-			//cargaProperties();
-			contentPane.revalidate();
-			break;
-
-		case CMD_BTN_INICIAR_SESION2:
-		/*	try 
-			{
-				clsGestor.ComprobarUsuario(t1.getText(), t2.getText(), t3.getText());
-				clsGestor.IniciarSesion(t1.getText(), t2.getText());
-				this.setVisible(false);
-				salvaProperties();
-				frmMenuPrincipal frame = new frmMenuPrincipal();
-				frame.setVisible(true);
-				logger.log( Level.INFO, "Iniciando sesion.");
-			} 
-			catch (clsUsuarioNoRegistrado e1)
-			{
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-			}				
-			break;
-		*/
-			frmListaVuelos frVuelos = new frmListaVuelos();
-			frVuelos.setVisible(true);
-			this.setVisible(false);
-			break;	
-			
-			
-		case CMD_BTN_REGISTRARSE2:
-			
-		/*	@SuppressWarnings("deprecation")
-			clsUsuario a = new clsUsuario(nomtxt.getText(), apetxt.getText(), corretxt.getText(), nomusutxt.getText(), contrausutxt.getText());
-			try {
-				clsBaseDeDatos.anyadirFilaATabla(clsBaseDeDatos.getStatement(), a);
-				clsGestor.IniciarSesion(nomusutxt.getText(), corretxt.getText());
-				logger.log( Level.INFO, "Registrando usuario.");
-				this.setVisible(false);
-				salvaProperties();
-				frmMenuPrincipal frame = new frmMenuPrincipal();
-				frame.setVisible(true);
-				
-			} catch (clsEmailNoValido e1) {
-				
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-			} catch (clsUsuarioRepetido e1) {
-				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-			}
+//		// TODO Auto-generated method stub
+//		switch (e.getActionCommand()) 
+//		{
+//		
+//		case CMD_BTN_ATRAS:
+//			//salvaProperties();
+//			setContentPane(VentanaInicial());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//			
+//		case CMD_BTN_INICIAR_SESION :
+//			//salvaProperties();
+//			setContentPane(IniciarSesion());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//			
+//		case CMD_BTN_REGISTRARSE:
+//	
+//			//salvaProperties();
+//			setContentPane(Registrarse());
+//			//cargaProperties();
+//			contentPane.revalidate();
+//			break;
+//
+//		case CMD_BTN_INICIAR_SESION2:
+//		/*	try 
+//			{
+//				clsGestor.ComprobarUsuario(t1.getText(), t2.getText(), t3.getText());
+//				clsGestor.IniciarSesion(t1.getText(), t2.getText());
+//				this.setVisible(false);
+//				salvaProperties();
+//				frmMenuPrincipal frame = new frmMenuPrincipal();
+//				frame.setVisible(true);
+//				logger.log( Level.INFO, "Iniciando sesion.");
+//			} 
+//			catch (clsUsuarioNoRegistrado e1)
+//			{
+//				JOptionPane.showMessageDialog(null, e1.getMessage());
+//			}				
+//			break;
+//		*/
+//			frmListaVuelos frVuelos = new frmListaVuelos();
+//			frVuelos.setVisible(true);
 //			this.setVisible(false);
-			salvaProperties();
-			frmMenuPrincipal frame = new frmMenuPrincipal();
-			frame.setVisible(true);
-			break;
-			}	
-		*/
-			frmListaVuelos frVuelos2 = new frmListaVuelos();
-			frVuelos2.setVisible(true);
-			this.setVisible(false);
-			break;
-		    default: break;	
-		}
+//			break;	
+//			
+//			
+//		case CMD_BTN_REGISTRARSE2:
+//			
+//		/*	@SuppressWarnings("deprecation")
+//			clsUsuario a = new clsUsuario(nomtxt.getText(), apetxt.getText(), corretxt.getText(), nomusutxt.getText(), contrausutxt.getText());
+//			try {
+//				clsBaseDeDatos.anyadirFilaATabla(clsBaseDeDatos.getStatement(), a);
+//				clsGestor.IniciarSesion(nomusutxt.getText(), corretxt.getText());
+//				logger.log( Level.INFO, "Registrando usuario.");
+//				this.setVisible(false);
+//				salvaProperties();
+//				frmMenuPrincipal frame = new frmMenuPrincipal();
+//				frame.setVisible(true);
+//				
+//			} catch (clsEmailNoValido e1) {
+//				
+//				JOptionPane.showMessageDialog(null, e1.getMessage());
+//			} catch (clsUsuarioRepetido e1) {
+//				// TODO Auto-generated catch block
+//				JOptionPane.showMessageDialog(null, e1.getMessage());
+//			}
+////			this.setVisible(false);
+//			salvaProperties();
+//			frmMenuPrincipal frame = new frmMenuPrincipal();
+//			frame.setVisible(true);
+//			break;
+//			}	
+//		*/
+//			frmListaVuelos frVuelos2 = new frmListaVuelos();
+//			frVuelos2.setVisible(true);
+//			this.setVisible(false);
+//			break;
+//		    default: break;	
+//		}
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 	/**
 	 * Este es el panel que se visualizara si escogemos la opcion de registro.
 	 * Borra el panel inicial, y despues de haber definido este panel con todos sus elementos,
-	 * enseña el panel de registro de usuarios.
+	 * ensenya el panel de registro de usuarios.
 	 * @return panel de registro de usuarios.
 	 */
 	public JPanel Registrarse()
@@ -297,7 +297,7 @@ public class frmInicioRegistro extends JFrame implements ActionListener
 		nomusutxt.setBounds(275, 210, 160, 25);
 		contentPane.add(nomusutxt);
 		
-		JLabel contrausu = new JLabel("Contraseña:");
+		JLabel contrausu = new JLabel("Contrasena:");
 		contrausu.setForeground(Color.white);
 		contrausu.setBounds(195, 270, 160, 25);
 		contentPane.add(contrausu);

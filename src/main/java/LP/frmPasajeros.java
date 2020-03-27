@@ -105,16 +105,16 @@ public class frmPasajeros extends JFrame implements ActionListener
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		switch (e.getActionCommand()) 
-		{
-		
-		case CMD_BTN_PAGAR:
-			//salvaProperties();
-			frmPago pago = new frmPago();
-			pago.setVisible(true);
-			break;
-		}
+//		// TODO Auto-generated method stub
+//		switch (e.getActionCommand()) 
+//		{
+//		
+//		case CMD_BTN_PAGAR:
+//			//salvaProperties();
+//			frmPago pago = new frmPago();
+//			pago.setVisible(true);
+//			break;
+//		}
 		
 	}
 
