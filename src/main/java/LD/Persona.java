@@ -1,6 +1,9 @@
 package LD;
 
+import java.util.Set;
+
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
@@ -10,6 +13,8 @@ public class Persona {
 	public int dni_persona;
 	public String nombre;
 	public String apellido;
+	@Persistent(mappedBy="personasRes")
+	Set<Reserva> reservas;
 	
 	public Persona(int dni_persona, String nombre, String apellido) {
 		this.dni_persona = dni_persona;

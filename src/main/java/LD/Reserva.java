@@ -1,6 +1,10 @@
 package LD;
 
+import java.util.Set;
+
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -11,6 +15,11 @@ public class Reserva {
 	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private long id_reserva;
 	private float precio;
+	private int idAerolinea;
+	@Persistent(table="RESERVAS_PERSONAS")
+	@Join(column="id_reserva")
+	@Element(column="dni")
+	Set<Persona> personasRes;
 	
 	
 	//Constructor
