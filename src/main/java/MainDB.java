@@ -7,10 +7,10 @@ import javax.jdo.Transaction;
 import LD.Reserva;
 import LD.Usuario;
 
-public class MainBD {
+public class MainDB {
 
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
+
 		/*
 		 * USUARIO
 		 * - dni
@@ -46,8 +46,10 @@ public class MainBD {
 			    
 			    usuario1.getReservas().add(reserva1);		    
 			    persistentManager.makePersistent(usuario1);
+			    persistentManager.makePersistent(reserva1);
 			    
 			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
+			    System.out.println("- Inserted into db: " + usuario1.getNombre());
 			    
 			    transaction.commit();
 			    
@@ -76,9 +78,17 @@ public class MainBD {
 			try
             {
 			    transaction.begin();
-	
+			    Reserva reserva2= new Reserva(300);
+			    System.out.println("Precio de la reserva sin modificar: " + reserva2.getPrecio());
 			    @SuppressWarnings("unchecked")
-				Query<Reserva> ReservasQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() + " WHERE precio < 150.00 ORDER BY precio ASC");
+				Query<Reserva> ReservasQuery1 = persistentManager.newQuery("javax.jdo.query.SQL", "UPDATE " + Reserva.class.getName() + " SET PRECIO = 200 WHERE ID_RESERVA=2 ");
+			    for (Reserva reserva : ReservasQuery1.executeList())
+			    {
+				    System.out.println("- Selected from db: " + reserva.getId_reserva() + " con precio modificado de: " + reserva.getPrecio());
+			    }
+			    
+			    @SuppressWarnings("unchecked")
+				Query<Reserva> ReservasQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() + " WHERE precio < 300 ORDER BY precio ASC");
 			    
 			    for (Reserva reserva : ReservasQuery.executeList()) 
 			    {
