@@ -79,6 +79,7 @@ public class MainDB {
             {
 			    transaction.begin();
 			    Reserva reserva2= new Reserva(300);
+			    persistentManager.makePersistent(reserva2);
 			    System.out.println("Precio de la reserva sin modificar: " + reserva2.getPrecio());
 			    @SuppressWarnings("unchecked")
 				Query<Reserva> ReservasQuery1 = persistentManager.newQuery("javax.jdo.query.SQL", "UPDATE RESERVA SET PRECIO = 200 WHERE ID_RESERVA=2 ");
