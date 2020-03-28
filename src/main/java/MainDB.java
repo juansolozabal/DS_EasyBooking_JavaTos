@@ -81,18 +81,19 @@ public class MainDB {
 			    Reserva reserva2= new Reserva(300);
 			    System.out.println("Precio de la reserva sin modificar: " + reserva2.getPrecio());
 			    @SuppressWarnings("unchecked")
-				Query<Reserva> ReservasQuery1 = persistentManager.newQuery("javax.jdo.query.SQL", "UPDATE " + Reserva.class.getName() + " SET PRECIO = 200 WHERE ID_RESERVA=2 ");
-			    for (Reserva reserva : ReservasQuery1.executeList())
-			    {
-				    System.out.println("- Selected from db: " + reserva.getId_reserva() + " con precio modificado de: " + reserva.getPrecio());
-			    }
+				Query<Reserva> ReservasQuery1 = persistentManager.newQuery("javax.jdo.query.SQL", "UPDATE RESERVA SET PRECIO = 200 WHERE ID_RESERVA=2 ");
+//			    for (Reserva reserva : ReservasQuery1.executeList())
+//			    {
+//				    System.out.println("- Selected from db: " + reserva.getId_reserva() + " con precio modificado de: " + reserva.getPrecio());
+//			    }
 			    
 			    @SuppressWarnings("unchecked")
-				Query<Reserva> ReservasQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() + " WHERE precio < 300 ORDER BY precio ASC");
+				Query<Reserva> ReservasQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() + " WHERE ID_RESERVA=2");
 			    
 			    for (Reserva reserva : ReservasQuery.executeList()) 
 			    {
 			        System.out.println("- Selected from db: " + reserva.getId_reserva());
+			        System.out.println("- Precio actualizado: " + reserva.getPrecio());
 			        persistentManager.deletePersistent(reserva);
 			        System.out.println("- Deleted from db: " + reserva.getId_reserva());
 			    }
