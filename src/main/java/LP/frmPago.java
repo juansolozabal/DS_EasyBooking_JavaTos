@@ -247,47 +247,47 @@ public class frmPago extends JFrame implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		// TODO Auto-generated method stub
-//		switch (e.getActionCommand()) 
-//		{
-//		
-//		case CMD_BTN_ATRAS:
-//			//salvaProperties();
-//			setContentPane(VentanaInicial());
-//			//cargaProperties();
-//			contentPane.revalidate();
-//			break;
-//			
-//		case CMD_BTN_PAYPAL :
-//			//salvaProperties();
-//			setContentPane(PayPal());
-//			//cargaProperties();
-//			contentPane.revalidate();
-//			break;
-//			
-//		case CMD_BTN_VISA:
-//	
-//			//salvaProperties();
-//			setContentPane(Visa());
-//			//cargaProperties();
-//			contentPane.revalidate();
-//			break;
-//		case CMD_BTN_PAGAR_VISA:
-//			try{
-//				vencimientoDate.getDate();
-//				if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta esta caducada.");
-//			} 
-//			catch(NullPointerException e1)
-//			{
-//				JOptionPane.showMessageDialog(null, "Introduzca una fecha.");
-//			}
-//		    //TODO Hacer el resto de comprobaciones
-//
-//			break;
-//		case CMD_BTN_PAGAR_PAYPAL:
-//		    //TODO Hacer el resto de comprobaciones
-//
-//			break;
-//		}
+		// TODO Auto-generated method stub
+		switch (e.getActionCommand()) 
+		{
+		
+		case CMD_BTN_ATRAS:
+			//salvaProperties();
+			setContentPane(VentanaInicial());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+			
+		case CMD_BTN_PAYPAL :
+			//salvaProperties();
+			setContentPane(PayPal());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+			
+		case CMD_BTN_VISA:
+	
+			//salvaProperties();
+			setContentPane(Visa());
+			//cargaProperties();
+			contentPane.revalidate();
+			break;
+		case CMD_BTN_PAGAR_VISA:
+			try{
+				vencimientoDate.getDate();
+				if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta esta caducada.");
+			} 
+			catch(NullPointerException e1)
+			{
+				JOptionPane.showMessageDialog(null, "Introduzca una fecha.");
+			}
+		    //TODO Hacer el resto de comprobaciones
+
+			break;
+		case CMD_BTN_PAGAR_PAYPAL:
+		    //TODO Hacer el resto de comprobaciones
+
+			break;
+		}
 	}
 }

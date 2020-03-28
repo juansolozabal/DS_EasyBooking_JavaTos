@@ -7,6 +7,8 @@
 	<properties>
         	<config.files.dir>src/main/resources</config.files.dir>
         	<encoding>UTF-8</encoding>
+        	<maven.compiler.target>1.8</maven.compiler.target>
+    		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
     
 	<dependencies>

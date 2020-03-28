@@ -1,6 +1,16 @@
 package COMUN;
 
 public class clsConstantes {
+	/*
+	enum botones {
+		CMD_BTN_LOGOTIPO_INICIAL, 
+		CMD_BTN_INICIAR_SESION,
+		CMD_BTN_REGISTRARSE
+		CMD_BTN_INICIAR_SESION2
+		CMD_BTN_REGISTRARSE2
+	}*/
+	
+	
 	public static final String CMD_BTN_LOGOTIPO_INICIAL = "CMD_BTN_LOGOTIPO_INICIAL";
 	public static final String CMD_BTN_INICIAR_SESION = "CMD_BTN_INICIAR_SESION";
 	public static final String CMD_BTN_REGISTRARSE = "CMD_BTN_REGISTRARSE";
