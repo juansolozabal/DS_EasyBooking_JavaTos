@@ -16,6 +16,9 @@ public class MainDB {
 	
 		public static void main(String[] args) {
 			
+		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		persistentManager = persistentManagerFactory.getPersistenceManager();
+		transaction = persistentManager.currentTransaction();
 		try
         {
 			Anyadir();
@@ -34,7 +37,6 @@ public class MainDB {
 		{
 			try
             {
-				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 				persistentManager = persistentManagerFactory.getPersistenceManager();
 				transaction = persistentManager.currentTransaction();
 			    transaction.begin();
@@ -137,16 +139,14 @@ public class MainDB {
 		{
 			try
             {
-				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 				persistentManager = persistentManagerFactory.getPersistenceManager();
 				transaction = persistentManager.currentTransaction();
 			    transaction.begin();
 			    
-			    
 			    Usuario eliminar = persistentManager.getObjectById(Usuario.class, "72325229");
 				persistentManager.deletePersistent(eliminar);
+				System.out.println("- Deleted from DB: ");
 				
-			    
 			    
 			    transaction.commit();
 			}
@@ -170,27 +170,27 @@ public class MainDB {
 		{
 			try
             {
-					persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-					persistentManager = persistentManagerFactory.getPersistenceManager();
-					transaction = persistentManager.currentTransaction();
-				 	transaction.begin();
-				    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, "72839127");
-				    usuario1.setCorreo("juan.solozabal@opendeusto.es");
-				    System.out.println("Actualizacion realizada.");
+				persistentManager = persistentManagerFactory.getPersistenceManager();
+				transaction = persistentManager.currentTransaction();
+
+			 	transaction.begin();
+			    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, "72839127");
+			    usuario1.setCorreo("juan.solozabal@opendeusto.es");
+			    System.out.println("Actualizacion realizada.");
 				   
-				    Usuario usuario2 = persistentManager.getObjectById(Usuario.class, "72555100");
-				    usuario2.setCorreo("javier.a.eulate@opendeusto.es");
-				    System.out.println("Actualizacion realizada.");
+			    Usuario usuario2 = persistentManager.getObjectById(Usuario.class, "72555100");
+			    usuario2.setCorreo("javier.a.eulate@opendeusto.es");
+			    System.out.println("Actualizacion realizada.");
+			    
+//			    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "21");
+//			    reserva1.setPrecio(200);
+//			    System.out.println("Reserva actualizada");
+//				    
+//			    Reserva reserva2 = persistentManager.getObjectById(Reserva.class, "22");
+//			    reserva2.setPrecio(100);
+//			    System.out.println("Reserva actualizada");
 				    
-				    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "1");
-				    reserva1.setPrecio(200);
-				    System.out.println("Reserva actualizada");
-				    
-				    Reserva reserva2 = persistentManager.getObjectById(Reserva.class, "2");
-				    reserva2.setPrecio(100);
-				    System.out.println("Reserva actualizada");
-				    
-				    transaction.commit();
+			    transaction.commit();
 			}
 
             catch(Exception ex)
@@ -212,31 +212,22 @@ public class MainDB {
 		{
 			try
             {
-				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 				persistentManager = persistentManagerFactory.getPersistenceManager();
 				transaction = persistentManager.currentTransaction();
+				System.out.println("");
 				transaction.begin();
-				Query <Usuario> q1 = persistentManager.newQuery("SELECT * FROM USUARIO");
-
+				@SuppressWarnings("unchecked")
+				Query <Usuario> q1 = persistentManager.newQuery("SELECT FROM " + Usuario.class.getName());
 			    for (Usuario aux : q1.executeList()) {
-					System.out.println("DNI usuario" + aux.getDni());
+					System.out.println("DNI usuario: " + aux.getDni() + " y correo: " + aux.getCorreo());
 				}
 			    
-			    Query <Reserva> q2 = persistentManager.newQuery("SELECT * FROM RESERVA");
+			    @SuppressWarnings("unchecked")
+			    Query <Reserva> q2 = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName());
 			    for (Reserva aux : q2.executeList()) {
 					System.out.println("Precio reserva" + aux.getPrecio());
 				}
-			    
-			    Query <Reserva> q3 = persistentManager.newQuery("SELECT * FROM RESERVA WHERE PRECIO<300");
-			    for (Reserva aux : q3.executeList()) {
-					System.out.println("ID reserva" + aux.getId_reserva());
-				}
-			    
-			    Query <Reserva> q4 = persistentManager.newQuery("SELECT MAX(PRECIO) FROM RESERVA");
-			    for (Reserva aux : q4.executeList()) {
-					System.out.println("ID reserva" + aux.getId_reserva());
-				}
-			    
+			    			    
 			    transaction.commit();
 			}
 
