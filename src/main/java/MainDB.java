@@ -2,6 +2,7 @@
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import LD.Reserva;
@@ -18,9 +19,9 @@ public class MainDB {
 		try
         {
 			Anyadir();
-		//	Eliminar();
+			Eliminar();
 			Actualizar();
-		//	Select();
+			Select();
         }
 		catch (Exception ex)
         {
@@ -142,12 +143,17 @@ public class MainDB {
 			    transaction.begin();
 			    
 			    
+			    Usuario eliminar = persistentManager.getObjectById(Usuario.class, "72325229");
+				persistentManager.deletePersistent(eliminar);
+				
+			    
+			    
 			    transaction.commit();
 			}
 
             catch(Exception ex)
 			{
-				System.err.println("* Exception eliminating data into db: " + ex.getMessage());
+				System.err.println("* Exception deleting data into db: " + ex.getMessage());
 			}
 			
 			finally
@@ -206,7 +212,32 @@ public class MainDB {
 		{
 			try
             {
-			  
+				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+				persistentManager = persistentManagerFactory.getPersistenceManager();
+				transaction = persistentManager.currentTransaction();
+				transaction.begin();
+				Query <Usuario> q1 = persistentManager.newQuery("SELECT * FROM USUARIO");
+
+			    for (Usuario aux : q1.executeList()) {
+					System.out.println("DNI usuario" + aux.getDni());
+				}
+			    
+			    Query <Reserva> q2 = persistentManager.newQuery("SELECT * FROM RESERVA");
+			    for (Reserva aux : q2.executeList()) {
+					System.out.println("Precio reserva" + aux.getPrecio());
+				}
+			    
+			    Query <Reserva> q3 = persistentManager.newQuery("SELECT * FROM RESERVA WHERE PRECIO<300");
+			    for (Reserva aux : q3.executeList()) {
+					System.out.println("ID reserva" + aux.getId_reserva());
+				}
+			    
+			    Query <Reserva> q4 = persistentManager.newQuery("SELECT MAX(PRECIO) FROM RESERVA");
+			    for (Reserva aux : q4.executeList()) {
+					System.out.println("ID reserva" + aux.getId_reserva());
+				}
+			    
+			    transaction.commit();
 			}
 
             catch(Exception ex)
