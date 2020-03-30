@@ -158,7 +158,24 @@ public class MainDB {
 		{
 			try
             {
-			   
+				 	transaction.begin();
+				    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, "72839127");
+				    usuario1.setCorreo("juan.solozabal@opendeusto.es");
+				    System.out.println("Actualizacion realizada.");
+				   
+				    Usuario usuario2 = persistentManager.getObjectById(Usuario.class, "72555100");
+				    usuario1.setCorreo("javier.a.eulate@opendeusto.es");
+				    System.out.println("Actualizacion realizada.");
+				    
+				    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "");
+				    reserva1.setPrecio(200);
+				    System.out.println("Reserva actualizada");
+				    
+				    Reserva reserva2 = persistentManager.getObjectById(Reserva.class, "");
+				    reserva2.setPrecio(100);
+				    System.out.println("Reserva actualizada");
+				    
+				    transaction.commit();
 			}
 
             catch(Exception ex)
