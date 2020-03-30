@@ -1,11 +1,7 @@
-import java.awt.List;
-import java.util.ArrayList;
 
-import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import LD.Reserva;
@@ -39,18 +35,81 @@ public class MainDB {
             {
 			    transaction.begin();
 			    
-			    //Anyadimos usuario 1 a nivel local
+			    //Anyadimos usuarios
 			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
-			    //Anyadimos reserva 1 a nivel local
+			    Usuario usuario2 = new Usuario(72555100, "Javier", "Alvarez de Eulate", "javier.a.eulate@gmail.com", 1234, 112);
+			    Usuario usuario3 = new Usuario(74632437, "Jon", "Sanchez", "jonsanchez@gmail.com", 6853, 863);
+			    Usuario usuario4 = new Usuario(76424685, "Lander", "Pison", "landerpison@gmail.com", 8573, 075);
+			    Usuario usuario5 = new Usuario(75739572, "Mikel", "Sanz", "mikelsanz@gmail.com", 9643, 247);
+			    Usuario usuario6 = new Usuario(74927593, "Laura", "Gomez", "lauragomez@gmail.com", 1562, 034);
+			    Usuario usuario7 = new Usuario(78306823, "Luken", "White", "lukenwhite@gmail.com", 6357, 2535);
+			    Usuario usuario8 = new Usuario(72936384, "Lucas", "Eguibar", "lucaseguibar@gmail.com", 2468, 642);
+			    Usuario usuario9 = new Usuario(72956385, "Joaquin", "Del Campo", "joaquindelcampo@gmail.com", 2453, 674);
+			    Usuario usuario10 = new Usuario(72325229, "Iratxe", "Lizasoain", "iratxelizasoain@gmail.com", 9242, 678);
+			    //Anyadimos reservas
 			    Reserva reserva1= new Reserva(256);
+			    Reserva reserva2= new Reserva(573);
+			    Reserva reserva3= new Reserva(764);
+			    Reserva reserva4= new Reserva(134);
+			    Reserva reserva5= new Reserva(532);
+			    Reserva reserva6= new Reserva(845);
+			    Reserva reserva7= new Reserva(143);
+			    Reserva reserva8= new Reserva(642);
+			    Reserva reserva9= new Reserva(120);
+			    Reserva reserva10= new Reserva(923);
 			    //Asignamos la reserva 1 al usuario 1
 			    usuario1.getReservas().add(reserva1);
+			    usuario1.getReservas().add(reserva2);
+			    usuario2.getReservas().add(reserva3);
+			    usuario3.getReservas().add(reserva4);
+			    usuario3.getReservas().add(reserva5);
+			    usuario3.getReservas().add(reserva6);
+			    usuario4.getReservas().add(reserva7);
+			    usuario5.getReservas().add(reserva8);
+			    usuario6.getReservas().add(reserva9);
+			    usuario7.getReservas().add(reserva10);
 			    //Persistimos los datos en la BD
 			    persistentManager.makePersistent(usuario1);
+			    persistentManager.makePersistent(usuario2);
+			    persistentManager.makePersistent(usuario3);
+			    persistentManager.makePersistent(usuario4);
+			    persistentManager.makePersistent(usuario5);
+			    persistentManager.makePersistent(usuario6);
+			    persistentManager.makePersistent(usuario7);
+			    persistentManager.makePersistent(usuario8);
+			    persistentManager.makePersistent(usuario9);
+			    persistentManager.makePersistent(usuario10);
 			    persistentManager.makePersistent(reserva1);
+			    persistentManager.makePersistent(reserva2);
+			    persistentManager.makePersistent(reserva3);
+			    persistentManager.makePersistent(reserva4);
+			    persistentManager.makePersistent(reserva5);
+			    persistentManager.makePersistent(reserva6);
+			    persistentManager.makePersistent(reserva7);
+			    persistentManager.makePersistent(reserva8);
+			    persistentManager.makePersistent(reserva9);
+			    persistentManager.makePersistent(reserva10);
 			    //Imprimimos lo que hemos introducido en la BD
-			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
 			    System.out.println("- Inserted into db: " + usuario1.getNombre());
+			    System.out.println("- Inserted into db: " + usuario2.getNombre());
+			    System.out.println("- Inserted into db: " + usuario3.getNombre());
+			    System.out.println("- Inserted into db: " + usuario4.getNombre());
+			    System.out.println("- Inserted into db: " + usuario5.getNombre());
+			    System.out.println("- Inserted into db: " + usuario6.getNombre());
+			    System.out.println("- Inserted into db: " + usuario7.getNombre());
+			    System.out.println("- Inserted into db: " + usuario8.getNombre());
+			    System.out.println("- Inserted into db: " + usuario9.getNombre());
+			    System.out.println("- Inserted into db: " + usuario10.getNombre());
+			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva2.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva3.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva4.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva5.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva6.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva7.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva8.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva9.getId_reserva());
+			    System.out.println("- Inserted into db: " + reserva10.getId_reserva());
 			    
 			    transaction.commit();
 			}
@@ -76,18 +135,6 @@ public class MainDB {
             {
 			    transaction.begin();
 			    
-			    //Anyadimos usuario 1 a nivel local
-			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
-			    //Anyadimos reserva 1 a nivel local
-			    Reserva reserva1= new Reserva(256);
-			    //Asignamos la reserva 1 al usuario 1
-			    usuario1.getReservas().add(reserva1);
-			    //Persistimos los datos en la BD
-			    persistentManager.makePersistent(usuario1);
-			    persistentManager.makePersistent(reserva1);
-			    //Imprimimos lo que hemos introducido en la BD
-			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
-			    System.out.println("- Inserted into db: " + usuario1.getNombre());
 			    
 			    transaction.commit();
 			}
@@ -111,22 +158,7 @@ public class MainDB {
 		{
 			try
             {
-			    transaction.begin();
-			    
-			    //Anyadimos usuario 1 a nivel local
-			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
-			    //Anyadimos reserva 1 a nivel local
-			    Reserva reserva1= new Reserva(256);
-			    //Asignamos la reserva 1 al usuario 1
-			    usuario1.getReservas().add(reserva1);
-			    //Persistimos los datos en la BD
-			    persistentManager.makePersistent(usuario1);
-			    persistentManager.makePersistent(reserva1);
-			    //Imprimimos lo que hemos introducido en la BD
-			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
-			    System.out.println("- Inserted into db: " + usuario1.getNombre());
-			    
-			    transaction.commit();
+			   
 			}
 
             catch(Exception ex)
@@ -148,22 +180,7 @@ public class MainDB {
 		{
 			try
             {
-			    transaction.begin();
-			    
-			    //Anyadimos usuario 1 a nivel local
-			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
-			    //Anyadimos reserva 1 a nivel local
-			    Reserva reserva1= new Reserva(256);
-			    //Asignamos la reserva 1 al usuario 1
-			    usuario1.getReservas().add(reserva1);
-			    //Persistimos los datos en la BD
-			    persistentManager.makePersistent(usuario1);
-			    persistentManager.makePersistent(reserva1);
-			    //Imprimimos lo que hemos introducido en la BD
-			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
-			    System.out.println("- Inserted into db: " + usuario1.getNombre());
-			    
-			    transaction.commit();
+			  
 			}
 
             catch(Exception ex)
