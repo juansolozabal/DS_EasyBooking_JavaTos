@@ -1,3 +1,7 @@
+import java.awt.List;
+import java.util.ArrayList;
+
+import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -8,51 +12,47 @@ import LD.Reserva;
 import LD.Usuario;
 
 public class MainDB {
+		static PersistenceManagerFactory persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		//Insert data in the DB
+		static PersistenceManager persistentManager = persistentManagerFactory.getPersistenceManager();				
+		static Transaction transaction = persistentManager.currentTransaction();
+	
+		public static void main(String[] args) {
 
-	public static void main(String[] args) {
-
-		/*
-		 * USUARIO
-		 * - dni
-		 * - nombre
-		 * - apellido
-		 * - correo
-		 * - pin
-		 * - id_aeropuerto
-		 * 
-		 * RESERVA
-		 * - id_reserva (viene dado por datanucleus)
-		 * - precio
-		 * 
-		 * PERSONA
-		 * - dni
-		 * - nombre
-		 * - apellido
-		 */
 		try
         {
-			PersistenceManagerFactory persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-			
-			//Insert data in the DB
-			PersistenceManager persistentManager = persistentManagerFactory.getPersistenceManager();				
-			Transaction transaction = persistentManager.currentTransaction();				
-			
+			Anyadir();
+			Eliminar();
+			Actualizar();
+			Select();
+        }
+		catch (Exception ex)
+        {
+			System.err.println("* Exception: " + ex.getMessage());
+		}
+	}
+		
+		
+		public static void Anyadir()
+		{
 			try
             {
 			    transaction.begin();
 			    
+			    //Anyadimos usuario 1 a nivel local
 			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
+			    //Anyadimos reserva 1 a nivel local
 			    Reserva reserva1= new Reserva(256);
-			    
-			    usuario1.getReservas().add(reserva1);		    
+			    //Asignamos la reserva 1 al usuario 1
+			    usuario1.getReservas().add(reserva1);
+			    //Persistimos los datos en la BD
 			    persistentManager.makePersistent(usuario1);
 			    persistentManager.makePersistent(reserva1);
-			    
+			    //Imprimimos lo que hemos introducido en la BD
 			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
 			    System.out.println("- Inserted into db: " + usuario1.getNombre());
 			    
 			    transaction.commit();
-			    
 			}
 
             catch(Exception ex)
@@ -69,59 +69,117 @@ public class MainDB {
 			    
 			    persistentManager.close();
 			}
-			
-			
-			//Select data using a Query
-			persistentManager = persistentManagerFactory.getPersistenceManager();
-			transaction = persistentManager.currentTransaction();
-				
+		}
+		public static void Eliminar()
+		{
 			try
             {
 			    transaction.begin();
-			    Reserva reserva2= new Reserva(300);
-			    persistentManager.makePersistent(reserva2);
-			    System.out.println("Precio de la reserva sin modificar: " + reserva2.getPrecio());
-			    @SuppressWarnings("unchecked")
-				Query<Reserva> ReservasQuery1 = persistentManager.newQuery("javax.jdo.query.SQL", "UPDATE RESERVA SET PRECIO = 200 WHERE ID_RESERVA=2 ");
-//			    for (Reserva reserva : ReservasQuery1.executeList())
-//			    {
-//				    System.out.println("- Selected from db: " + reserva.getId_reserva() + " con precio modificado de: " + reserva.getPrecio());
-//			    }
 			    
-			    @SuppressWarnings("unchecked")
-				Query<Reserva> ReservasQuery = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName() + " WHERE ID_RESERVA=2");
+			    //Anyadimos usuario 1 a nivel local
+			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
+			    //Anyadimos reserva 1 a nivel local
+			    Reserva reserva1= new Reserva(256);
+			    //Asignamos la reserva 1 al usuario 1
+			    usuario1.getReservas().add(reserva1);
+			    //Persistimos los datos en la BD
+			    persistentManager.makePersistent(usuario1);
+			    persistentManager.makePersistent(reserva1);
+			    //Imprimimos lo que hemos introducido en la BD
+			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
+			    System.out.println("- Inserted into db: " + usuario1.getNombre());
 			    
-			    for (Reserva reserva : ReservasQuery.executeList()) 
-			    {
-			        System.out.println("- Selected from db: " + reserva.getId_reserva());
-			        System.out.println("- Precio actualizado: " + reserva.getPrecio());
-			        persistentManager.deletePersistent(reserva);
-			        System.out.println("- Deleted from db: " + reserva.getId_reserva());
-			    }
-	
 			    transaction.commit();
 			}
 
-			catch(Exception ex)
+            catch(Exception ex)
 			{
-				System.err.println("* Exception executing a query: " + ex.getMessage());
+				System.err.println("* Exception inserting data into db: " + ex.getMessage());
 			}
-
-			finally 
-			{
-				if (transaction.isActive())
+			
+			finally
+			{		    
+				if (transaction.isActive()) 
 				{
 			        transaction.rollback();
 			    }
-	
+			    
 			    persistentManager.close();
 			}
 		}
+		public static void Actualizar()
+		{
+			try
+            {
+			    transaction.begin();
+			    
+			    //Anyadimos usuario 1 a nivel local
+			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
+			    //Anyadimos reserva 1 a nivel local
+			    Reserva reserva1= new Reserva(256);
+			    //Asignamos la reserva 1 al usuario 1
+			    usuario1.getReservas().add(reserva1);
+			    //Persistimos los datos en la BD
+			    persistentManager.makePersistent(usuario1);
+			    persistentManager.makePersistent(reserva1);
+			    //Imprimimos lo que hemos introducido en la BD
+			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
+			    System.out.println("- Inserted into db: " + usuario1.getNombre());
+			    
+			    transaction.commit();
+			}
 
-		catch (Exception ex)
-        {
-			System.err.println("* Exception: " + ex.getMessage());
+            catch(Exception ex)
+			{
+				System.err.println("* Exception inserting data into db: " + ex.getMessage());
+			}
+			
+			finally
+			{		    
+				if (transaction.isActive()) 
+				{
+			        transaction.rollback();
+			    }
+			    
+			    persistentManager.close();
+			}
 		}
-	}
+		public static void Select()
+		{
+			try
+            {
+			    transaction.begin();
+			    
+			    //Anyadimos usuario 1 a nivel local
+			    Usuario usuario1 = new Usuario(72839127, "Juan", "Solozabal", "juansolozabal@gmail.com", 3654, 123);
+			    //Anyadimos reserva 1 a nivel local
+			    Reserva reserva1= new Reserva(256);
+			    //Asignamos la reserva 1 al usuario 1
+			    usuario1.getReservas().add(reserva1);
+			    //Persistimos los datos en la BD
+			    persistentManager.makePersistent(usuario1);
+			    persistentManager.makePersistent(reserva1);
+			    //Imprimimos lo que hemos introducido en la BD
+			    System.out.println("- Inserted into db: " + reserva1.getId_reserva());
+			    System.out.println("- Inserted into db: " + usuario1.getNombre());
+			    
+			    transaction.commit();
+			}
+
+            catch(Exception ex)
+			{
+				System.err.println("* Exception inserting data into db: " + ex.getMessage());
+			}
+			
+			finally
+			{		    
+				if (transaction.isActive()) 
+				{
+			        transaction.rollback();
+			    }
+			    
+			    persistentManager.close();
+			}
+		}
 
 }
