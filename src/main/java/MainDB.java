@@ -8,19 +8,19 @@ import LD.Reserva;
 import LD.Usuario;
 
 public class MainDB {
-		static PersistenceManagerFactory persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		static PersistenceManagerFactory persistentManagerFactory;
 		//Insert data in the DB
-		static PersistenceManager persistentManager = persistentManagerFactory.getPersistenceManager();				
-		static Transaction transaction = persistentManager.currentTransaction();
+		static PersistenceManager persistentManager;				
+		static Transaction transaction;
 	
 		public static void main(String[] args) {
-
+			
 		try
         {
 			Anyadir();
-			Eliminar();
+		//	Eliminar();
 			Actualizar();
-			Select();
+		//	Select();
         }
 		catch (Exception ex)
         {
@@ -33,6 +33,9 @@ public class MainDB {
 		{
 			try
             {
+				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+				persistentManager = persistentManagerFactory.getPersistenceManager();
+				transaction = persistentManager.currentTransaction();
 			    transaction.begin();
 			    
 			    //Anyadimos usuarios
@@ -133,6 +136,9 @@ public class MainDB {
 		{
 			try
             {
+				persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+				persistentManager = persistentManagerFactory.getPersistenceManager();
+				transaction = persistentManager.currentTransaction();
 			    transaction.begin();
 			    
 			    
@@ -141,7 +147,7 @@ public class MainDB {
 
             catch(Exception ex)
 			{
-				System.err.println("* Exception inserting data into db: " + ex.getMessage());
+				System.err.println("* Exception eliminating data into db: " + ex.getMessage());
 			}
 			
 			finally
@@ -158,20 +164,23 @@ public class MainDB {
 		{
 			try
             {
+					persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+					persistentManager = persistentManagerFactory.getPersistenceManager();
+					transaction = persistentManager.currentTransaction();
 				 	transaction.begin();
 				    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, "72839127");
 				    usuario1.setCorreo("juan.solozabal@opendeusto.es");
 				    System.out.println("Actualizacion realizada.");
 				   
 				    Usuario usuario2 = persistentManager.getObjectById(Usuario.class, "72555100");
-				    usuario1.setCorreo("javier.a.eulate@opendeusto.es");
+				    usuario2.setCorreo("javier.a.eulate@opendeusto.es");
 				    System.out.println("Actualizacion realizada.");
 				    
-				    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "");
+				    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "1");
 				    reserva1.setPrecio(200);
 				    System.out.println("Reserva actualizada");
 				    
-				    Reserva reserva2 = persistentManager.getObjectById(Reserva.class, "");
+				    Reserva reserva2 = persistentManager.getObjectById(Reserva.class, "2");
 				    reserva2.setPrecio(100);
 				    System.out.println("Reserva actualizada");
 				    
@@ -180,7 +189,7 @@ public class MainDB {
 
             catch(Exception ex)
 			{
-				System.err.println("* Exception inserting data into db: " + ex.getMessage());
+				System.err.println("* Exception updating data into db: " + ex.getMessage());
 			}
 			
 			finally
@@ -202,7 +211,7 @@ public class MainDB {
 
             catch(Exception ex)
 			{
-				System.err.println("* Exception inserting data into db: " + ex.getMessage());
+				System.err.println("* Exception selecting data into db: " + ex.getMessage());
 			}
 			
 			finally
