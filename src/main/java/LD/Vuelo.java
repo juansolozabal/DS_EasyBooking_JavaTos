@@ -1,22 +1,30 @@
 package LD;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class Vuelo {
 	
-	public int cod_vuelo;
-	public int num_asientos_tot;
-	public int num_asientos_disp;
-	public Time hora_salida;
-	public Time hora_llegada;
+	private int cod_vuelo;
+	private int num_asientos_tot;
+	private int num_asientos_disp;
+	private Date fecha_salida;
+	private Date fecha_llegada;
+	private Aeropuerto aeropuerto_origen;
+	private Aeropuerto aeropuerto_destino;
+	private Aerolinea aerolinea;
 	
-	public Vuelo(int cod_vuelo, int num_asientos_tot, int num_asientos_disp, Time hora_salida, Time hora_llegada) {
+	
+	public Vuelo(int cod_vuelo, int num_asientos_tot, int num_asientos_disp, Date fecha_salida, Date fecha_llegada, Aeropuerto aeropuerto_origen, Aeropuerto aeropuerto_destino, Aerolinea aerolinea) {
 		super();
 		this.cod_vuelo = cod_vuelo;
 		this.num_asientos_tot = num_asientos_tot;
 		this.num_asientos_disp = num_asientos_disp;
-		this.hora_salida = hora_salida;
-		this.hora_llegada = hora_llegada;
+		this.fecha_salida = fecha_salida;
+		this.fecha_llegada = fecha_llegada;
+		this.aeropuerto_origen = aeropuerto_origen;
+		this.aeropuerto_destino = aeropuerto_destino;
+		this.aerolinea = aerolinea;
 	}
 
 	public int getCod_vuelo() {
@@ -43,20 +51,48 @@ public class Vuelo {
 		this.num_asientos_disp = num_asientos_disp;
 	}
 
-	public Time getHora_salida() {
-		return hora_salida;
+	public Date getFecha_salida() {
+		return fecha_salida;
 	}
 
-	public void setHora_salida(Time hora_salida) {
-		this.hora_salida = hora_salida;
+	public void setFecha_salida(Date fecha_salida) {
+		this.fecha_salida = fecha_salida;
 	}
 
-	public Time getHora_llegada() {
-		return hora_llegada;
+	public Date getFecha_llegada() {
+		return fecha_llegada;
 	}
 
-	public void setHora_llegada(Time hora_llegada) {
-		this.hora_llegada = hora_llegada;
+	public void setHora_llegada(Date fecha_llegada) {
+		this.fecha_llegada = fecha_llegada;
+	}
+
+	public Aeropuerto getAeropuerto_origen() {
+		return aeropuerto_origen;
+	}
+
+	public void setAeropuerto_origen(Aeropuerto aeropuerto_origen) {
+		this.aeropuerto_origen = aeropuerto_origen;
+	}
+
+	public Aeropuerto getAeropuerto_destino() {
+		return aeropuerto_destino;
+	}
+
+	public void setAeropuerto_destino(Aeropuerto aeropuerto_destino) {
+		this.aeropuerto_destino = aeropuerto_destino;
+	}
+
+	public Aerolinea getAerolinea() {
+		return aerolinea;
+	}
+
+	public void setAerolinea(Aerolinea aerolinea) {
+		this.aerolinea = aerolinea;
+	}
+
+	public void setFecha_llegada(Date fecha_llegada) {
+		this.fecha_llegada = fecha_llegada;
 	}
 	
 	
