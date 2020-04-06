@@ -225,7 +225,7 @@ public class MainDB {
 			    @SuppressWarnings("unchecked")
 			    Query <Reserva> q2 = persistentManager.newQuery("SELECT FROM " + Reserva.class.getName());
 			    for (Reserva aux : q2.executeList()) {
-					System.out.println("Precio reserva" + aux.getPrecio());
+					System.out.println("Precio reserva" + aux.getPrecioTotal());
 				}
 			    			    
 			    transaction.commit();

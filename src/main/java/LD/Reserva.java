@@ -16,7 +16,7 @@ public class Reserva {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private long id_reserva;
-	private float precio;
+	private float precioTotal;
 	private int cod_vuelo;
 	@Persistent(table="RESERVAS_PERSONAS")
 	@Join(column="id_reserva")
@@ -25,8 +25,8 @@ public class Reserva {
 	
 	
 	//Constructor
-	public Reserva(float precio) {
-		this.precio = precio;
+	public Reserva(int cod_vuelo) {
+		this.cod_vuelo = cod_vuelo;
 		personasRes = new HashSet<Persona>();
 	}
 	public long getId_reserva() {
@@ -35,11 +35,11 @@ public class Reserva {
 	public void setId_reserva(long id_reserva) {
 		this.id_reserva = id_reserva;
 	}
-	public float getPrecio() {
-		return precio;
+	public float getPrecioTotal() {
+		return precioTotal;
 	}
-	public void setPrecio(float precio) {
-		this.precio = precio;
+	public void setPrecio(float precioTotal) {
+		this.precioTotal = precioTotal;
 	}
 	public int getCod_vuelo() {
 		return cod_vuelo;
