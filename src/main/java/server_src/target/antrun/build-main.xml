@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <ant antfile="C:\workspace\DS_EasyBooking_JavaTos\src\main\java\server_src/build.xml">
+    <target name="launch.server"/>
+  </ant>
+</target>
+</project>
