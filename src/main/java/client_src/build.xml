@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="launch.client" name="4.1_SMS_C-and-SL_Client">
 	<property environment="env"/>
-	<property name="source.dir" location="src/client"/>
-	<property name="lib.dir" location="lib"/>
+	<property name="lib.dir" location="target"/>
 	<property name="server.port" value="1099"/> 
 	<property name="server.IP" value="127.0.0.1"/> 
 	<property name="server.Name" value="Cliente"/>
@@ -14,7 +13,6 @@
         </fileset>
     </path>
 	
-
 	<target name="launch.client" description="Runs Client program">
 		<java classname="src.client.controller.EBController" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
