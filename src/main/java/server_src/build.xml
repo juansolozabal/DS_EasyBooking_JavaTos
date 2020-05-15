@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="launch.server" name="Runs EB Server">
 	<property environment="env"/>
-	<property name="source.dir" location="src"/>
-	<property name="dist.dir" location="dist"/>
-	<property name="lib.dir" location="lib"/>
-	<property name="classpath" location="bin"/>
-	<property name="export.file" value="EasyBookingManagerServer.jar"/>
+	<property name="lib.dir" location="target"/>
 	<property name="server.port" value="1099"/> 
 	<property name="server.IP" value="127.0.0.1"/> 
 	<property name="server.Name" value="Servidor"/>
@@ -18,7 +14,7 @@
     </path>
 	
 	<target name="launch.server" description="Runs Server">
-		<java classname="EasyBookingManagerServer" classpathref="classpath" fork="true">
+		<java classname="src.EasyBookingManagerServer" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${server.IP}"/> 
 	 		<arg value="${server.port}"/> 

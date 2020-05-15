@@ -20,10 +20,10 @@ public class EBController {
 	{
 		// Add your related code for the initialization of the Service Locator
 		rsl = new RMIServiceLocator();
-		rsl.setService("127.0.0.1", "1099", "Cliente");
-//		rsl.setService(args[0], args[1], args[2]);
+		rsl.setService(args[0], args[1], args[2]);
         // Add your code for the initialization of the windows		
 		app = new frmLogotipoInicial(this);
+		app.setVisible(true);
 	}
 	
 	public void iniciarSesion(String nomUsuario, String correo, String contrasenya)

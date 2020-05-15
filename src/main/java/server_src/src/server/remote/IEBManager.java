@@ -19,6 +19,6 @@ public interface IEBManager extends Remote {
 	public void pagarPayPal(String email, String contrasenya) throws RemoteException;
 	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException;
 	public ArrayList<Vuelo> buscarVuelos() throws RemoteException; //Se buscan vuelos en un fecha especifica
-	public ArrayList<Vuelo> getVuelos() throws RemoteException; //Al arranque del programa se recogerán todos los vuelos
+	public ArrayList<Vuelo> getVuelos() throws RemoteException; //Al arranque del programa se recogeran todos los vuelos
 	public String comprobacionConexion() throws RemoteException;
 }

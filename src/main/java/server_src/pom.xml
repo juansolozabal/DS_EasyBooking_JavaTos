@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-        	<config.files.dir>src/main/resources</config.files.dir>
+        	<config.files.dir>../../resources</config.files.dir>
         	<encoding>UTF-8</encoding>
         	<maven.compiler.target>1.8</maven.compiler.target>
     		<maven.compiler.source>1.8</maven.compiler.source>
@@ -56,7 +56,7 @@
 	</dependencies>
 	
 	 <build>
-        <sourceDirectory>src/main/java/server_src</sourceDirectory>
+        <sourceDirectory>src/</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <resources>
@@ -86,26 +86,6 @@
                     </filesets>
                 </configuration>
             </plugin>
-			<plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-antrun-plugin</artifactId>
-              <version>1.8</version>
-
-              <dependencies>
-                 <dependency>
-                    <groupId>commons-net</groupId>
-                    <artifactId>commons-net</artifactId>
-                    <version>1.4.1</version>
-                 </dependency>
-
-                 <dependency>
-                   <groupId>org.apache.ant</groupId>
-                   <artifactId>ant-commons-net</artifactId>
-                   <version>1.8.1</version>
-             
-             </dependency>
-               </dependencies>
-           </plugin>
            
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -127,10 +107,25 @@
                     <props>${config.files.dir}/datanucleus.properties</props>
                 </configuration>
 
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+			<plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-antrun-plugin</artifactId>
+              <version>1.8</version>
+			
                <executions>
                		<execution>
                 	<id>run-ant</id>
-                	<phase>compile</phase>
+                	<phase>package</phase>
                 	<goals>
                     	<goal>run</goal>
                 	</goals>
@@ -143,14 +138,27 @@
                			</configuration>
               		</execution>
                 </executions>
-            </plugin>
+               <dependencies>
+                 <dependency>
+                    <groupId>commons-net</groupId>
+                    <artifactId>commons-net</artifactId>
+                    <version>1.4.1</version>
+                 </dependency>
 
+                 <dependency>
+                   <groupId>org.apache.ant</groupId>
+                   <artifactId>ant-commons-net</artifactId>
+                   <version>1.8.1</version>
+             
+             	</dependency>
+               </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>EasyBookingManagerServer</mainClass>
+                    <mainClass>src.EasyBookingManagerServer</mainClass>
                     <systemProperties>
                         <systemProperty>
                             <key>log4j.configuration</key>

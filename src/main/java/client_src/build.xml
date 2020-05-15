@@ -4,7 +4,7 @@
 	<property name="lib.dir" location="target"/>
 	<property name="server.port" value="1099"/> 
 	<property name="server.IP" value="127.0.0.1"/> 
-	<property name="server.Name" value="Cliente"/>
+	<property name="server.Name" value="Servidor"/>
 	<property name="policy.file" location="security/java.policy"/>	
 
 	<path id="classpath">

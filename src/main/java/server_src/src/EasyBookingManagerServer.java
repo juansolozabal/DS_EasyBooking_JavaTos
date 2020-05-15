@@ -1,3 +1,5 @@
+package src;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -18,8 +20,7 @@ public class EasyBookingManagerServer {
 			System.setSecurityManager(new SecurityManager());
 		}
 
-//		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
-		String name = "//" + "127.0.0.1" + ":" + "1099" + "/" + "Servidor";
+		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 		
 		try 
 		{
