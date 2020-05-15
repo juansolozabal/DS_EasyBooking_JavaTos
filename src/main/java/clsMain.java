@@ -6,9 +6,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
-import LP.frmInicioRegistro;
-import LP.frmListaVuelos;
-import LP.frmLogotipoInicial;
+import src.client.gui.frmLogotipoInicial;
 
 public class clsMain 
 {
@@ -25,7 +23,7 @@ public class clsMain
 			logger.log( Level.SEVERE, e.toString(), e );
 		}
 		
-		frmLogotipoInicial frPantalla = new frmLogotipoInicial();
+		frmLogotipoInicial frPantalla = new frmLogotipoInicial(null);
 		frPantalla.setVisible(true);
 		logger.log( Level.INFO, "Ejecutando programa. ");
 	}

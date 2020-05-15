@@ -90,22 +90,6 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-antrun-plugin</artifactId>
               <version>1.8</version>
-              <executions>
-               <execution>
-                	<id>run-ant</id>
-                	<phase>compile</phase>
-                	<goals>
-                    	<goal>run</goal>
-                	</goals>
-               		<configuration>
-                  		<target>
-                     		<ant antfile="${basedir}/build.xml">
-                        		<target name="launch.server"/>
-                     		</ant>
-                  		</target>
-               		</configuration>
-               </execution>
-              </executions>
 
               <dependencies>
                  <dependency>
@@ -143,14 +127,14 @@
                     <props>${config.files.dir}/datanucleus.properties</props>
                 </configuration>
 
-                <executions>
+               <executions>
                		<execution>
                 	<id>run-ant</id>
-                	<phase>package</phase>
+                	<phase>compile</phase>
                 	<goals>
                     	<goal>run</goal>
                 	</goals>
-               <configuration>
+               			<configuration>
                   			<target>
                      			<ant antfile="${basedir}/build.xml">
                         		<target name="launch.server"/>
@@ -166,7 +150,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>org.datanucleus.samples.jdo.tutorial.Main</mainClass>
+                    <mainClass>EasyBookingManagerServer</mainClass>
                     <systemProperties>
                         <systemProperty>
                             <key>log4j.configuration</key>

@@ -12,15 +12,16 @@ import java.util.Date;
 
 public class EBController {
 
-	private RMIServiceLocator rsl = null;
-	private frmLogotipoInicial app = null;
-	private IEBManager ieb = null;
+	private RMIServiceLocator rsl;
+	private frmLogotipoInicial app;
+	private IEBManager ieb;
 	
 	public EBController(String[] args) throws RemoteException
 	{
 		// Add your related code for the initialization of the Service Locator
 		rsl = new RMIServiceLocator();
-		rsl.setService(args[0], args[1], args[2]);
+		rsl.setService("127.0.0.1", "1099", "Cliente");
+//		rsl.setService(args[0], args[1], args[2]);
         // Add your code for the initialization of the windows		
 		app = new frmLogotipoInicial(this);
 	}

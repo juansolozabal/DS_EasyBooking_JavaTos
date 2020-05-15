@@ -56,7 +56,7 @@
 	</dependencies>
 	
 	 <build>
-        <sourceDirectory>src/main/java/client_src</sourceDirectory>
+        <sourceDirectory>src/</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <resources>
@@ -90,23 +90,7 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-antrun-plugin</artifactId>
               <version>1.8</version>
-              <executions>
-               <execution>
-                	<id>run-ant</id>
-                	<phase>compile</phase>
-                	<goals>
-                    	<goal>run</goal>
-                	</goals>
-               		<configuration>
-                  		<target>
-                     		<ant antfile="${basedir}/build.xml">
-                        		<target name="launch.client"/>
-                     		</ant>
-                  		</target>
-               		</configuration>
-               </execution>
-              </executions>
-
+              
               <dependencies>
                  <dependency>
                     <groupId>commons-net</groupId>
@@ -146,11 +130,11 @@
                <executions>
                		<execution>
                 	<id>run-ant</id>
-                	<phase>package</phase>
+                	<phase>compile</phase>
                 	<goals>
-                    	<goal>run</goal>
+                    	<goal>enhance</goal>
                 	</goals>
-               <configuration>
+               			<configuration>
                   			<target>
                      			<ant antfile="${basedir}/build.xml">
                         		<target name="launch.client"/>
@@ -166,7 +150,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>org.datanucleus.samples.jdo.tutorial.Main</mainClass>
+                    <mainClass>src.client.controller.EBController</mainClass>
                     <systemProperties>
                         <systemProperty>
                             <key>log4j.configuration</key>
@@ -196,23 +180,4 @@
         </plugins>
     </build>
 	
-	
-	<profiles>     
-        <!-- run as 'mvn exec:java -PpruebaVentanas -->
-        <profile>
-            <id>pruebaVentanas</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.2.1</version>
-                        <configuration>
-                            <mainClass>src.client.controller.EBController</mainClass>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-     </profiles>  
 </project>

@@ -5,8 +5,9 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import LD.Reserva;
-import LD.Usuario;
+import src.server.dto.Reserva;
+import src.server.dto.Usuario;
+
 
 public class MainDB {
 		static PersistenceManagerFactory persistentManagerFactory;
