@@ -12,8 +12,8 @@ import src.server.dto.Vuelo;
 
 public interface IEBManager extends Remote {
 
-	public void iniciarSesion(String nomUsuario, String correo, String contrasenya) throws RemoteException;
-	public void registrarse(String nombre, String apellidos, String correo, String nomUsuario, String contrasenya) throws RemoteException;
+	public void iniciarSesion(String correo, String contrasenya) throws RemoteException;
+	public void registrarse(String nombre, String apellidos, String correo) throws RemoteException;
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos) throws RemoteException;
 	public void hacerReserva(int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros) throws RemoteException;
 	public void pagarPayPal(String email, String contrasenya) throws RemoteException;

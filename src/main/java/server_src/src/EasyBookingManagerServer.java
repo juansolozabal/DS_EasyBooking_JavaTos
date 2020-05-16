@@ -24,14 +24,14 @@ public class EasyBookingManagerServer {
 		
 		try 
 		{
-			IEBManager EBServer = new EBManager(args[2]);
+			IEBManager EBServer = new EBManager(args); // TODO No estoy seguro de que sea asi
 			Registry registry = LocateRegistry.createRegistry((Integer.valueOf(args[1])));
 			registry.rebind(name,EBServer);		
-			System.out.println("- EBProgramManager '" + name + "' active and waiting...");
+			System.out.println("- EasyBookingProgramManagerServer '" + name + "' active and waiting...");
 		} 
 		catch (Exception e) 
 		{
-			System.err.println("$ EBProgramManager exception: " + e.getMessage());
+			System.err.println("$ EasyBookingProgramManagerServer exception: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}

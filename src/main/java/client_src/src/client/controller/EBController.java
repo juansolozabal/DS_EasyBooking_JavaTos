@@ -26,11 +26,11 @@ public class EBController {
 		app.setVisible(true);
 	}
 	
-	public void iniciarSesion(String nomUsuario, String correo, String contrasenya)
+	public void iniciarSesion(String correo, String contrasenya)
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.iniciarSesion(nomUsuario, correo, contrasenya);
+			ieb.iniciarSesion(correo, contrasenya);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error iniciando sesion: " + e.toString());		}
@@ -51,7 +51,7 @@ public class EBController {
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.registrarse(nombre, apellidos, correo, nomUsuario, contrasenya);
+			ieb.registrarse(nombre, apellidos, correo);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al registrarse: " + e.toString());		}

@@ -29,23 +29,25 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	private EBgestorDAO gestorDAO;
 	
 	
-	public EBManager(String serverName) throws RemoteException 
+	public EBManager(String[] args) throws RemoteException 
 	{
 		super();
-		this.serverName = serverName;
+		this.serverName = args[2];
+		this.gestorAero = new EBgestorAero(args);
+		this.gestorAuth = new EBgestorAuth(args);
+		this.gestorPagos = new EBgestorPagos(args);
+		this.gestorDAO = new EBgestorDAO();
 	}
 	
 	@Override
-	public void iniciarSesion(String nomUsuario, String correo, String contrasenya) throws RemoteException {
-		// TODO Auto-generated method stub
+	public void iniciarSesion(String correo, String contrasenya) throws RemoteException {
+		this.gestorAuth.iniciarSesion(correo, contrasenya);
 		
 	}
 
 	@Override
-	public void registrarse(String nombre, String apellidos, String correo, String nomUsuario, String contrasenya)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public void registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
+		this.gestorAuth.registrarse(nombre, apellidos, correo);
 	}
 
 	@Override
