@@ -62,7 +62,7 @@ public class frmPago extends JFrame  {
 		fechaHoy.setCalendar(actual);
 		setTitle("Pasarela de pago");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		imagen = new File("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		imagen = new File("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(imagen.getAbsolutePath()));
 		setResizable(false);
 		setBounds(0, 100, 600, 431);
@@ -83,19 +83,19 @@ public class frmPago extends JFrame  {
 		contentPane.setLayout(null);
 	    Color azulFondo = new Color (0, 76, 109);
 	    contentPane.setBackground(azulFondo);
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(342, 140,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg);
 		setBounds(0, 100, 600, 431);
 		
-		VisaImagen = new ImageIcon("src\\main\\resources\\img\\VISA.png");
+		VisaImagen = new ImageIcon("..\\..\\resources\\img\\VISA.png");
 		
 		JButton btnPayPal = new JButton("PayPal");
 		btnPayPal.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnPayPal.setBounds(203, 227, 168, 103);
 		
-		PayPalImagen = new ImageIcon("src\\main\\resources\\img\\PayPal.png");
+		PayPalImagen = new ImageIcon("..\\..\\resources\\img\\PayPal.png");
 		PayPalIcono = new ImageIcon(PayPalImagen.getImage().getScaledInstance(btnPayPal.getWidth(), btnPayPal.getHeight(), Image.SCALE_DEFAULT));
 		btnPayPal.setIcon(PayPalIcono);
 		btnPayPal.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +136,7 @@ public class frmPago extends JFrame  {
 		contentPane.removeAll();
 	
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\PayPal.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\PayPal.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 
@@ -203,7 +203,7 @@ public class frmPago extends JFrame  {
 		setBounds(0, 100, 600, 331);
 		
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\VISA.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\VISA.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 

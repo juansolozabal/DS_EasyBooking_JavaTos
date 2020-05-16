@@ -67,8 +67,8 @@ public class frmInicioRegistro extends JFrame
 	    contentPane.setBackground(azulFondo);
 
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
-		Image image = logo.getImage(); 
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
+		Image image = logo.getImage();
 		Image newimg = image.getScaledInstance(342, 140,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 
 		EasyBooking.setIcon(logo);
@@ -110,7 +110,7 @@ public class frmInicioRegistro extends JFrame
 		contentPane.removeAll();
 	
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 
@@ -180,7 +180,7 @@ public class frmInicioRegistro extends JFrame
 		contentPane.removeAll();
 		
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(196, 80,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 

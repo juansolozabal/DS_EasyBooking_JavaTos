@@ -28,7 +28,7 @@ public class frmLogotipoInicial extends JFrame
 	{
 		this.controller = controller;
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\workspace\\DS_EasyBooking_JavaTos\\src\\main\\resources\\img\\Logo EasyBooking_Azul.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\..\\resources\\img\\Logo EasyBooking_Azul.png"));
 		setTitle("Bienvenid@ a EasyBooking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 100, 600, 431);		
@@ -40,7 +40,7 @@ public class frmLogotipoInicial extends JFrame
 		contentPane.setBackground(azulFondo);
 		
 		JLabel EasyBooking = new JLabel("");
-		ImageIcon logo= new ImageIcon("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		ImageIcon logo= new ImageIcon("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		Image image = logo.getImage(); 
 		Image newimg = image.getScaledInstance(342, 140,  java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(newimg); 

@@ -42,7 +42,7 @@ public class frmPasajeros extends JFrame
 		this.controller = controller;
 	    Color azulFondo = new Color (0, 76, 109);
 	    Color azulClaro = new Color (184, 205, 218);
-		imagen = new File("src\\main\\resources\\img\\Logo EasyBooking_Azul.png");
+		imagen = new File("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(imagen.getAbsolutePath()));
 		setResizable(false);
 		setTitle("Datos de Pasajeros");
