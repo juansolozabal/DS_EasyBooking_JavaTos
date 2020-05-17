@@ -10,6 +10,8 @@ import src.server.appservice.EBgestorAuth;
 import src.server.appservice.EBgestorPagos;
 import src.server.dao.EBgestorDAO;
 import src.server.dto.Persona;
+import src.server.dto.Reserva;
+import src.server.dto.Usuario;
 import src.server.dto.Vuelo;
 
 public class EBManager extends UnicastRemoteObject implements IEBManager{
@@ -86,5 +88,34 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 	public String getName() {
 		return serverName;
+	}
+	
+	public void anyadirUsuario(Usuario usu)
+	{
+		EBgestorDAO.anyadirUsuario(usu);
+	}
+	public void anyadirReservaAUsuario (Usuario usu, Reserva res)
+	{
+		EBgestorDAO.anyadirReservaAUsuario(usu, res);
+	}
+	public void eliminarUsuario(Usuario usu)
+	{
+		EBgestorDAO.eliminarUsuario(usu);
+	}
+	public void actualizarUsuario(Usuario actu)
+	{
+		EBgestorDAO.actualizarUsuario(actu);
+	}
+	public void actualizarReserva(Reserva actu)
+	{
+		EBgestorDAO.actualizarReserva(actu);
+	}
+
+	public ArrayList<Usuario> selectUsuarios() {
+		return gestorDAO.selectUsuarios();
+	}
+
+	public ArrayList<Reserva> selectReservas() {
+		return gestorDAO.selectReservas();
 	}
 }
