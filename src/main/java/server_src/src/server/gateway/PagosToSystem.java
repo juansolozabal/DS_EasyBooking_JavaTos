@@ -1,5 +1,6 @@
 package src.server.gateway;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class PagosToSystem implements IGatewayPagos{
 
 
 	@Override
-	public void hacerReserva(String nomUsu, int cod_vuelo, float precio, List<Persona> pasajeros) {
+	public void hacerReserva(int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros) {
 		// TODO Auto-generated method stub
 		
 	}

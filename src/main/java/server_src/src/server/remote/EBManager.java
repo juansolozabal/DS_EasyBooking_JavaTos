@@ -23,9 +23,6 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String serverName;
-	private EBgestorPagos gestorPagos;
-	private EBgestorAuth gestorAuth;
-	private EBgestorAero gestorAero;
 	private EBgestorDAO gestorDAO;
 	
 	
@@ -33,67 +30,63 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	{
 		super();
 		this.serverName = args[2];
-		this.gestorAero = new EBgestorAero(args);
-		this.gestorAuth = new EBgestorAuth(args);
-		this.gestorPagos = new EBgestorPagos(args);
-		this.gestorDAO = new EBgestorDAO();
+		EBgestorAero.getGestorAero().setArgs(args);
+		EBgestorAuth.getGestorAuth().setArgs(args);
+		EBgestorPagos.getGestorPagos().setArgs(args);
+		EBgestorDAO.getGestorDAO();
 	}
 	
 	@Override
 	public void iniciarSesion(String correo, String contrasenya) throws RemoteException {
-		this.gestorAuth.iniciarSesion(correo, contrasenya);
+		EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
 		
 	}
 
 	@Override
 	public void registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
-		this.gestorAuth.registrarse(nombre, apellidos, correo);
+		EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
 	}
 
 	@Override
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		//Este hay que mirar bien donde meterlo. Este metodo no tiene que estar conectado
+		//Con el gestor pagos, es algo que debemos gestionar internamente. Una vez que hayamos
+		//acabado de meter todas las personas, en el clicaremos en aceptar y llamaremos al 
+		//metodo hacer reserva. Este ultimo si que estara conectado al gestorPagos.
 	}
 
 	@Override
 	public void hacerReserva(int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros) throws RemoteException {
-		// TODO Auto-generated method stub
+		EBgestorPagos.getGestorPagos().hacerReserva(codVuelo, nomUsuario, pasajeros);
 		
 	}
 
 	@Override
 	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException{
-		// TODO Auto-generated method stub
+		EBgestorPagos.getGestorPagos().pagarVisa(nomTitular, numTarj, venc, cvc);
 		
 	}
 
 	@Override
 	public void pagarPayPal(String email, String contrasenya) throws RemoteException{
-	
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public String comprobacionConexion() throws RemoteException 
-	{
-		return "Conexion establecida con el servidor.";
-	}
-
-	public String getName() 
-	{
-		return serverName;
+		EBgestorPagos.getGestorPagos().pagarPayPal(email, contrasenya);
 	}
 
 	@Override
-	public ArrayList<Vuelo> buscarVuelos() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) throws RemoteException{
+		return EBgestorAero.getGestorAero().buscarVuelos(fecha, nomOrigen, nomDestino);
 	}
 
 	@Override
 	public ArrayList<Vuelo> getVuelos() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String comprobacionConexion() throws RemoteException {
+		return "Conexion establecida con el servidor.";
+	}
+	public String getName() {
+		return serverName;
 	}
 }

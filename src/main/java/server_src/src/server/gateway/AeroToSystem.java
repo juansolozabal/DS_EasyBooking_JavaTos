@@ -46,7 +46,7 @@ public class AeroToSystem implements IGatewayAero{
 
 
 	@Override
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, Aeropuerto aeropuerto_origen, Aeropuerto aeropuerto_destino) {
+	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) {
 		// TODO Auto-generated method stub
 		return null;
 	}

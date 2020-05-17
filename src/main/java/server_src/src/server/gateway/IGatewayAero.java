@@ -11,5 +11,5 @@ public interface IGatewayAero {
 	public void makePutRequest();
 	public void makePostRequest();
 	public ArrayList<Vuelo> getVuelos();
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, Aeropuerto aeropuerto_origen, Aeropuerto aeropuerto_destino);
+	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino);
 }

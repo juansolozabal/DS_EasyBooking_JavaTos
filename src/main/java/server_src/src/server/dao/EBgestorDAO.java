@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import src.server.appservice.EBgestorAuth;
 import src.server.dto.Reserva;
 import src.server.dto.Usuario;
 
@@ -17,6 +18,20 @@ public class EBgestorDAO {
 	static PersistenceManager persistentManager;				
 	static Transaction transaction;
 
+	private static EBgestorDAO gestorDAO = null;
+
+	private EBgestorDAO(){}
+	
+	public static EBgestorDAO getGestorDAO()
+	{
+		synchronized(EBgestorDAO.class)
+		{
+			if (gestorDAO == null) gestorDAO = new EBgestorDAO();
+		}
+		return gestorDAO;
+	}
+	
+	
 	public static void main(String[] args) {
 		
 	persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");

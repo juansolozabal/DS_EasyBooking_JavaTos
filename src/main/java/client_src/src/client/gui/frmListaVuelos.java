@@ -55,13 +55,13 @@ import javax.swing.JComboBox;
 
 public class frmListaVuelos extends JFrame{
 	private JPanel contentPane;
-	private JDateChooser calendarIda, calendarVuelta;
+	private JDateChooser calendarIda, calendarVuelta, fechaHoy;
 	private File imagen;
 	private int numPasajeros;
 	private JSpinner spinner;
-	private JDateChooser fechaHoy;
 	private Calendar actual;
 	private JRadioButton btnIda, btnIdaYVuelta;
+	private JComboBox origen, destino;
 	private EBController controller;
 
 	public frmListaVuelos(EBController controller) 
@@ -166,12 +166,12 @@ public class frmListaVuelos extends JFrame{
 		contentPane.add(btnIda);
 		idaOidavuelta.add(btnIda);
 		
-		JComboBox origen = new JComboBox();
+		origen = new JComboBox();
 		origen.setBackground(azulClaro);
 		origen.setBounds(12, 51, 99, 22);
 		contentPane.add(origen);
 		
-		JComboBox destino = new JComboBox();
+		destino = new JComboBox();
 		destino.setBackground(azulClaro);
 		destino.setBounds(123, 51, 99, 22);
 		contentPane.add(destino);
@@ -314,7 +314,7 @@ public class frmListaVuelos extends JFrame{
 	{
 		//TODO Aqui falta sacarlo por pantalla en cada uno de los huecos.
 		//Habria que saber cuantos resultados produce y pasarselo a numBusquedas
-		controller.buscarVuelos();
+		controller.buscarVuelos(calendarIda.getDate(), origen.getSelectedItem().toString(), destino.getSelectedItem().toString());
 	}
 	
 	private void buttonReservar(ActionEvent evt)
