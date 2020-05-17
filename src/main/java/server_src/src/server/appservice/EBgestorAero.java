@@ -30,7 +30,7 @@ public class EBgestorAero {
 	
 	public void setArgs(String[] args)
 	{
-		aeroGway = new AeroToSystem(args[0], args[1]);
+		aeroGway = new AeroToSystem(args);
 	}
 	
 	public ArrayList<Vuelo> getVuelos()

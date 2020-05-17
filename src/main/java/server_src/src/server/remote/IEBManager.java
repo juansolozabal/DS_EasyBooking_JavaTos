@@ -5,8 +5,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.toedter.calendar.JDateChooser;
-
 import src.server.dto.Persona;
 import src.server.dto.Vuelo;
 

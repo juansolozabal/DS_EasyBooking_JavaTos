@@ -1,5 +1,7 @@
 package src.server.gateway;
 
+import javax.ws.rs.core.Response;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -10,7 +12,8 @@ public class AuthToSystem implements IGatewayAuth{
 	private RestClient<A_User> client;
 	private String path;
 	
-	public AuthToSystem() {
+	public AuthToSystem(String[] args) {
+		// client = new RestClient<>(args[3], args[4]);
 		client = new RestClient<>("192.168.6.31", "5000");
 	}
 	

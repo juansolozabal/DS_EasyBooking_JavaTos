@@ -29,22 +29,32 @@ public class EBgestorPagos {
 	
 	public void setArgs(String[] args)
 	{
-		pagosGway = new PagosToSystem(args[0], args[1]);
+		pagosGway = new PagosToSystem(args);
 	}
 	
 	public void hacerReserva (int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros)
 	{
-		this.pagosGway.hacerReserva(codVuelo, nomUsuario, pasajeros);
+	//	this.pagosGway.hacerReserva(codVuelo, nomUsuario, pasajeros);
 	}
 	
 	public void pagarPayPal (String email, String contrasenya)
 	{
-		this.pagosGway.pagarPayPal(email, contrasenya);
+		try {
+			this.pagosGway.makePayment(email, (float) 2.0 ,contrasenya); //TODO para cambiar
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void pagarVisa (String nomTitular, int numTarj, Date venc, int cvc)
 	{
-		this.pagosGway.pagarVisa(nomTitular, numTarj, venc, cvc);
+		try {
+			this.pagosGway.makePayment(nomTitular, (float) 2.0 , nomTitular); //TODO para cambiar
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

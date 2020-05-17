@@ -24,17 +24,27 @@ public class EBgestorAuth {
 	
 	public void setArgs(String[] args)
 	{
-		authGway = new AuthToSystem(args[0], args[1]);
+		authGway = new AuthToSystem(args);
 	}
 	
 	public void iniciarSesion (String correo, String contrasenya)
 	{
-		this.authGway.iniciarSesion(correo, contrasenya);
+		try {
+			this.authGway.LogIn(correo, contrasenya);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void registrarse (String nombre, String apellidos, String correo)
 	{
-		this.authGway.registrarse(nombre, apellidos, correo);
+		try {
+			this.authGway.createUser(nombre, apellidos, correo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

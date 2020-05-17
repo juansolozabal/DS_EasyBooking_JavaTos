@@ -7,8 +7,8 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import es.deusto.PruebasMicroServicios2.P_User;
-import es.deusto.PruebasMicroServicios2.RestClient;
+import src.server.gateway.P_User;
+import src.server.gateway.RestClient;
 import src.server.dto.Persona;
 
 public class PagosToSystem implements IGatewayPagos{
@@ -17,13 +17,14 @@ public class PagosToSystem implements IGatewayPagos{
 	private RestClient<P_User> client;
 	private String path;
 	
-	public PagosToSystem() {
+	public PagosToSystem(String[] args) {
+	//	client = new RestClient<>(args[3], args[5]);
 		client = new RestClient<>("192.168.6.31", "5001");
 	}
 	
 	@Override
 	public String makePayment(String email, float amount, String concept) throws Exception {
-		path = "/Paymens/Make_payment";
+		path = "/Payments/Make_payment";
 		boolean operation_result = false;
 		String new_payment_response;
 
