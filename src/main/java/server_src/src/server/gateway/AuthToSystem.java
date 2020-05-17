@@ -1,48 +1,76 @@
 package src.server.gateway;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+
+
 public class AuthToSystem implements IGatewayAuth{
 
-	private String IP;
-	private String PORT;
+	private RestClient<A_User> client;
+	private String path;
 	
-	public AuthToSystem(String IP, String PORT) {
-		super();
-		this.IP=IP;
-		this.PORT=PORT;
+	public AuthToSystem() {
+		client = new RestClient<>("192.168.6.31", "5000");
 	}
-
 	
-// TODO Te dejo esto para ti Juanso, disfrutalo.
 	@Override
-	public void makeGetRequest() {
-		// TODO Auto-generated method stub
-		
+	public boolean LogIn(String email, String password) throws Exception {
+		path = "/Authentication/Log_in";
+		boolean operation_result = false;
+		String new_login_response;
+
+		new_login_response = client.makePostRequest(client.createInvocationBuilder(path), new A_User(email, password)).readEntity(String.class);
+		JSONParser myParser = new JSONParser();
+		JSONObject myJsonObject = (JSONObject) myParser.parse(new_login_response);
+		operation_result = (boolean) myJsonObject.get("Result");
+
+		return operation_result;
 	}
 
 	@Override
-	public void makePutRequest() {
-		// TODO Auto-generated method stub
+	public long createUser(String nombre, String apellido, String email) throws Exception {
+		path = "/Authentication/Create_user";
+		Response response = null;
+			
+		response = client.makePostRequest(client.createInvocationBuilder(path), new A_User(nombre, apellido, email));
 		
+		Simple_pass_result result_class_password = null;
+		String reply = response.readEntity(String.class);
+		
+	
+		result_class_password = new Simple_pass_result(reply);
+
+		long password = result_class_password.getContentNumber();
+		return password;
 	}
 
 	@Override
-	public void makePostRequest() {
-		// TODO Auto-generated method stub
-		
+	public boolean changePassword(String email, String passOld, String passNew) throws Exception {
+		path = "/Authentication/Change_password";
+		boolean operation_result = false;
+		String change_password_response;
+
+		change_password_response = client.makePutRequest(client.createInvocationBuilder(path), new A_User(null, null, email, passOld, passNew)).readEntity(String.class);
+		JSONParser myParser = new JSONParser();
+		JSONObject myJsonObject = (JSONObject) myParser.parse(change_password_response);
+		operation_result = (boolean) myJsonObject.get("Result");
+	
+		return operation_result;
 	}
 
-
 	@Override
-	public void iniciarSesion(String correo, String contrasenya) {
-		// TODO Auto-generated method stub
+	public boolean deleteUser(String email, String password) throws Exception {
+		path = "/Authentication/Delete_user";
+		boolean operation_result = false;
+		String delete_response;
 		
-	}
+		delete_response = client.makePutRequest(client.createInvocationBuilder(path), new A_User(email, password)).readEntity(String.class);
+		JSONParser myParser = new JSONParser();
+		JSONObject myJsonObject = (JSONObject) myParser.parse(delete_response);
+		operation_result = (boolean) myJsonObject.get("Result");
 
-
-	@Override
-	public void registrarse(String nombre, String apellidos, String correo) {
-		// TODO Auto-generated method stub
-		
+		return operation_result;
 	}
 
 }
