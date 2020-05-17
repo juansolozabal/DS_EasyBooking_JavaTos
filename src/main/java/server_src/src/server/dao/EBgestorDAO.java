@@ -25,7 +25,7 @@ public class EBgestorDAO {
 	private static ArrayList<Reserva> reses;
 
 	private EBgestorDAO(){
-		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 		persistentManager = persistentManagerFactory.getPersistenceManager();
 		transaction = persistentManager.currentTransaction();
 	}
@@ -156,7 +156,8 @@ public class EBgestorDAO {
 
 //Esta de aqui abajo es la manera en la que estaba antes
 //		 	transaction.begin();
-//		    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, "72839127");
+//		 	
+//		    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, actu.getDni());
 //		    usuario1.setCorreo("juan.solozabal@opendeusto.es");
 //		    System.out.println("Actualizacion realizada.");
 			
@@ -195,17 +196,17 @@ public class EBgestorDAO {
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 
-//Esta de aqui abajo es la manera en la que estaba antes
-//		 	transaction.begin();
-//		    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "21");
-//		    reserva1.setPrecio(200);
-//		    System.out.println("Reserva actualizada");
+			//Esta de aqui abajo es la manera en la que estaba antes
+		 	transaction.begin();
+		    Reserva reserva1 = persistentManager.getObjectById(Reserva.class, "21");
+		    reserva1.setPrecio(200);
+		    System.out.println("Reserva actualizada");
 			
-			transaction.begin();
-			Reserva eliminar = persistentManager.getObjectById(Usuario.class, actu.getId_reserva());
-			persistentManager.deletePersistent(eliminar);
-		    //Persistimos los datos en la BD
-		    persistentManager.makePersistent(actu);
+//			transaction.begin();
+//			Reserva eliminar = persistentManager.getObjectById(Usuario.class, actu.getId_reserva());
+//			persistentManager.deletePersistent(eliminar);
+//		    //Persistimos los datos en la BD
+//		    persistentManager.makePersistent(actu);
 
 		    //Imprimimos lo que hemos introducido en la BD
 		    System.out.println("- Updated Reserva: " + actu.getId_reserva());			   
@@ -243,7 +244,7 @@ public class EBgestorDAO {
 				usus.add(aux);
 			}
 		    transaction.commit();
-		    return usus;
+		    
 		}
 
         catch(Exception ex)
@@ -260,6 +261,7 @@ public class EBgestorDAO {
 		    
 		    persistentManager.close();
 		}
+		return usus;
 	}
 	
 	public ArrayList<Reserva> selectReservas()
@@ -276,7 +278,6 @@ public class EBgestorDAO {
 				reses.add(aux);
 			}
 		    transaction.commit();
-		    return reses;
 		}
 
         catch(Exception ex)
@@ -293,6 +294,7 @@ public class EBgestorDAO {
 		    
 		    persistentManager.close();
 		}
+		return reses;
 	}
 	
 	
