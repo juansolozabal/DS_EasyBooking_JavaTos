@@ -23,7 +23,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String serverName;
-	private EBgestorDAO gestorDAO;
+	private EBgestorDAO gestorDAO; //Esto asi yo creo que esta mal
 	
 	
 	public EBManager(String[] args) throws RemoteException 
@@ -39,7 +39,6 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	@Override
 	public void iniciarSesion(String correo, String contrasenya) throws RemoteException {
 		EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
-		
 	}
 
 	@Override
@@ -90,32 +89,27 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		return serverName;
 	}
 	
-	public void anyadirUsuario(Usuario usu)
-	{
+	public void anyadirUsuario(Usuario usu) throws RemoteException {
 		EBgestorDAO.anyadirUsuario(usu);
 	}
-	public void anyadirReservaAUsuario (Usuario usu, Reserva res)
-	{
+	public void anyadirReservaAUsuario (Usuario usu, Reserva res) throws RemoteException {
 		EBgestorDAO.anyadirReservaAUsuario(usu, res);
 	}
-	public void eliminarUsuario(Usuario usu)
-	{
+	public void eliminarUsuario(Usuario usu)throws RemoteException {
 		EBgestorDAO.eliminarUsuario(usu);
 	}
-	public void actualizarUsuario(Usuario actu)
-	{
+	public void actualizarUsuario(Usuario actu)throws RemoteException {
 		EBgestorDAO.actualizarUsuario(actu);
 	}
-	public void actualizarReserva(Reserva actu)
-	{
+	public void actualizarReserva(Reserva actu)throws RemoteException {
 		EBgestorDAO.actualizarReserva(actu);
 	}
 
-	public ArrayList<Usuario> selectUsuarios() {
+	public ArrayList<Usuario> selectUsuarios()throws RemoteException {
 		return gestorDAO.selectUsuarios();
 	}
 
-	public ArrayList<Reserva> selectReservas() {
+	public ArrayList<Reserva> selectReservas()throws RemoteException {
 		return gestorDAO.selectReservas();
 	}
 }

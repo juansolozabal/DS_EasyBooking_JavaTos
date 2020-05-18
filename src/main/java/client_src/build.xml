@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="launch.client" name="4.1_SMS_C-and-SL_Client">
+<project basedir="." default="launch.client" name="Runs EB Client">
 	<property environment="env"/>
 	<property name="lib.dir" location="target"/>
 	<property name="server.port" value="1099"/> 
 	<property name="server.IP" value="127.0.0.1"/> 
 	<property name="server.Name" value="Servidor"/>
+	<property name="raspberry.IP" value="192.168.6.31"/>
+	<property name="raspberry.portAuth" value="5000"/> 
+	<property name="raspberry.portPago" value="5001"/> 
+	<property name="raspberry.portAero" value="5002"/> 
 	<property name="policy.file" location="security/java.policy"/>	
 
 	<path id="classpath">
@@ -13,12 +17,16 @@
         </fileset>
     </path>
 	
-	<target name="launch.client" description="Runs Client program">
+	<target name="launch.client" description="Runs Client">
 		<java classname="src.client.controller.EBController" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${server.IP}"/> 
 	 		<arg value="${server.port}"/> 
 			<arg value="${server.Name}"/> 
+			<arg value="${raspberry.IP}"/> 
+			<arg value="${raspberry.portAuth}"/> 
+			<arg value="${raspberry.portPago}"/> 
+			<arg value="${raspberry.portAero}"/> 
         </java>
     </target>
 </project>

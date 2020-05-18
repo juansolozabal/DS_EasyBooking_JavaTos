@@ -10,7 +10,7 @@ public class EasyBookingManagerServer {
 
 	public static void main(String[] args) {
 		
-		if (args.length != 3) 
+		if (args.length != 7) 
 		{
 			System.exit(0);
 		}

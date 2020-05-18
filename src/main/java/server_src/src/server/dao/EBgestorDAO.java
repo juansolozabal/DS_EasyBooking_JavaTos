@@ -25,9 +25,9 @@ public class EBgestorDAO {
 	private static ArrayList<Reserva> reses;
 
 	private EBgestorDAO(){
-		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
-		persistentManager = persistentManagerFactory.getPersistenceManager();
-		transaction = persistentManager.currentTransaction();
+//		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
+//		persistentManager = persistentManagerFactory.getPersistenceManager();
+//		transaction = persistentManager.currentTransaction();
 	}
 	
 	public static EBgestorDAO getGestorDAO()
@@ -44,7 +44,7 @@ public class EBgestorDAO {
 		try
         {
 			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
@@ -79,7 +79,7 @@ public class EBgestorDAO {
 		try
         {
 			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();
@@ -118,7 +118,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();
 		    
@@ -151,7 +151,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 
 //Esta de aqui abajo es la manera en la que estaba antes
@@ -193,7 +193,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 
 			//Esta de aqui abajo es la manera en la que estaba antes
@@ -234,7 +234,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 			System.out.println("");
 			transaction.begin();
@@ -268,7 +268,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManager = persistentManagerFactory.getPersistenceManager();
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 			System.out.println("");
 			transaction.begin();

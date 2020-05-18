@@ -9,7 +9,6 @@
 	<property name="raspberry.portAuth" value="5000"/> 
 	<property name="raspberry.portPago" value="5001"/> 
 	<property name="raspberry.portAero" value="5002"/> 
-
 	<property name="policy.file" location="security/java.policy"/>	
     
 	<path id="classpath">
@@ -24,11 +23,10 @@
         	<arg value="${server.IP}"/> 
 	 		<arg value="${server.port}"/> 
 			<arg value="${server.Name}"/> 
-			<arg value="${raspberry.IP}"/> 
-			<arg value="${raspberry.portAuth}"/> 
+		    <arg value="${raspberry.IP}"/> 
+		    <arg value="${raspberry.portAuth}"/> 
 			<arg value="${raspberry.portPago}"/> 
 			<arg value="${raspberry.portAero}"/> 
         </java>
     </target>
-
 </project>
