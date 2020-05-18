@@ -13,7 +13,7 @@ public class AeroToSystem implements IGatewayAero{
 	
 	public AeroToSystem(String[] args) {
 		super();
-		// client = new RestClient<>(args[3], args[6]);
+		//client = new RestClient<>(args[3], args[6]);
 		this.IP=IP;
 		this.PORT=PORT;
 	}
