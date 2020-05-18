@@ -55,8 +55,8 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public void hacerReserva(int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros) throws RemoteException {
-		EBgestorPagos.getGestorPagos().hacerReserva(codVuelo, nomUsuario, pasajeros);
+	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException {
+		EBgestorPagos.getGestorPagos().hacerReserva(codVuelo, correo, pasajeros);
 		
 	}
 

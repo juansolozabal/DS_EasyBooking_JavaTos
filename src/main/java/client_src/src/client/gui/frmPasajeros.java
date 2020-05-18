@@ -151,6 +151,7 @@ public class frmPasajeros extends JFrame
 		reservado=true;
 		frmPago pago = new frmPago(controller);
 		pago.setVisible(true);
+//		controller.hacerReserva(codVuelo, correo, pasajeros);
 	}
 		
 }

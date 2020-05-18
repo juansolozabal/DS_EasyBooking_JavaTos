@@ -30,6 +30,7 @@ public class EBgestorAuth {
 	public void iniciarSesion (String correo, String contrasenya)
 	{
 		try {
+			System.out.println(correo+contrasenya);
 			this.authGway.LogIn(correo, contrasenya);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -26,14 +26,13 @@ public class frmInicioRegistro extends JFrame
 	JPanel contentPane = new JPanel();
 	private JButton btnIniciarSesion;
 	private JButton btnRegistrarse;
-	private JTextField t1;
-	private JTextField t2;
-	private JTextField t3;
+	private JTextField t2, t3;
 	private JPasswordField contrausutxt;
 	private JTextField nomusutxt;
 	private JTextField corretxt;
 	private JTextField apetxt;
 	private JTextField nomtxt;
+	private JLabel nombre, apellido, correo;
 
 
 	public frmInicioRegistro(EBController controller)
@@ -122,12 +121,6 @@ public class frmInicioRegistro extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel i1 = new JLabel("Nombre de Usuario:");
-		i1.setForeground(Color.white);
-		i1.setBounds(200, 60, 150,50);
-		t1 = new JTextField(15);
-		t1.setBounds(320, 75,150,20);
-		
 		JLabel i2 = new JLabel("Direccion de correo electronico:");
 		i2.setForeground(Color.white);
 		i2.setBounds(130, 130, 200, 50);
@@ -140,8 +133,6 @@ public class frmInicioRegistro extends JFrame
 		t3 = new JPasswordField(15);
 		t3.setBounds(320, 220,150,20);
 		
-		contentPane.add(i1);
-		contentPane.add(t1);
 		contentPane.add(i2);
 		contentPane.add(t2);
 		contentPane.add(i3);
@@ -188,7 +179,7 @@ public class frmInicioRegistro extends JFrame
 		EasyBooking.setBounds(5, 5, 180, 150);
 		contentPane.add(EasyBooking);
 		
-		JLabel nombre = new JLabel("Nombre:");
+		nombre = new JLabel("Nombre:");
 		nombre.setForeground(Color.white);
 		nombre.setBounds(215, 30, 80, 25);
 		contentPane.add(nombre);
@@ -197,7 +188,7 @@ public class frmInicioRegistro extends JFrame
 		nomtxt.setBounds(275, 30, 160, 25);
 		contentPane.add(nomtxt);
 		
-		JLabel apellido = new JLabel("Apellidos:");
+		apellido = new JLabel("Apellidos:");
 		apellido.setForeground(Color.white);
 		apellido.setBounds(215, 90, 160, 25);
 		contentPane.add(apellido);
@@ -206,7 +197,7 @@ public class frmInicioRegistro extends JFrame
 		apetxt.setBounds(275, 90, 160, 25);
 		contentPane.add(apetxt);
 		
-		JLabel correo = new JLabel("Correo electronico:");
+		correo = new JLabel("Correo electronico:");
 		correo.setForeground(Color.white);
 		correo.setBounds(155, 150, 160, 25);
 		contentPane.add(correo);
@@ -215,23 +206,6 @@ public class frmInicioRegistro extends JFrame
 		corretxt.setBounds(275, 150, 160, 25);
 		contentPane.add(corretxt);
 		
-		JLabel nomusu = new JLabel("Nombre de usuario:");
-		nomusu.setForeground(Color.white);
-		nomusu.setBounds(155, 210, 160, 25);
-		contentPane.add(nomusu);
-		
-		nomusutxt = new JTextField();
-		nomusutxt.setBounds(275, 210, 160, 25);
-		contentPane.add(nomusutxt);
-		
-		JLabel contrausu = new JLabel("Contrasena:");
-		contrausu.setForeground(Color.white);
-		contrausu.setBounds(195, 270, 160, 25);
-		contentPane.add(contrausu);
-		
-		contrausutxt = new JPasswordField();
-		contrausutxt.setBounds(275, 270, 160, 25);
-		contentPane.add(contrausutxt);
 		
 		JButton btnMeterUsuarios = new JButton("Registrarse");
 		btnMeterUsuarios.setBounds(205, 320, 180, 25);
@@ -268,6 +242,7 @@ public class frmInicioRegistro extends JFrame
 		frmListaVuelos frVuelos = new frmListaVuelos(controller);
 		frVuelos.setVisible(true);
 		this.setVisible(false);
+		controller.iniciarSesion(t2.getText().toString(), t3.getText().toString());
 	}
 	
 	private void buttonRegistrarse(ActionEvent evt)
@@ -283,6 +258,7 @@ public class frmInicioRegistro extends JFrame
 		frmListaVuelos frVuelos2 = new frmListaVuelos(controller);
 		frVuelos2.setVisible(true);
 		this.setVisible(false);
+		controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
 	}
 	
 	private void buttonAtras(ActionEvent evt)

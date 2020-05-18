@@ -49,7 +49,7 @@ public class EBController {
 		}
 	}
 	
-	public void registrarse(String nombre, String apellidos, String correo, String nomUsuario, String contrasenya)
+	public void registrarse(String nombre, String apellidos, String correo)
 	{
 		ieb = rsl.getService();
 		try {
@@ -71,11 +71,11 @@ public class EBController {
 		return null;
 	}
 	
-	public void hacerReserva(int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros)
+	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros)
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.hacerReserva(codVuelo, nomUsuario, pasajeros);
+			ieb.hacerReserva(codVuelo, correo, pasajeros);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al hacer reserva: " + e.toString());		
