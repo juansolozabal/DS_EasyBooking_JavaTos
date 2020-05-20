@@ -24,28 +24,42 @@ public class PagosToSystem implements IGatewayPagos{
 	
 	@Override
 	public String makePayment(String email, float amount, String concept) throws Exception {
+		// Metodo que devuelve el recibo con su id correspondiente. No devuelve un booleano.
 		path = "/Payments/Make_payment";
-		boolean operation_result = false;
 		String new_payment_response;
 
 		new_payment_response = client.makePostRequest(client.createInvocationBuilder(path), new P_User(email, amount, concept)).readEntity(String.class);
-		JSONParser myParser = new JSONParser();
-		JSONObject myJsonObject = (JSONObject) myParser.parse(new_payment_response);
-		operation_result = (boolean) myJsonObject.get("Result");
 
-		return null;
+		return new_payment_response;
 	}
 
 	@Override
 	public boolean updateCurrency(String email, float amount) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		path = "/Payments/Update_currency";
+		boolean operation_result = false;
+		String update_currency_response;
+		
+		update_currency_response = client.makePutRequest(client.createInvocationBuilder(path), new P_User(email, amount)).readEntity(String.class);
+		JSONParser myParser = new JSONParser();
+		JSONObject myJsonObject = (JSONObject) myParser.parse(update_currency_response);
+		operation_result = (boolean) myJsonObject.get("Result");
+		
+		return operation_result;
 	}
 
 	@Override
-	public long createUser(String nombre, String apellido, String email, float amount) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean createUser(String nombre, String apellido, String email, float amount) throws Exception {
+		path = "/Payments/Create_user";
+		boolean operation_result = false;
+		String user_creation_response;
+		
+		user_creation_response = client.makePostRequest(client.createInvocationBuilder(path), new P_User(nombre, apellido, email, amount)).readEntity(String.class);
+		JSONParser myParser = new JSONParser();
+		JSONObject myJsonObject = (JSONObject) myParser.parse(user_creation_response);
+		operation_result = (boolean) myJsonObject.get("Result");
+		
+		return operation_result;
+		
 	}
 
 

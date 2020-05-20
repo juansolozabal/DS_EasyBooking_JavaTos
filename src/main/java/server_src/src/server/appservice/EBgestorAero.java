@@ -2,15 +2,18 @@ package src.server.appservice;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import src.server.dto.Aeropuerto;
 import src.server.dto.Vuelo;
 import src.server.gateway.AeroToSystem;
 import src.server.gateway.AuthToSystem;
+import src.server.gateway.Flight_JSON;
+import src.server.gateway.IGatewayAero;
 
 public class EBgestorAero {
 
-	private AeroToSystem aeroGway;
+	private IGatewayAero aeroGway;
 	private static EBgestorAero gestorAero = null;
 	
 	private EBgestorAero(){}
@@ -33,14 +36,30 @@ public class EBgestorAero {
 		aeroGway = new AeroToSystem(args);
 	}
 	
-	public ArrayList<Vuelo> getVuelos()
+	public List<Flight_JSON> getVuelos()
 	{
-		return this.aeroGway.getVuelos();	
+		try {
+			return this.aeroGway.getVuelos(null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;	
 	}
 	
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino)
+	public List<Flight_JSON> getVuelos(String nomOrigen, String nomDestino)
 	{
-		return this.aeroGway.buscarVuelos(fecha, nomOrigen, nomDestino);
+		String [] parameters_Array = new String [2];
+		parameters_Array[0] = nomOrigen;
+		parameters_Array[1] = nomDestino;
+		
+		try {
+			return this.aeroGway.getVuelos(parameters_Array);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

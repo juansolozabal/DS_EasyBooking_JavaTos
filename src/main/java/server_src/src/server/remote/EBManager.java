@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import src.server.appservice.EBgestorAero;
 import src.server.appservice.EBgestorAuth;
@@ -13,6 +14,7 @@ import src.server.dto.Persona;
 import src.server.dto.Reserva;
 import src.server.dto.Usuario;
 import src.server.dto.Vuelo;
+import src.server.gateway.Flight_JSON;
 
 public class EBManager extends UnicastRemoteObject implements IEBManager{
 
@@ -73,7 +75,10 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) throws RemoteException{
-		return EBgestorAero.getGestorAero().buscarVuelos(fecha, nomOrigen, nomDestino);
+		ArrayList<Vuelo> listaVuelos = new ArrayList<Vuelo>();
+		List<Flight_JSON> vuelosJSON = EBgestorAero.getGestorAero().getVuelos(nomOrigen, nomDestino);
+		
+		return listaVuelos;
 	}
 
 	@Override

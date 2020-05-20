@@ -2,14 +2,12 @@ package src.server.gateway;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import src.server.dto.Aeropuerto;
 import src.server.dto.Vuelo;
 
 public interface IGatewayAero {
-	public void makeGetRequest();
-	public void makePutRequest();
-	public void makePostRequest();
-	public ArrayList<Vuelo> getVuelos();
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino);
+	public List<Flight_JSON> getVuelos(Object[] args) throws Exception;
 }
+
