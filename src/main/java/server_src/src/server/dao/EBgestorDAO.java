@@ -230,7 +230,7 @@ public class EBgestorDAO {
 		}
 	}
 	
-	public ArrayList<Usuario> selectUsuarios()
+	public static ArrayList<Usuario> selectUsuarios()
 	{
 		try
         {
@@ -264,7 +264,7 @@ public class EBgestorDAO {
 		return usus;
 	}
 	
-	public ArrayList<Reserva> selectReservas()
+	public static ArrayList<Reserva> selectReservas()
 	{
 		try
         {

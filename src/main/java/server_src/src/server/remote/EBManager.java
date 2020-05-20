@@ -25,7 +25,6 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String serverName;
-	private EBgestorDAO gestorDAO; //Esto asi yo creo que esta mal
 	
 	
 	public EBManager(String[] args) throws RemoteException 
@@ -111,10 +110,10 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	public ArrayList<Usuario> selectUsuarios()throws RemoteException {
-		return gestorDAO.selectUsuarios();
+		return EBgestorDAO.selectUsuarios();
 	}
 
 	public ArrayList<Reserva> selectReservas()throws RemoteException {
-		return gestorDAO.selectReservas();
+		return EBgestorDAO.selectReservas();
 	}
 }
