@@ -13,8 +13,8 @@ public class AuthToSystem implements IGatewayAuth{
 	private String path;
 	
 	public AuthToSystem(String[] args) {
-		 client = new RestClient<>(args[3], args[4]);
-		//client = new RestClient<>("192.168.6.31", "5000");
+		 //client = new RestClient<>(args[3], args[4]);
+		client = new RestClient<>("192.168.6.31", "5000");
 	}
 	
 	@Override

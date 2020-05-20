@@ -31,7 +31,9 @@ public class EBgestorAuth {
 	{
 		try {
 			System.out.println(correo+contrasenya);
-			this.authGway.LogIn(correo, contrasenya);
+			boolean confirmacion = this.authGway.LogIn(correo, contrasenya);
+			if (confirmacion==false) System.out.println("Inicio sesion no permitida");
+			else System.out.println("Inicio sesion exitoso");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
