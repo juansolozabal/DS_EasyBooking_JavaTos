@@ -1,22 +1,22 @@
 package src.server.dto;
 
 public class Aeropuerto {
-	public int id;
+	public String id;
 	public String nom_aeropuerto;
 	public String abreviatura;
 	
-	public Aeropuerto(int id, String nom_aeropuerto, String abreviatura) {
+	public Aeropuerto(String id, String nom_aeropuerto) {
 		super();
 		this.id = id;
 		this.nom_aeropuerto = nom_aeropuerto;
-		this.abreviatura = abreviatura;
+		this.abreviatura = nom_aeropuerto.substring(0, 2).toUpperCase();
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

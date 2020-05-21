@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -53,6 +54,8 @@ import javax.swing.JTextArea;
 import javax.swing.SingleSelectionModel;
 import javax.swing.JComboBox;
 
+import src.server.dto.Vuelo;
+
 public class frmListaVuelos extends JFrame{
 	private JPanel contentPane;
 	private JDateChooser calendarIda, calendarVuelta, fechaHoy;
@@ -63,10 +66,15 @@ public class frmListaVuelos extends JFrame{
 	private JRadioButton btnIda, btnIdaYVuelta;
 	private JComboBox origen, destino;
 	private EBController controller;
+	private int numBusquedas = 6; //ira cambiando segun cuantas busquedas coincidan
+	private ArrayList<Vuelo> vuelosCargados;
+
 
 	public frmListaVuelos(EBController controller) 
 	{
+		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
+		cargarVuelos();
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);
@@ -192,7 +200,6 @@ public class frmListaVuelos extends JFrame{
 		spinner.setBounds(340, 14, 36, 22);
 		contentPane.add(spinner);
 		numPasajeros = (Integer) spinner.getValue();
-		System.out.println("Numero de pasajeros:" + numPasajeros);
 		
 		JLabel lblNmeroDeBilletes = new JLabel("N\u00FAmero de billetes:");
 		lblNmeroDeBilletes.setForeground(Color.white);
@@ -221,7 +228,6 @@ public class frmListaVuelos extends JFrame{
 		
 		
 		int offset=0;
-		int numBusquedas = 6; //ira cambiando segun cuantas busquedas coincidan
 		JTextArea textArea_1, textArea, textArea_2, textArea_3, textArea_4, textArea_5;
 		JLabel label, label_1;
 		JButton btnReservar;
@@ -232,12 +238,14 @@ public class frmListaVuelos extends JFrame{
 			textArea_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			textArea_1.setBackground(azulClaro);
 			textArea_1.setBounds(22, 151+offset, 375, 22);
+			textArea_1.setText(vuelosCargados.get(i).getCod_vuelo());
 			contentPane.add(textArea_1);
 			
 			textArea = new JTextArea();
 			textArea.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			textArea.setBackground(azulClaro);
 			textArea.setBounds(22, 180+offset, 119, 46);
+			textArea.setText(vuelosCargados.get(i).getAeropuerto_origen().getAbreviatura());
 			contentPane.add(textArea);		
 			
 			textArea_2 = new JTextArea();
@@ -285,6 +293,14 @@ public class frmListaVuelos extends JFrame{
 			
 			offset+=100;
 		}
+	}
+	
+	private void cargarVuelos() {
+		System.out.println("Ha pasado por el metodo cargarVuelos.");
+		vuelosCargados = new ArrayList<Vuelo>();
+		vuelosCargados = controller.getVuelos();
+		System.out.println("El numero de vuelos cargados es: " + vuelosCargados.size());
+		numBusquedas = vuelosCargados.size();
 	}
 	
 	private void buttonIda(ActionEvent evt)
@@ -360,4 +376,5 @@ public class frmListaVuelos extends JFrame{
 			JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de vuelta.");
 		}
 	}
+	
 }

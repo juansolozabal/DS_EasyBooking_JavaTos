@@ -14,6 +14,7 @@ import src.server.dto.Persona;
 import src.server.dto.Reserva;
 import src.server.dto.Usuario;
 import src.server.dto.Vuelo;
+import src.server.dto.VueloAssembler;
 import src.server.gateway.Flight_JSON;
 
 public class EBManager extends UnicastRemoteObject implements IEBManager{
@@ -74,16 +75,12 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) throws RemoteException{
-		ArrayList<Vuelo> listaVuelos = new ArrayList<Vuelo>();
-		List<Flight_JSON> vuelosJSON = EBgestorAero.getGestorAero().getVuelos(nomOrigen, nomDestino);
-		
-		return listaVuelos;
+		return VueloAssembler.assemble(EBgestorAero.getGestorAero().getVuelos(nomOrigen, nomDestino));
 	}
 
 	@Override
 	public ArrayList<Vuelo> getVuelos() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return VueloAssembler.assemble(EBgestorAero.getGestorAero().getVuelos());
 	}
 	
 	public String comprobacionConexion() throws RemoteException {
@@ -116,4 +113,5 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	public ArrayList<Reserva> selectReservas()throws RemoteException {
 		return EBgestorDAO.selectReservas();
 	}
+	
 }

@@ -71,6 +71,15 @@ public class EBController {
 		return null;
 	}
 	
+	public ArrayList<Vuelo> getVuelos() {
+		try {
+			return ieb.getVuelos();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros)
 	{
 		ieb = rsl.getService();
