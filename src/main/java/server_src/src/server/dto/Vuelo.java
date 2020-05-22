@@ -1,10 +1,11 @@
 package src.server.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
-public class Vuelo {
+public class Vuelo implements Serializable{
 	
 	private String cod_vuelo;
 	private long price;

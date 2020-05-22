@@ -71,10 +71,12 @@ public class EBController {
 	}
 	
 	public ArrayList<Vuelo> getVuelos() {
+		ieb = rsl.getService();
 		try {
 			return ieb.getVuelos();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Da error");
 			e.printStackTrace();
 		}
 		return null;

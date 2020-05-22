@@ -17,7 +17,7 @@ public class VueloAssembler {
 			vuelos.add(new Vuelo(t.getCode(), t.getPrice(), t.getTotalSeats(), t.getFreeSeats(), t.getDepartureDate(), t.getDepartureDate(true), new Aeropuerto(t.getAirportDepartureCode(), t.getAirportDepartureCity()), new Aeropuerto(t.getAirportArrivalCode(), t.getAirportArrivalCity()), null));
 		}
 
-		System.out.println("* Assembling TV Programs ...");
+		System.out.println("* Assembling vuelos...");
 		
 		return vuelos;
 	}

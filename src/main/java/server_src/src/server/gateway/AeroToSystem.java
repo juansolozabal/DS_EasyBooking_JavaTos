@@ -63,6 +63,7 @@ public class AeroToSystem implements IGatewayAero{
 	}
 	
 	public List<Flight_JSON> getVuelos() throws Exception {
+		System.out.println("Ha pasado por el gateway");
 		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters());
 		vuelos = flightParser(response);
 		return vuelos;

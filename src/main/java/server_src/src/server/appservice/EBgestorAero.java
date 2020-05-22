@@ -49,6 +49,7 @@ public class EBgestorAero {
 	
 	public List<Flight_JSON> getVuelos(String nomOrigen, String nomDestino)
 	{
+		System.out.println("Ha pasado por el AppService");
 		String [] parameters_Array = new String [2];
 		parameters_Array[0] = nomOrigen;
 		parameters_Array[1] = nomDestino;

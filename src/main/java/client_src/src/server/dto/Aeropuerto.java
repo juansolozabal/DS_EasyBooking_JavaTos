@@ -1,6 +1,8 @@
 package src.server.dto;
 
-public class Aeropuerto {
+import java.io.Serializable;
+
+public class Aeropuerto implements Serializable{
 	public String id;
 	public String nom_aeropuerto;
 	public String abreviatura;
@@ -9,7 +11,7 @@ public class Aeropuerto {
 		super();
 		this.id = id;
 		this.nom_aeropuerto = nom_aeropuerto;
-		this.abreviatura = nom_aeropuerto.substring(0, 2).toUpperCase();
+		this.abreviatura = nom_aeropuerto.substring(0, 3).toUpperCase();
 	}
 
 	public String getId() {

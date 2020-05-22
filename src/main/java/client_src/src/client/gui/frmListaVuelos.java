@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -54,6 +55,7 @@ import javax.swing.JTextArea;
 import javax.swing.SingleSelectionModel;
 import javax.swing.JComboBox;
 
+import src.server.dto.Aeropuerto;
 import src.server.dto.Vuelo;
 
 public class frmListaVuelos extends JFrame{
@@ -68,13 +70,14 @@ public class frmListaVuelos extends JFrame{
 	private EBController controller;
 	private int numBusquedas = 0; //ira cambiando segun cuantas busquedas coincidan
 	private ArrayList<Vuelo> vuelosCargados;
+	private HashSet<Aeropuerto> aeropuertosCargados;
 
 
 	public frmListaVuelos(EBController controller) 
 	{
 		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
-		//cargarVuelos();
+		cargarVuelos();
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);
@@ -228,49 +231,56 @@ public class frmListaVuelos extends JFrame{
 		
 		
 		int offset=0;
-		JTextArea textArea_1, textArea, textArea_2, textArea_3, textArea_4, textArea_5;
+		JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
 		JLabel label, label_1;
 		JButton btnReservar;
 		
 		for (int i=0; i<numBusquedas; i++)
 		{
-		    textArea_1 = new JTextArea();
-			textArea_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea_1.setBackground(azulClaro);
-			textArea_1.setBounds(22, 151+offset, 375, 22);
-			textArea_1.setText(vuelosCargados.get(i).getCod_vuelo());
-			contentPane.add(textArea_1);
+		    precio = new JTextArea();
+			precio.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			precio.setBackground(azulClaro);
+			precio.setBounds(22, 151+offset, 375, 22);
+			precio.setText("Precio: " + Long.toString(vuelosCargados.get(i).getPrice()));
+			contentPane.add(precio);
 			
-			textArea = new JTextArea();
-			textArea.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea.setBackground(azulClaro);
-			textArea.setBounds(22, 180+offset, 119, 46);
-			textArea.setText(vuelosCargados.get(i).getAeropuerto_origen().getAbreviatura());
-			contentPane.add(textArea);		
+			ciudades = new JTextArea();
+			ciudades.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			ciudades.setBackground(azulClaro);
+			ciudades.setBounds(22, 180+offset, 119, 46);
+			ciudades.setText(
+					"Asientos totales: " + vuelosCargados.get(i).getNum_asientos_tot() + "\n" + 
+					"Asientos libres: " + vuelosCargados.get(i).getNum_asientos_disp());
+			contentPane.add(ciudades);		
 			
-			textArea_2 = new JTextArea();
-			textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea_2.setBackground(azulClaro);
-			textArea_2.setBounds(153, 180+offset, 67, 22);
-			contentPane.add(textArea_2);
+			fecha = new JTextArea();
+			fecha.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			fecha.setBackground(azulClaro);
+			fecha.setBounds(153, 180+offset, 67, 22);
+			fecha.setText(vuelosCargados.get(i).getFecha_salida());
+			contentPane.add(fecha);
 			
-			textArea_3 = new JTextArea();
-			textArea_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea_3.setBackground(azulClaro);
-			textArea_3.setBounds(234, 180+offset, 67, 22);
-			contentPane.add(textArea_3);
+			hora = new JTextArea();
+			hora.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			hora.setBackground(azulClaro);
+			hora.setBounds(234, 180+offset, 67, 22);
+			String hora_salida = vuelosCargados.get(i).getFecha_salida_con_horas().toString().substring(11, 16);
+			hora.setText(hora_salida);
+			contentPane.add(hora);
 			
-			textArea_4 = new JTextArea();
-			textArea_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea_4.setBackground(azulClaro);
-			textArea_4.setBounds(153, 204+offset, 67, 22);
-			contentPane.add(textArea_4);
+			cod_aero_origen = new JTextArea();
+			cod_aero_origen.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			cod_aero_origen.setBackground(azulClaro);
+			cod_aero_origen.setBounds(153, 204+offset, 67, 22);
+			cod_aero_origen.setText(vuelosCargados.get(i).getAeropuerto_origen().getNom_aeropuerto());
+			contentPane.add(cod_aero_origen);
 			
-			textArea_5 = new JTextArea();
-			textArea_5.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			textArea_5.setBackground(azulClaro);
-			textArea_5.setBounds(234, 204+offset, 67, 22);
-			contentPane.add(textArea_5);
+			cod_aero_destino = new JTextArea();
+			cod_aero_destino.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			cod_aero_destino.setBackground(azulClaro);
+			cod_aero_destino.setBounds(234, 204+offset, 67, 22);
+			cod_aero_destino.setText(vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto());
+			contentPane.add(cod_aero_destino);
 			
 			label = new JLabel("a");
 			label.setForeground(Color.white);
@@ -301,6 +311,15 @@ public class frmListaVuelos extends JFrame{
 		vuelosCargados = controller.getVuelos();
 		System.out.println("El numero de vuelos cargados es: " + vuelosCargados.size());
 		numBusquedas = vuelosCargados.size();
+	}
+	
+	private void cargarAeropuertos() {
+		System.out.println("Ha pasado por el metodo cargarAeropuertos.");
+		aeropuertosCargados = new HashSet<Aeropuerto>();
+		for (Vuelo vuelo: vuelosCargados) {
+			aeropuertosCargados.add(vuelo.getAeropuerto_origen());
+			aeropuertosCargados.add(vuelo.getAeropuerto_destino());
+		}
 	}
 	
 	private void buttonIda(ActionEvent evt)

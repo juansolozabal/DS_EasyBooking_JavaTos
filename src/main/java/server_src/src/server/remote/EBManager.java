@@ -81,6 +81,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public ArrayList<Vuelo> getVuelos() throws RemoteException {
+		System.out.println("Ha pasado por EBManager");
 		return VueloAssembler.assemble(EBgestorAero.getGestorAero().getVuelos());
 	}
 	
