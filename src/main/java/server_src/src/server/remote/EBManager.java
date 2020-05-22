@@ -26,7 +26,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String serverName;
-	
+	private Usuario state;
 	
 	public EBManager(String[] args) throws RemoteException 
 	{
@@ -40,8 +40,10 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 	
 	@Override
-	public void iniciarSesion(String correo, String contrasenya) throws RemoteException {
-		EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
+	public boolean iniciarSesion(String correo, String contrasenya) throws RemoteException {
+		this.state=EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
+		System.out.println(this.state);
+		return state!=null;
 	}
 
 	@Override

@@ -62,7 +62,7 @@ public class frmListaVuelos extends JFrame{
 	private JPanel contentPane;
 	private JDateChooser calendarIda, calendarVuelta, fechaHoy;
 	private File imagen;
-	private int numPasajeros;
+	private static int numPasajeros;
 	private JSpinner spinner;
 	private Calendar actual;
 	private JRadioButton btnIda, btnIdaYVuelta;
@@ -175,21 +175,20 @@ public class frmListaVuelos extends JFrame{
 				buttonIda(evt);
 			}
 		});
-		contentPane.add(btnIda);
+		contentPane.add(btnIda);	
 		idaOidavuelta.add(btnIda);
 		
 		origen = new JComboBox();
+		destino = new JComboBox();
 		for(Aeropuerto a: aeropuertosCargados) {
 			origen.addItem(a);
+			destino.addItem(a);
+
 		}
 		origen.setBackground(azulClaro);
 		origen.setBounds(12, 51, 99, 22);
 		contentPane.add(origen);
 		
-		destino = new JComboBox();
-		for(Aeropuerto a: aeropuertosCargados) {
-			destino.addItem(a);
-		}
 		destino.setBackground(azulClaro);
 		destino.setBounds(123, 51, 99, 22);
 		contentPane.add(destino);
@@ -236,7 +235,6 @@ public class frmListaVuelos extends JFrame{
 		scrollPane.setBounds(420, 0, 18, 516);
 		contentPane.add(scrollPane);
 		
-		
 		int offset=0;
 		JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
 		JLabel label, label_1;
@@ -249,6 +247,7 @@ public class frmListaVuelos extends JFrame{
 			precio.setBackground(azulClaro);
 			precio.setBounds(22, 151+offset, 375, 22);
 			precio.setText("Precio: " + Long.toString(vuelosCargados.get(i).getPrice()));
+			precio.setEditable(false);
 			contentPane.add(precio);
 			
 			ciudades = new JTextArea();
@@ -258,6 +257,7 @@ public class frmListaVuelos extends JFrame{
 			ciudades.setText(
 					"Asientos totales: " + vuelosCargados.get(i).getNum_asientos_tot() + "\n" + 
 					"Asientos libres: " + vuelosCargados.get(i).getNum_asientos_disp());
+			ciudades.setEditable(false);
 			contentPane.add(ciudades);		
 			
 			fecha = new JTextArea();
@@ -265,6 +265,7 @@ public class frmListaVuelos extends JFrame{
 			fecha.setBackground(azulClaro);
 			fecha.setBounds(153, 180+offset, 67, 22);
 			fecha.setText(vuelosCargados.get(i).getFecha_salida());
+			fecha.setEditable(false);
 			contentPane.add(fecha);
 			
 			hora = new JTextArea();
@@ -273,6 +274,7 @@ public class frmListaVuelos extends JFrame{
 			hora.setBounds(234, 180+offset, 67, 22);
 			String hora_salida = vuelosCargados.get(i).getFecha_salida_con_horas().toString().substring(11, 16);
 			hora.setText(hora_salida);
+			hora.setEditable(false);
 			contentPane.add(hora);
 			
 			cod_aero_origen = new JTextArea();
@@ -280,6 +282,7 @@ public class frmListaVuelos extends JFrame{
 			cod_aero_origen.setBackground(azulClaro);
 			cod_aero_origen.setBounds(153, 204+offset, 67, 22);
 			cod_aero_origen.setText(vuelosCargados.get(i).getAeropuerto_origen().getNom_aeropuerto());
+			cod_aero_origen.setEditable(false);
 			contentPane.add(cod_aero_origen);
 			
 			cod_aero_destino = new JTextArea();
@@ -287,6 +290,7 @@ public class frmListaVuelos extends JFrame{
 			cod_aero_destino.setBackground(azulClaro);
 			cod_aero_destino.setBounds(234, 204+offset, 67, 22);
 			cod_aero_destino.setText(vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto());
+			cod_aero_destino.setEditable(false);
 			contentPane.add(cod_aero_destino);
 			
 			label = new JLabel("a");
@@ -374,8 +378,8 @@ public class frmListaVuelos extends JFrame{
 				idaCorrecta=true;
 				if(btnIda.isSelected())
 				{
-					frmPasajeros datosPasajeros = new frmPasajeros(controller, numPasajeros);
-					datosPasajeros.setVisible(true);
+					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
+					inicioregistro.setVisible(true);
 				}
 			}
 		}
@@ -402,5 +406,8 @@ public class frmListaVuelos extends JFrame{
 			JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de vuelta.");
 		}
 	}
-	
+
+	public static int getNumPasajeros() {
+		return numPasajeros;
+	}	
 }

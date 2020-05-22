@@ -1,5 +1,6 @@
 package src.server.appservice;
 
+import src.server.dto.Usuario;
 import src.server.gateway.AuthToSystem;
 
 public class EBgestorAuth {
@@ -27,16 +28,25 @@ public class EBgestorAuth {
 		authGway = new AuthToSystem(args);
 	}
 	
-	public void iniciarSesion (String correo, String contrasenya)
+	public Usuario iniciarSesion (String correo, String contrasenya)
 	{
 		try {
-			System.out.println(correo+contrasenya);
 			boolean confirmacion = this.authGway.LogIn(correo, contrasenya);
-			if (confirmacion==false) System.out.println("Inicio sesion no permitida");
-			else System.out.println("Inicio sesion exitoso");
+			if (confirmacion==false)
+			{
+				System.out.println("Inicio sesion no permitida");
+				return null;
+			}
+			else
+			{
+				System.out.println("Inicio sesion exitoso");
+				Usuario user = new Usuario((int)(100000 * Math.random()), "", "", correo);
+				return user;
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 	}
 	

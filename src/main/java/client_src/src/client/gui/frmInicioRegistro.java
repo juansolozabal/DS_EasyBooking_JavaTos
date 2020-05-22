@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -33,6 +34,7 @@ public class frmInicioRegistro extends JFrame
 	private JTextField apetxt;
 	private JTextField nomtxt;
 	private JLabel nombre, apellido, correo;
+	private static boolean loginResult;
 
 
 	public frmInicioRegistro(EBController controller)
@@ -239,10 +241,16 @@ public class frmInicioRegistro extends JFrame
 
 	private void buttonIniciarSesion2(ActionEvent evt)
 	{
-		frmListaVuelos frVuelos = new frmListaVuelos(controller);
-		frVuelos.setVisible(true);
 		this.setVisible(false);
-		controller.iniciarSesion(t2.getText().toString(), t3.getText().toString());
+		loginResult = controller.iniciarSesion(t2.getText().toString(), t3.getText().toString());
+		if (loginResult==true)
+			{
+				JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
+				frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
+				datosPasajeros.setVisible(true);
+			}
+		else JOptionPane.showMessageDialog(null, "Inicio de sesion fallido.");
+
 	}
 	
 	private void buttonRegistrarse(ActionEvent evt)
@@ -255,10 +263,15 @@ public class frmInicioRegistro extends JFrame
 	
 	private void buttonRegistrarse2(ActionEvent evt)
 	{
-		frmListaVuelos frVuelos2 = new frmListaVuelos(controller);
-		frVuelos2.setVisible(true);
 		this.setVisible(false);
 		controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
+		if (loginResult==true)
+		{
+			JOptionPane.showMessageDialog(null, "Registro exitoso!");
+			frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
+			datosPasajeros.setVisible(true);
+		}
+	else JOptionPane.showMessageDialog(null, "Registro fallido.");
 	}
 	
 	private void buttonAtras(ActionEvent evt)
@@ -267,5 +280,9 @@ public class frmInicioRegistro extends JFrame
 		setContentPane(VentanaInicial());
 		//cargaProperties();
 		contentPane.revalidate();
+	}
+
+	public static boolean getLoginResult() {
+		return loginResult;
 	}
 }

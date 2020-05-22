@@ -16,27 +16,20 @@ public class Usuario {
 	private String correo;
 	private int pin;
 	private int idAeropuerto;
+	
 	@Element(column="dni")
 	private ArrayList<Reserva> reservasUsu = new ArrayList<Reserva>();	
 	
 	
-	public Usuario(int dni, String nombre, String apellido, String correo, int pin, int idAeropuerto) {
+	public Usuario(int dni, String nombre, String apellido, String correo) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
-		this.pin = pin;
-		this.idAeropuerto = idAeropuerto;
+
 	}
 
-	public int getIdAeropuerto() {
-		return idAeropuerto;
-	}
-
-	public void setIdAeropuerto(int idAeropuerto) {
-		this.idAeropuerto = idAeropuerto;
-	}
 
 	public int getDni() {
 		return dni;
@@ -68,14 +61,6 @@ public class Usuario {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
-	}
-
-	public int getPin() {
-		return pin;
-	}
-
-	public void setPin(int pin) {
-		this.pin = pin;
 	}
 	
 	public ArrayList<Reserva> getReservas(){

@@ -27,14 +27,16 @@ public class EBController {
 		app.setVisible(true);
 	}
 	
-	public void iniciarSesion(String correo, String contrasenya)
+	public boolean iniciarSesion(String correo, String contrasenya)
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.iniciarSesion(correo, contrasenya);
+			return ieb.iniciarSesion(correo, contrasenya);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			System.err.println("$ Error iniciando sesion: " + e.toString());		}
+			System.err.println("$ Error iniciando sesion: " + e.toString());
+			return false;
+		}
 	}
 
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos)
