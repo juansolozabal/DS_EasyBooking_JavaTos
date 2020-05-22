@@ -37,7 +37,47 @@ public class Aeropuerto implements Serializable{
 	public void setAbreviatura(String abreviatura) {
 		this.abreviatura = abreviatura;
 	}
-	
-		
+
+	@Override
+	public String toString() {
+		return nom_aeropuerto;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((abreviatura == null) ? 0 : abreviatura.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nom_aeropuerto == null) ? 0 : nom_aeropuerto.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aeropuerto other = (Aeropuerto) obj;
+		if (abreviatura == null) {
+			if (other.abreviatura != null)
+				return false;
+		} else if (!abreviatura.equals(other.abreviatura))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nom_aeropuerto == null) {
+			if (other.nom_aeropuerto != null)
+				return false;
+		} else if (!nom_aeropuerto.equals(other.nom_aeropuerto))
+			return false;
+		return true;
+	}	
 
 }

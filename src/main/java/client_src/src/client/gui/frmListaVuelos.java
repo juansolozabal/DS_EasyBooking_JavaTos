@@ -78,6 +78,7 @@ public class frmListaVuelos extends JFrame{
 		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
 		cargarVuelos();
+		cargarAeropuertos();
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);
@@ -178,11 +179,17 @@ public class frmListaVuelos extends JFrame{
 		idaOidavuelta.add(btnIda);
 		
 		origen = new JComboBox();
+		for(Aeropuerto a: aeropuertosCargados) {
+			origen.addItem(a);
+		}
 		origen.setBackground(azulClaro);
 		origen.setBounds(12, 51, 99, 22);
 		contentPane.add(origen);
 		
 		destino = new JComboBox();
+		for(Aeropuerto a: aeropuertosCargados) {
+			destino.addItem(a);
+		}
 		destino.setBackground(azulClaro);
 		destino.setBounds(123, 51, 99, 22);
 		contentPane.add(destino);
