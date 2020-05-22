@@ -20,7 +20,6 @@ public class EBController {
 	{
 		// Add your related code for the initialization of the Service Locator
 		rsl = new RMIServiceLocator();
-		System.out.println("aqui1");
 		rsl.setService(args[0], args[1], args[2]);
         // Add your code for the initialization of the windows		
 		app = new frmLogotipoInicial(this);

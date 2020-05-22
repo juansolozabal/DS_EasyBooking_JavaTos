@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="launch.client" name="Runs EB Client">
 	<property environment="env"/>
-	<property name="build.dir" location="target/classes/"/>
-	<property name="maven.source.dir" location="C:/Users/Alumno/.m2"/>
+	<property name="lib.dir" location="target"/>
 	<property name="server.port" value="1099"/> 
 	<property name="server.IP" value="127.0.0.1"/> 
 	<property name="server.Name" value="Servidor"/>
@@ -13,11 +12,10 @@
 	<property name="policy.file" location="security/java.policy"/>	
 
 	<path id="classpath">
-	        <fileset dir="${maven.source.dir}">
-	            <include name="**/*.jar"/>
-	        </fileset>
-			<pathelement location="${build.dir}"/>
-	</path>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
 	
 	<target name="launch.client" description="Runs Client">
 		<java classname="src.client.controller.EBController" classpathref="classpath" fork="true">

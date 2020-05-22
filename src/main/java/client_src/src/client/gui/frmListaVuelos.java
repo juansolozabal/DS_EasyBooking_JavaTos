@@ -66,7 +66,7 @@ public class frmListaVuelos extends JFrame{
 	private JRadioButton btnIda, btnIdaYVuelta;
 	private JComboBox origen, destino;
 	private EBController controller;
-	private int numBusquedas = 6; //ira cambiando segun cuantas busquedas coincidan
+	private int numBusquedas = 0; //ira cambiando segun cuantas busquedas coincidan
 	private ArrayList<Vuelo> vuelosCargados;
 
 
@@ -74,7 +74,7 @@ public class frmListaVuelos extends JFrame{
 	{
 		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
-		cargarVuelos();
+		//cargarVuelos();
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);

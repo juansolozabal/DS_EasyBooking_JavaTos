@@ -32,6 +32,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	{
 		super();
 		this.serverName = args[2];
+		System.out.println("Probando EBManager");
 		EBgestorAero.getGestorAero().setArgs(args);
 		EBgestorAuth.getGestorAuth().setArgs(args);
 		EBgestorPagos.getGestorPagos().setArgs(args);

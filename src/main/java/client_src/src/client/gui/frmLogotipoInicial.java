@@ -27,6 +27,8 @@ public class frmLogotipoInicial extends JFrame
 	public frmLogotipoInicial(EBController controller)
 	{
 		this.controller = controller;
+		System.out.println("primero");
+
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\..\\resources\\img\\Logo EasyBooking_Azul.png"));
 		setTitle("Bienvenid@ a EasyBooking");
@@ -64,5 +66,6 @@ public class frmLogotipoInicial extends JFrame
 		frmListaVuelos lista = new frmListaVuelos(controller);
 		lista.setVisible(true);
 		this.setVisible(false);
+		System.out.println("pru");
 	}
 }
