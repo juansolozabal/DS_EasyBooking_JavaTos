@@ -160,6 +160,7 @@
                     <log4jConfiguration>${config.files.dir}/log4j.properties</log4jConfiguration>
                     <verbose>true</verbose>
                     <props>${config.files.dir}/datanucleus.properties</props>
+                    <fork>false</fork>
                 </configuration>
 
                 <executions>
