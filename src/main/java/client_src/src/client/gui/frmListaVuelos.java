@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 
@@ -71,6 +73,7 @@ public class frmListaVuelos extends JFrame{
 	private int numBusquedas = 0; //ira cambiando segun cuantas busquedas coincidan
 	private ArrayList<Vuelo> vuelosCargados;
 	private HashSet<Aeropuerto> aeropuertosCargados;
+	private Object[] parametros_busqueda;
 
 
 	public frmListaVuelos(EBController controller) 
@@ -358,11 +361,37 @@ public class frmListaVuelos extends JFrame{
 	
 	private void buttonBuscarVuelos(ActionEvent evt)
 	{
+		// Formara un array de 
+
+		parametrosBusqueda();
 		//TODO Aqui falta sacarlo por pantalla en cada uno de los huecos.
 		//Habria que saber cuantos resultados produce y pasarselo a numBusquedas
-		controller.buscarVuelos(calendarIda.getDate(), origen.getSelectedItem().toString(), destino.getSelectedItem().toString());
+		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
 	}
 	
+	private void parametrosBusqueda () {
+		
+		
+		String aeropuerto_origen = origen.getSelectedItem().toString();
+		String aeropuerto_destino = origen.getSelectedItem().toString();
+		String fechaIda;
+		if(calendarIda.getDate()!=null) {
+			Date date = calendarIda.getDate();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
+			fechaIda = dateFormat.format(date);
+		}
+		else {fechaIda = null;}
+
+		int free_seats = numPasajeros;
+		
+		parametros_busqueda = new Object[5];
+		parametros_busqueda[0] = aeropuerto_origen;
+		parametros_busqueda[1] = aeropuerto_destino;
+		parametros_busqueda[2] = free_seats;
+		parametros_busqueda[3] = null; // No filtraremos por precio
+		parametros_busqueda[4] = fechaIda;
+		
+	}
 	private void buttonReservar(ActionEvent evt)
 	{
 		numPasajeros=(Integer)spinner.getValue();	

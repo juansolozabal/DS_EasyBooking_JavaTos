@@ -39,7 +39,7 @@ public class EBgestorAero {
 	public List<Flight_JSON> getVuelos()
 	{
 		try {
-			return this.aeroGway.getVuelos(null);
+			return this.aeroGway.getVuelos();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,20 +47,17 @@ public class EBgestorAero {
 		return null;	
 	}
 	
-	public List<Flight_JSON> getVuelos(String nomOrigen, String nomDestino)
+	public List<Flight_JSON> getVuelos(Object[] parametros_array)
 	{
-		System.out.println("Ha pasado por el AppService");
-		String [] parameters_Array = new String [2];
-		parameters_Array[0] = nomOrigen;
-		parameters_Array[1] = nomDestino;
-		
 		try {
-			return this.aeroGway.getVuelos(parameters_Array);
+			return this.aeroGway.getVuelos(parametros_array);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+
 	
 }

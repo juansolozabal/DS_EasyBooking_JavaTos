@@ -60,11 +60,11 @@ public class EBController {
 			System.err.println("$ Error al registrarse: " + e.toString());		}
 	}
 	
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) 
+	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) 
 	{
 		ieb = rsl.getService();
 		try {
-			return ieb.buscarVuelos(fecha, nomOrigen, nomDestino);
+			return ieb.buscarVuelos(parametros_busqueda);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al buscar vuelo: " + e.toString());		

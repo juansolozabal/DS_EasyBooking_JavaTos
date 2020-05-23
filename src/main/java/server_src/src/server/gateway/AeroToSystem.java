@@ -33,32 +33,8 @@ public class AeroToSystem implements IGatewayAero{
 
 	@Override
 	public List<Flight_JSON> getVuelos(Object [] args) throws Exception {
-		if( args != null) {
-			if(args.length==2)
-			{
-				vuelos = getVuelos((String) args[0], (String) args[1]);
-			}
-			else if(args.length==3)
-			{
-				vuelos = getVuelos((String) args[0], (String) args[1], (int) args[2]);
-			}
-			else if(args.length==4)
-			{
-				vuelos = getVuelos((String) args[0], (String) args[1], (int) args[2], (double) args[3]);
-			}
-			else if(args.length==5)
-			{
-				vuelos = getVuelos((String) args[0], (String) args[1], (int) args[2], (double) args[3], (String) args[4]);
-			}
-			else {
-				throw new Exception();
-			}
-		}
-		else
-		{
-			vuelos = getVuelos();
-		}
-
+		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1], (int) args[2], (String) args[4]));
+		vuelos = flightParser(response);
 		return vuelos;
 	}
 	
@@ -68,30 +44,25 @@ public class AeroToSystem implements IGatewayAero{
 		vuelos = flightParser(response);
 		return vuelos;
 	}
-	
-	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name) throws Exception {
-		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name));
-		vuelos = flightParser(response);
-		return vuelos;
-	}
-	
-	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name, int free_seats) throws Exception {
-		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name, free_seats));
-		vuelos = flightParser(response);
-		return vuelos;
-	}
-	
-	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name, int free_seats, double price) throws Exception {
-		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name, free_seats, price));
-		vuelos = flightParser(response);
-		return vuelos;
-	}
-	
-	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name, int free_seats, double price, String departure_date) throws Exception {
-		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name, free_seats, price, departure_date));
-		vuelos = flightParser(response);
-		return vuelos;
-	}
+//	
+//	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name) throws Exception {
+//		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name));
+//		vuelos = flightParser(response);
+//		return vuelos;
+//	}
+//	
+//	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name, int free_seats) throws Exception {
+//		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name, free_seats));
+//		vuelos = flightParser(response);
+//		return vuelos;
+//	}
+//	
+//	
+//	public List<Flight_JSON> getVuelos(String airport_departure_name, String airport_arrival_name, int free_seats, double price, String departure_date) throws Exception {
+//		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters(airport_departure_name, airport_arrival_name, free_seats, price, departure_date));
+//		vuelos = flightParser(response);
+//		return vuelos;
+//	}
 	
 	@SuppressWarnings("unchecked")
 	private List<Flight_JSON> flightParser(Response response) {

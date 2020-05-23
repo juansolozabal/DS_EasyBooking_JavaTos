@@ -76,8 +76,8 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public ArrayList<Vuelo> buscarVuelos(Date fecha, String nomOrigen, String nomDestino) throws RemoteException{
-		return VueloAssembler.assemble(EBgestorAero.getGestorAero().getVuelos(nomOrigen, nomDestino));
+	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) throws RemoteException{
+		return VueloAssembler.assemble(EBgestorAero.getGestorAero().getVuelos(parametros_busqueda));
 	}
 
 	@Override

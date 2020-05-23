@@ -9,5 +9,6 @@ import src.server.dto.Vuelo;
 
 public interface IGatewayAero {
 	public List<Flight_JSON> getVuelos(Object[] args) throws Exception;
+	public List<Flight_JSON> getVuelos() throws Exception;
 }
 
