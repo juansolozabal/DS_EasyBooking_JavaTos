@@ -39,7 +39,7 @@ public class frmPasajeros extends JFrame
 	private boolean reservado;
 	JTextField textField, textField_1, textField_2;
 	private static int j=0;
-	private int numPasajeros;
+	private static int numeroPasajeros=0;
 	Color azulFondo, azulClaro;
 	JButton sig, btnNewButton;
 	ArrayList<Persona>pasajeros=new ArrayList<>();
@@ -47,7 +47,7 @@ public class frmPasajeros extends JFrame
 	public frmPasajeros (EBController controller, int numPasajeros)
 	{
 		this.controller = controller;
-		this.numPasajeros = numPasajeros;
+		numeroPasajeros=numPasajeros;
 		 azulFondo = new Color (0, 76, 109);
 		    azulClaro = new Color (184, 205, 218);
 			imagen = new File("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
@@ -81,18 +81,18 @@ public class frmPasajeros extends JFrame
 			});
 			contentPane.add(sig);
 			contentPane.add(btnNewButton);
-			datos();			
+			datos();				
 	}
 	
 	private void datos()
 	{
-		if(j<numPasajeros-1)
+		if(j<numeroPasajeros-1)
 		{
 			System.out.println(j);
 			sig.setEnabled(true);
 			btnNewButton.setEnabled(false);
 			
-			JLabel lblDatosDelPasajero = new JLabel("Datos del Pasajero " + j);
+			JLabel lblDatosDelPasajero = new JLabel("Datos de los " + numeroPasajeros+ " pasajero");
 			lblDatosDelPasajero.setForeground(Color.white);
 			lblDatosDelPasajero.setBounds(12, 13, 152, 27);
 			getContentPane().add(lblDatosDelPasajero);

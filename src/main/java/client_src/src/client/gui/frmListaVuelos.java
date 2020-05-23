@@ -74,79 +74,27 @@ public class frmListaVuelos extends JFrame{
 	private ArrayList<Vuelo> vuelosCargados;
 	private HashSet<Aeropuerto> aeropuertosCargados;
 	private Object[] parametros_busqueda;
-
+	private JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
+	private Color azulFondo, azulClaro;
 
 	public frmListaVuelos(EBController controller) 
 	{
 		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
-		cargarVuelos();
+		if(vuelosCargados==null)cargarVuelos();
+		else buscarVuelos();
 		cargarAeropuertos();
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);
-	    Color azulFondo = new Color (0, 76, 109);
-	    Color azulClaro = new Color (184, 205, 218);
+	    azulFondo = new Color (0, 76, 109);
+	    azulClaro = new Color (184, 205, 218);
 		imagen = new File("..\\..\\resources\\img\\Logo EasyBooking_Azul.png");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(imagen.getAbsolutePath()));
 		setResizable(false);
 		setTitle("Lista de Vuelos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 444, 577);
-		
-		JMenuBar menuBar = new JMenuBar();
-		
-		JMenu inicio = new JMenu("Inicio");
-		inicio.setMnemonic(KeyEvent.VK_I); 
-		menuBar.add(inicio);
-		
-		JMenuItem mntmIrAInicio = new JMenuItem("Ir a Inicio");
-		inicio.add(mntmIrAInicio);
-		mntmIrAInicio.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				buttonLogotipoInicial(evt);
-			}
-		});
-		
-		JMenu cuenta = new JMenu("Cuenta");
-		cuenta.setMnemonic(KeyEvent.VK_C); 
-		menuBar.add(cuenta);
-		
-		JMenuItem iniciosesion = new JMenuItem("Inicio sesion");
-		cuenta.add(iniciosesion);
-		
-		JMenuItem registro = new JMenuItem("Registro");
-		cuenta.add(registro);
-		
-		JMenu salir = new JMenu("Salir");
-		salir.setMnemonic(KeyEvent.VK_S); 
-		menuBar.add(salir);
-		
-		JMenuBar menuBar_1 = new JMenuBar();
-		setJMenuBar(menuBar_1);
-		
-		JMenu mnNewMenu = new JMenu("Inicio");
-		menuBar_1.add(mnNewMenu);
-		
-		JMenu mnNewMenu_1 = new JMenu("Mi cuenta");
-		menuBar_1.add(mnNewMenu_1);
-		
-		JMenuItem mntmIniciarSesin = new JMenuItem("Iniciar sesi\u00F3n");
-		mnNewMenu_1.add(mntmIniciarSesin);
-		mntmIniciarSesin.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				buttonIrInicioRegistro(evt);
-			}
-		});
-		
-		JMenuItem mntmMisReservas = new JMenuItem("Mis reservas");
-		mnNewMenu_1.add(mntmMisReservas);
-		
-		JMenuItem mntmRegistrarse = new JMenuItem("Cerrar sesi\u00F3n");
-		mnNewMenu_1.add(mntmRegistrarse);
-		
-		JMenu mnNewMenu_3 = new JMenu("Cont\u00E1ctanos\r\n");
-		menuBar_1.add(mnNewMenu_3);
+		setBounds(100, 100, 444, 577); 		
 		
 		contentPane = new JPanel();
 	    contentPane.setBackground(azulFondo);
@@ -238,8 +186,12 @@ public class frmListaVuelos extends JFrame{
 		scrollPane.setBounds(420, 0, 18, 516);
 		contentPane.add(scrollPane);
 		
+		datos();
+	}
+	
+	private void datos()
+	{
 		int offset=0;
-		JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
 		JLabel label, label_1;
 		JButton btnReservar;
 		
@@ -323,8 +275,73 @@ public class frmListaVuelos extends JFrame{
 		System.out.println("Ha pasado por el metodo cargarVuelos.");
 		vuelosCargados = new ArrayList<Vuelo>();
 		vuelosCargados = controller.getVuelos();
-		System.out.println("El numero de vuelos cargados es: " + vuelosCargados.size());
 		numBusquedas = vuelosCargados.size();
+		System.out.println("El numero de vuelos cargados es: " + numBusquedas);
+	}
+	
+
+	private void buscarVuelos()
+	{
+		for (int i=0; i<numBusquedas; i++)
+		{
+			precio.setText("");
+			ciudades.setText("");
+			fecha.setText("");
+			hora.setText("");
+			cod_aero_origen.setText("");
+			cod_aero_destino.setText("");
+		}
+		contentPane.repaint();
+		parametrosBusqueda();
+
+		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
+		numBusquedas = vuelosCargados.size();
+		contentPane.repaint();
+		contentPane.updateUI();
+		contentPane.paintAll(contentPane.getGraphics());
+		repaint();
+		datos();
+		for(int i=0; i<numBusquedas; i++)
+		{
+			precio.updateUI();
+			ciudades.updateUI();
+			fecha.updateUI();
+			hora.updateUI();
+			cod_aero_origen.updateUI();
+			cod_aero_destino.updateUI();
+			System.out.println(vuelosCargados.get(i).getAeropuerto_origen().getNom_aeropuerto()+ " a " +
+					vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto()+
+			" del dia "+ vuelosCargados.get(i).getFecha_salida());
+		}
+		
+	}
+	
+	private void parametrosBusqueda () {
+		
+		
+		String aeropuerto_origen = origen.getSelectedItem().toString();
+		String aeropuerto_destino = destino.getSelectedItem().toString();
+		String fechaIda;
+		if(calendarIda.getDate()!=null) {
+			Date date = calendarIda.getDate();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
+			fechaIda = dateFormat.format(date);
+		}
+		else {
+			fechaIda = null;
+			JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar una fecha de ida.");
+		}
+		System.out.println("Buscando de " + aeropuerto_origen + " a " + aeropuerto_destino + " para el dia "+ fechaIda);
+
+		int free_seats = numPasajeros;
+		
+		parametros_busqueda = new Object[5];
+		parametros_busqueda[0] = aeropuerto_origen;
+		parametros_busqueda[1] = aeropuerto_destino;
+		parametros_busqueda[2] = free_seats;
+		parametros_busqueda[3] = null; // No filtraremos por precio
+		parametros_busqueda[4] = fechaIda;
+		
 	}
 	
 	private void cargarAeropuertos() {
@@ -361,37 +378,9 @@ public class frmListaVuelos extends JFrame{
 	
 	private void buttonBuscarVuelos(ActionEvent evt)
 	{
-		// Formara un array de 
-
-		parametrosBusqueda();
-		//TODO Aqui falta sacarlo por pantalla en cada uno de los huecos.
-		//Habria que saber cuantos resultados produce y pasarselo a numBusquedas
-		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
+		buscarVuelos();
 	}
 	
-	private void parametrosBusqueda () {
-		
-		
-		String aeropuerto_origen = origen.getSelectedItem().toString();
-		String aeropuerto_destino = origen.getSelectedItem().toString();
-		String fechaIda;
-		if(calendarIda.getDate()!=null) {
-			Date date = calendarIda.getDate();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
-			fechaIda = dateFormat.format(date);
-		}
-		else {fechaIda = null;}
-
-		int free_seats = numPasajeros;
-		
-		parametros_busqueda = new Object[5];
-		parametros_busqueda[0] = aeropuerto_origen;
-		parametros_busqueda[1] = aeropuerto_destino;
-		parametros_busqueda[2] = free_seats;
-		parametros_busqueda[3] = null; // No filtraremos por precio
-		parametros_busqueda[4] = fechaIda;
-		
-	}
 	private void buttonReservar(ActionEvent evt)
 	{
 		numPasajeros=(Integer)spinner.getValue();	
