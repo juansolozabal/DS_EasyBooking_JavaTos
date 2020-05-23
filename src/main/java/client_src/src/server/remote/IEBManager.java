@@ -21,7 +21,7 @@ public interface IEBManager extends Remote {
 	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) throws RemoteException; //Se buscan vuelos en un fecha especifica
 	public ArrayList<Vuelo> getVuelos() throws RemoteException; //Al arranque del programa se recogeran todos los vuelos
 	public String comprobacionConexion() throws RemoteException;
-	public void anyadirUsuario(Usuario usu) throws RemoteException;
+	public void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto) throws RemoteException;
 	public void anyadirReservaAUsuario (Usuario usu, Reserva res) throws RemoteException;
 	public void eliminarUsuario(Usuario usu) throws RemoteException;
 	public void actualizarUsuario(Usuario actu) throws RemoteException;

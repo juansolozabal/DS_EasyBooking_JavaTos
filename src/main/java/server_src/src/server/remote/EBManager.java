@@ -68,11 +68,21 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException{
 		EBgestorPagos.getGestorPagos().pagarVisa(nomTitular, numTarj, venc, cvc);
 		
+		//Esto es lo que se haria en caso de tener acceso a la BD
+//		if(EBgestorPagos.getGestorPagos().pagarVisa(nomTitular, numTarj, venc, cvc)!= "False"){
+//			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo);
+//		}
+		
 	}
 
 	@Override
 	public void pagarPayPal(String email, String contrasenya) throws RemoteException{
 		EBgestorPagos.getGestorPagos().pagarPayPal(email, contrasenya);
+		
+		//Esto es lo que se haria en caso de tener acceso a la BD
+//		if(EBgestorPagos.getGestorPagos().pagarPayPal(email, contrasenya)!= "False"){
+//			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo);
+//		}
 	}
 
 	@Override
@@ -93,8 +103,8 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		return serverName;
 	}
 	
-	public void anyadirUsuario(Usuario usu) throws RemoteException {
-		EBgestorDAO.anyadirUsuario(usu);
+	public void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto) throws RemoteException {
+		EBgestorDAO.anyadirUsuario(dni, nombre, apellido, correo, pin, idAeropuerto);
 	}
 	public void anyadirReservaAUsuario (Usuario usu, Reserva res) throws RemoteException {
 		EBgestorDAO.anyadirReservaAUsuario(usu, res);

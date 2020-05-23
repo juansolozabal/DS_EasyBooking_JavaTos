@@ -39,7 +39,7 @@ public class EBgestorDAO {
 		return gestorDAO;
 	}	
 	
-	public static void anyadirUsuario(Usuario usu)
+	public static void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto )
 	{
 		try
         {
@@ -48,12 +48,49 @@ public class EBgestorDAO {
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
-
+		    
+		    Usuario usu = new Usuario(dni, nombre, apellido, correo);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(usu);
 
 		    //Imprimimos lo que hemos introducido en la BD
 		    System.out.println("- Inserted into db: " + usu.getNombre());
+		    
+		    transaction.commit();
+		}
+
+        catch(Exception ex)
+		{
+			System.err.println("* Exception inserting data into db: " + ex.getMessage());
+		}
+		
+		finally
+		{		    
+			if (transaction.isActive()) 
+			{
+		        transaction.rollback();
+		    }
+		    
+		    persistentManager.close();
+		}
+	}
+	
+	public static void anyadirReserva(int cod_vuelo)
+	{
+		try
+        {
+			//Duda con la linea que viene a continuacion
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
+			persistentManager = persistentManagerFactory.getPersistenceManager();
+			transaction = persistentManager.currentTransaction();
+		    transaction.begin();		    
+		    
+		    Reserva res = new Reserva(cod_vuelo);
+		    //Persistimos los datos en la BD
+		    persistentManager.makePersistent(res);
+
+		    //Imprimimos lo que hemos introducido en la BD
+		    System.out.println("- Inserted into db: " + res.getId_reserva());
 		    
 		    transaction.commit();
 		}
