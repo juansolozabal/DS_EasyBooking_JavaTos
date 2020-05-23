@@ -9,7 +9,7 @@ Proyecto EasyBooking - Los JavaTos
 5. Disfrute de la experiencia EasyBooking desde casa.
 	
 ## Comandos a utilizar a lo largo del programa
-Para lanzar el cliente y el servidor, estos serán los comandos que utilizaremos. 
+Para lanzar el cliente y el servidor, estos serán los comandos que se deben emplear. 
 ```
 mvn [clean | validate | compile | install | package]
 ```
@@ -46,7 +46,7 @@ Para obtener más información del plugin maven-shade-plugin clique [aquí](http
 ## ¿Qué puedo hacer en EasyBooking?
 Podré hacer, entre otras cosas:
 1. Iniciar sesión y registrarme (se conectará a una RaspberryPi de la Universidad de Deusto a través de la VPN de la Universidad).
-2. Buscar vuelos que te interesen.
+2. Buscar vuelos que le interesen.
 3. Hacer reservas para vuelos futuros.
 4. Pagar mediante Visa o Paypal.
 
