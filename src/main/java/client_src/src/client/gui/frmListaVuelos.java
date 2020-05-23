@@ -396,8 +396,8 @@ public class frmListaVuelos extends JFrame{
 			{
 				if (idaCorrecta==true && btnIdaYVuelta.isSelected())
 				{
-					frmPasajeros datosPasajeros = new frmPasajeros(controller, numPasajeros);//TODO pasarle codvuelo
-					datosPasajeros.setVisible(true);
+					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
+					inicioregistro.setVisible(true);
 				}
 			}
 		}

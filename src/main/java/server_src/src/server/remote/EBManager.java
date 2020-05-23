@@ -26,7 +26,6 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String serverName;
-	private Usuario state;
 	
 	public EBManager(String[] args) throws RemoteException 
 	{
@@ -41,9 +40,8 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	
 	@Override
 	public boolean iniciarSesion(String correo, String contrasenya) throws RemoteException {
-		this.state=EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
-		System.out.println(this.state);
-		return state!=null;
+		return EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
+
 	}
 
 	@Override
@@ -53,6 +51,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos) throws RemoteException {
+		
 		//Este hay que mirar bien donde meterlo. Este metodo no tiene que estar conectado
 		//Con el gestor pagos, es algo que debemos gestionar internamente. Una vez que hayamos
 		//acabado de meter todas las personas, en el clicaremos en aceptar y llamaremos al 

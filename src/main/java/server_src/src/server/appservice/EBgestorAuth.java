@@ -28,25 +28,25 @@ public class EBgestorAuth {
 		authGway = new AuthToSystem(args);
 	}
 	
-	public Usuario iniciarSesion (String correo, String contrasenya)
+	public boolean iniciarSesion (String correo, String contrasenya)
 	{
 		try {
 			boolean confirmacion = this.authGway.LogIn(correo, contrasenya);
 			if (confirmacion==false)
 			{
 				System.out.println("Inicio sesion no permitida");
-				return null;
+				return false;
 			}
 			else
 			{
 				System.out.println("Inicio sesion exitoso");
 				Usuario user = new Usuario((int)(100000 * Math.random()), "", "", correo);
-				return user;
+				return true;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 	}
 	
