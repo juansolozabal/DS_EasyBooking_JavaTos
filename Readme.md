@@ -4,9 +4,10 @@ Proyecto EasyBooking - Los JavaTos
 ## Indicaciones
 1. Móntese el proyecto Maven en local.
 2. Compruebe la estructura del programa.
-3. Lance el servidor. 
-4. Lance el cliente.
-5. Disfrute de la experiencia EasyBooking desde casa.
+3. Conéctese a la VPN de la Universidad de Deusto con su correo de Deusto u Opendeusto.
+4. Lance el servidor. 
+5. Lance el cliente.
+6. Disfrute de la experiencia EasyBooking desde casa.
 	
 ## Comandos a utilizar a lo largo del programa
 Para lanzar el cliente y el servidor, estos serán los comandos que se deben emplear. 
