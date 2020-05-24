@@ -84,6 +84,15 @@ public class frmListaVuelos extends JFrame{
 		if(vuelosCargados==null)cargarVuelos();
 		else buscarVuelos();
 		cargarAeropuertos();
+
+		
+		VentanaInicial();	
+		
+	}
+	
+	
+	private void VentanaInicial()
+	{
 		fechaHoy = new JDateChooser();
 		actual=new GregorianCalendar();
 		fechaHoy.setCalendar(actual);
@@ -185,12 +194,6 @@ public class frmListaVuelos extends JFrame{
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(420, 0, 18, 516);
 		contentPane.add(scrollPane);
-		
-		datos();
-	}
-	
-	private void datos()
-	{
 		int offset=0;
 		JLabel label, label_1;
 		JButton btnReservar;
@@ -291,16 +294,15 @@ public class frmListaVuelos extends JFrame{
 			cod_aero_origen.setText("");
 			cod_aero_destino.setText("");
 		}
-		contentPane.repaint();
+		contentPane.removeAll();
 		parametrosBusqueda();
 
 		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
 		numBusquedas = vuelosCargados.size();
-		contentPane.repaint();
-		contentPane.updateUI();
-		contentPane.paintAll(contentPane.getGraphics());
-		repaint();
-		datos();
+//		contentPane.repaint();
+//		contentPane.updateUI();
+//		contentPane.paintAll(contentPane.getGraphics());
+//		repaint();
 		for(int i=0; i<numBusquedas; i++)
 		{
 			precio.updateUI();
@@ -313,6 +315,8 @@ public class frmListaVuelos extends JFrame{
 					vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto()+
 			" del dia "+ vuelosCargados.get(i).getFecha_salida());
 		}
+		VentanaInicial();
+		contentPane.repaint();
 		
 	}
 	
