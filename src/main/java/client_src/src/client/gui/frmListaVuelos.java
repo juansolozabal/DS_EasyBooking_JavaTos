@@ -200,7 +200,8 @@ public class frmListaVuelos extends JFrame{
 		scrollPane.setBounds(420, 0, 18, 516);
 		contentPane.add(scrollPane);
 		
-		JLabel vueloIndex = new JLabel("Vuelo "+index+" de "+ numBusquedas);
+		int indexAux = index +1;
+		JLabel vueloIndex = new JLabel("Vuelo "+indexAux+" de "+ numBusquedas);
 		vueloIndex.setForeground(Color.white);
 		vueloIndex.setBounds(22, 151, 375, 22);
 		contentPane.add(vueloIndex);
@@ -358,9 +359,11 @@ public class frmListaVuelos extends JFrame{
 		String aeropuerto_origen = origen.getSelectedItem().toString();
 		String aeropuerto_destino = destino.getSelectedItem().toString();
 		String fechaIda;
+		System.out.println("Sacando la fecha obtenida del JCalendar por pantalla:");
+		System.out.println(calendarIda.getDate().toString());
 		if(calendarIda.getDate()!=null) {
 			Date date = calendarIda.getDate();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 			fechaIda = dateFormat.format(date);
 		}
 		else {
@@ -371,11 +374,12 @@ public class frmListaVuelos extends JFrame{
 
 		int free_seats = numPasajeros;
 		
+		
 		parametros_busqueda = new Object[5];
 		parametros_busqueda[0] = aeropuerto_origen;
 		parametros_busqueda[1] = aeropuerto_destino;
 		parametros_busqueda[2] = free_seats;
-		parametros_busqueda[3] = null; // No filtraremos por precio
+		parametros_busqueda[3] = 20000.0; // No filtraremos por precio, de ahi que pongamos un precio maximo demasiado alto.
 		parametros_busqueda[4] = fechaIda;
 		
 	}

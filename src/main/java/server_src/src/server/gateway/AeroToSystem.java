@@ -31,12 +31,28 @@ public class AeroToSystem implements IGatewayAero{
 	}
 
 
-	@Override
 	public List<Flight_JSON> getVuelos(Object [] args) throws Exception {
-		response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1], (int) args[2], (String) args[4]));
+		if(args[0] == null && args[1] == null) {
+			response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters());
+		}
+		else if(args[2] == null)
+		{
+			response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1]));
+		}
+		else if(args[3] == null) {
+			response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1], (int) args[2]));
+		}
+		else if (args[4] == null) {
+			response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1], (int) args[2], (double) args[3]));
+		}
+		else {
+			response = client.makePostRequest(client.createInvocationBuilder(path), new Flight_parameters((String )args[0], (String) args[1], (int) args[2], (double) args[3], (String) args[4]));
+		}
+		
 		vuelos = flightParser(response);
 		return vuelos;
 	}
+	
 	
 	public List<Flight_JSON> getVuelos() throws Exception {
 		System.out.println("Ha pasado por el gateway");
