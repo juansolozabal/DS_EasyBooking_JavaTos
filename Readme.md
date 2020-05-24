@@ -41,7 +41,7 @@ Se deben seguir los siguientes pasos:
 6. mvn package
 7. mvn package (por segunda vez, necesario para que ejecute el jar generado por el maven-shade-plugin).
 
-Para obtener más información del plugin maven-shade-plugin clique [aquí](https://maven.apache.org/plugins/maven-shade-plugin/usage.html).
+Para obtener más información acerca del plugin maven-shade-plugin clique [aquí](https://maven.apache.org/plugins/maven-shade-plugin/usage.html).
 
 ## ¿Qué puedo hacer en EasyBooking?
 Podré hacer, entre otras cosas:
