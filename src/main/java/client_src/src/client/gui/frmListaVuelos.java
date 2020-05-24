@@ -70,12 +70,13 @@ public class frmListaVuelos extends JFrame{
 	private JRadioButton btnIda, btnIdaYVuelta;
 	private JComboBox origen, destino;
 	private EBController controller;
-	private int numBusquedas = 0; //ira cambiando segun cuantas busquedas coincidan
+	private int numBusquedas = 0, index=0; //ira cambiando segun cuantas busquedas coincidan
 	private ArrayList<Vuelo> vuelosCargados;
 	private HashSet<Aeropuerto> aeropuertosCargados;
 	private Object[] parametros_busqueda;
 	private JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
 	private Color azulFondo, azulClaro;
+	JButton sig, ant;
 
 	public frmListaVuelos(EBController controller) 
 	{
@@ -103,7 +104,7 @@ public class frmListaVuelos extends JFrame{
 		setResizable(false);
 		setTitle("Lista de Vuelos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 444, 577); 		
+		setBounds(100, 100, 415, 347); 		
 		
 		contentPane = new JPanel();
 	    contentPane.setBackground(azulFondo);
@@ -162,7 +163,11 @@ public class frmListaVuelos extends JFrame{
 		calendarVuelta.setForeground(azulClaro);
 		calendarVuelta.setBounds(123, 89, 100, 25);
 		contentPane.add(calendarVuelta);
-	//	calendarVuelta.
+	
+		JLabel nBusquedas = new JLabel("N\u00FAmero de busquedas: " + numBusquedas);
+		nBusquedas.setForeground(Color.white);
+		nBusquedas.setBounds(234, 89, 150, 25);
+		contentPane.add(nBusquedas);
 		
 		spinner = new JSpinner();
 		spinner.getEditor().getComponent(0).setBackground(azulClaro);
@@ -194,17 +199,23 @@ public class frmListaVuelos extends JFrame{
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(420, 0, 18, 516);
 		contentPane.add(scrollPane);
-		int offset=0;
+		
+		JLabel vueloIndex = new JLabel("Vuelo "+index+" de "+ numBusquedas);
+		vueloIndex.setForeground(Color.white);
+		vueloIndex.setBounds(22, 151, 375, 22);
+		contentPane.add(vueloIndex);
+		
+		int offset=30;
 		JLabel label, label_1;
 		JButton btnReservar;
 		
-		for (int i=0; i<numBusquedas; i++)
+		if (index<numBusquedas)
 		{
 		    precio = new JTextArea();
 			precio.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			precio.setBackground(azulClaro);
 			precio.setBounds(22, 151+offset, 375, 22);
-			precio.setText("Precio: " + Long.toString(vuelosCargados.get(i).getPrice()));
+			precio.setText("Precio: " + Long.toString(vuelosCargados.get(index).getPrice()));
 			precio.setEditable(false);
 			contentPane.add(precio);
 			
@@ -213,8 +224,8 @@ public class frmListaVuelos extends JFrame{
 			ciudades.setBackground(azulClaro);
 			ciudades.setBounds(22, 180+offset, 119, 46);
 			ciudades.setText(
-					"Asientos totales: " + vuelosCargados.get(i).getNum_asientos_tot() + "\n" + 
-					"Asientos libres: " + vuelosCargados.get(i).getNum_asientos_disp());
+					"Asientos totales: " + vuelosCargados.get(index).getNum_asientos_tot() + "\n" + 
+					"Asientos libres: " + vuelosCargados.get(index).getNum_asientos_disp());
 			ciudades.setEditable(false);
 			contentPane.add(ciudades);		
 			
@@ -222,7 +233,7 @@ public class frmListaVuelos extends JFrame{
 			fecha.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			fecha.setBackground(azulClaro);
 			fecha.setBounds(153, 180+offset, 67, 22);
-			fecha.setText(vuelosCargados.get(i).getFecha_salida());
+			fecha.setText(vuelosCargados.get(index).getFecha_salida());
 			fecha.setEditable(false);
 			contentPane.add(fecha);
 			
@@ -230,7 +241,7 @@ public class frmListaVuelos extends JFrame{
 			hora.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			hora.setBackground(azulClaro);
 			hora.setBounds(234, 180+offset, 67, 22);
-			String hora_salida = vuelosCargados.get(i).getFecha_salida_con_horas().toString().substring(11, 16);
+			String hora_salida = vuelosCargados.get(index).getFecha_salida_con_horas().toString().substring(11, 16);
 			hora.setText(hora_salida);
 			hora.setEditable(false);
 			contentPane.add(hora);
@@ -239,7 +250,7 @@ public class frmListaVuelos extends JFrame{
 			cod_aero_origen.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			cod_aero_origen.setBackground(azulClaro);
 			cod_aero_origen.setBounds(153, 204+offset, 67, 22);
-			cod_aero_origen.setText(vuelosCargados.get(i).getAeropuerto_origen().getNom_aeropuerto());
+			cod_aero_origen.setText(vuelosCargados.get(index).getAeropuerto_origen().getNom_aeropuerto());
 			cod_aero_origen.setEditable(false);
 			contentPane.add(cod_aero_origen);
 			
@@ -247,7 +258,7 @@ public class frmListaVuelos extends JFrame{
 			cod_aero_destino.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			cod_aero_destino.setBackground(azulClaro);
 			cod_aero_destino.setBounds(234, 204+offset, 67, 22);
-			cod_aero_destino.setText(vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto());
+			cod_aero_destino.setText(vuelosCargados.get(index).getAeropuerto_destino().getNom_aeropuerto());
 			cod_aero_destino.setEditable(false);
 			contentPane.add(cod_aero_destino);
 			
@@ -269,9 +280,45 @@ public class frmListaVuelos extends JFrame{
 					buttonReservar(evt);
 				}
 			});
-			
-			offset+=100;
+
 		}
+		
+		sig = new JButton("Siguiente ");
+		sig.setBounds(223, 234+offset, 120, 22);
+		sig.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt1) {
+				buttonSiguiente(evt1);
+			}
+		});
+		
+		
+		ant = new JButton("Anterior ");
+		ant.setBounds(53, 234+offset, 120, 22);
+		ant.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt2) {
+				buttonAnterior(evt2);
+			}
+		});
+		contentPane.add(sig);
+		contentPane.add(ant);
+		if(index==numBusquedas-1)sig.setEnabled(false);
+		if(index==0)			 ant.setEnabled(false);
+
+	}
+	private void buttonSiguiente(ActionEvent evt1)
+	{
+		contentPane.removeAll();
+		index++;
+		VentanaInicial();
+		contentPane.revalidate();
+	}
+	
+	private void buttonAnterior(ActionEvent evt1)
+	{
+		contentPane.removeAll();
+		index--;
+		VentanaInicial();
+		contentPane.revalidate();
 	}
 	
 	private void cargarVuelos() {
@@ -285,38 +332,23 @@ public class frmListaVuelos extends JFrame{
 
 	private void buscarVuelos()
 	{
-		for (int i=0; i<numBusquedas; i++)
-		{
-			precio.setText("");
-			ciudades.setText("");
-			fecha.setText("");
-			hora.setText("");
-			cod_aero_origen.setText("");
-			cod_aero_destino.setText("");
-		}
+
 		contentPane.removeAll();
+		index=0;
 		parametrosBusqueda();
 
 		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
 		numBusquedas = vuelosCargados.size();
-//		contentPane.repaint();
-//		contentPane.updateUI();
-//		contentPane.paintAll(contentPane.getGraphics());
-//		repaint();
+
 		for(int i=0; i<numBusquedas; i++)
 		{
-			precio.updateUI();
-			ciudades.updateUI();
-			fecha.updateUI();
-			hora.updateUI();
-			cod_aero_origen.updateUI();
-			cod_aero_destino.updateUI();
+
 			System.out.println(vuelosCargados.get(i).getAeropuerto_origen().getNom_aeropuerto()+ " a " +
 					vuelosCargados.get(i).getAeropuerto_destino().getNom_aeropuerto()+
 			" del dia "+ vuelosCargados.get(i).getFecha_salida());
 		}
 		VentanaInicial();
-		contentPane.repaint();
+		contentPane.revalidate();
 		
 	}
 	
