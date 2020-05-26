@@ -117,11 +117,11 @@ public class EBController {
 		}
 	}
 	
-	public void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto)
+	public void anyadirUsuario(String nombre, String apellido, String correo)
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.anyadirUsuario(dni, nombre, apellido, correo, pin, idAeropuerto);
+			ieb.anyadirUsuario(nombre, apellido, correo);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al guardar usuario en BD: " + e.toString());		

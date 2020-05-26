@@ -40,7 +40,7 @@ public class EBgestorAuth {
 			else
 			{
 				System.out.println("Inicio sesion exitoso");
-				Usuario user = new Usuario((int)(100000 * Math.random()), "", "", correo);
+				//Usuario user = new Usuario((int)(100000 * Math.random()), "", "", correo);
 				return true;
 			}
 		} catch (Exception e) {

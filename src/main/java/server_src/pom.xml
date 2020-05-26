@@ -248,6 +248,32 @@
             </plugin>
         </plugins>
     </build>
-	
+
+	<profiles>
+        <!-- run as 'mvn exec:java -PpruebaBD' -->
+        <profile>
+            <id>pruebaBD</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                        	<execution>
+                        		<phase>test</phase>
+                        		<goals>
+                        			<goal>run</goal>
+                        		</goals>
+                       			<configuration>
+                            		<mainClass>MainDB</mainClass>
+                       			 </configuration>
+                        	</execution>                        
+                        </executions> 
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+     </profiles>
 
 </project>

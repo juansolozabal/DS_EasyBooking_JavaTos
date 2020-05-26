@@ -19,8 +19,6 @@ import src.server.gateway.Flight_JSON;
 
 public class EBManager extends UnicastRemoteObject implements IEBManager{
 
-
-
 	/**
 	 * 
 	 */
@@ -103,17 +101,15 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		return serverName;
 	}
 	
-	public void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto) throws RemoteException {
-		EBgestorDAO.anyadirUsuario(dni, nombre, apellido, correo, pin, idAeropuerto);
+	public void anyadirUsuario(String nombre, String apellido, String correo) throws RemoteException {
+		EBgestorDAO.anyadirUsuario(nombre, apellido, correo);
 	}
-	public void anyadirReservaAUsuario (Usuario usu, Reserva res) throws RemoteException {
-		EBgestorDAO.anyadirReservaAUsuario(usu, res);
-	}
+
 	public void eliminarUsuario(Usuario usu)throws RemoteException {
 		EBgestorDAO.eliminarUsuario(usu);
 	}
-	public void actualizarUsuario(Usuario actu)throws RemoteException {
-		EBgestorDAO.actualizarUsuario(actu);
+	public void actualizarUsuario(String correo, String nombre, String apellido)throws RemoteException {
+		EBgestorDAO.actualizarUsuario(correo, nombre, apellido);
 	}
 	public void actualizarReserva(Reserva actu)throws RemoteException {
 		EBgestorDAO.actualizarReserva(actu);
@@ -125,6 +121,11 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	public ArrayList<Reserva> selectReservas()throws RemoteException {
 		return EBgestorDAO.selectReservas();
+	}
+
+	@Override
+	public void indicarSesionDAO(String correo, String contrasenya) throws RemoteException {
+		EBgestorDAO.indicarSesionDAO(correo);		
 	}
 	
 }

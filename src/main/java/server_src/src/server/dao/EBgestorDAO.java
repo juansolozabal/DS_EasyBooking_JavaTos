@@ -1,7 +1,9 @@
 package src.server.dao;
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
@@ -10,6 +12,7 @@ import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import src.server.appservice.EBgestorAuth;
+import src.server.dto.Persona;
 import src.server.dto.Reserva;
 import src.server.dto.Usuario;
 
@@ -23,12 +26,9 @@ public class EBgestorDAO {
 	private static EBgestorDAO gestorDAO = null;
 	private static ArrayList<Usuario> usus = new ArrayList<Usuario>();
 	private static ArrayList<Reserva> reses;
+	private static Usuario usuarioSesion;
 
-	private EBgestorDAO(){
-//		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
-//		persistentManager = persistentManagerFactory.getPersistenceManager();
-//		transaction = persistentManager.currentTransaction();
-	}
+	private EBgestorDAO(){}
 	
 	public static EBgestorDAO getGestorDAO()
 	{
@@ -39,7 +39,7 @@ public class EBgestorDAO {
 		return gestorDAO;
 	}	
 	
-	public static void anyadirUsuario(int dni,String nombre, String apellido, String correo, int pin, int idAeropuerto )
+	public static void anyadirUsuario(String nombre, String apellido, String correo)
 	{
 		try
         {
@@ -49,7 +49,7 @@ public class EBgestorDAO {
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
 		    
-		    Usuario usu = new Usuario(dni, nombre, apellido, correo);
+		    Usuario usu = new Usuario(nombre, apellido, correo);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(usu);
 
@@ -75,7 +75,8 @@ public class EBgestorDAO {
 		}
 	}
 	
-	public static void anyadirReserva(int cod_vuelo)
+	@SuppressWarnings("unchecked")
+	public static void anyadirReserva(int cod_vuelo, ArrayList<Persona> pasajeros)
 	{
 		try
         {
@@ -86,6 +87,8 @@ public class EBgestorDAO {
 		    transaction.begin();		    
 		    
 		    Reserva res = new Reserva(cod_vuelo);
+		    res.setPersonasRes((Set<Persona>) pasajeros);
+		    usuarioSesion.getReservas().add(res);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(res);
 
@@ -111,46 +114,6 @@ public class EBgestorDAO {
 		}
 	}
 	
-	public static void anyadirReservaAUsuario (Usuario usu, Reserva res)
-	{
-		try
-        {
-			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
-			persistentManager = persistentManagerFactory.getPersistenceManager();
-			transaction = persistentManager.currentTransaction();
-		    transaction.begin();
-		    
-		    
-		    Usuario eliminar = persistentManager.getObjectById(Usuario.class, usu.getDni());
-			persistentManager.deletePersistent(eliminar);			
-			usu.getReservas().add(res);
-
-		    //Persistimos los datos en la BD
-		    persistentManager.makePersistent(usu);
-
-		    //Imprimimos lo que hemos introducido en la BD
-		    System.out.println("- Inserted Reserva into Usuario: " + usu.getNombre());
-		    
-		    transaction.commit();
-		}
-
-        catch(Exception ex)
-		{
-			System.err.println("* Exception inserting data into db: " + ex.getMessage());
-		}
-		
-		finally
-		{		    
-			if (transaction.isActive()) 
-			{
-		        transaction.rollback();
-		    }
-		    
-		    persistentManager.close();
-		}
-		
-	}
 	public static void eliminarUsuario(Usuario usu)
 	{
 		try
@@ -159,7 +122,7 @@ public class EBgestorDAO {
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();
 		    
-		    Usuario eliminar = persistentManager.getObjectById(Usuario.class, usu.getDni());
+		    Usuario eliminar = persistentManager.getObjectById(Usuario.class, usu.getCorreo());
 			persistentManager.deletePersistent(eliminar);
 			System.out.println("- Deleted from DB:" + usu.getNombre());
 			
@@ -184,28 +147,22 @@ public class EBgestorDAO {
 	}
 	
 	
-	public static void actualizarUsuario(Usuario actu)
+	public static void actualizarUsuario(String correo, String nombre, String apellido)
 	{
 		try
         {
 			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 
-//Esta de aqui abajo es la manera en la que estaba antes
-//		 	transaction.begin();
-//		 	
-//		    Usuario usuario1 = persistentManager.getObjectById(Usuario.class, actu.getDni());
-//		    usuario1.setCorreo("juan.solozabal@opendeusto.es");
-//		    System.out.println("Actualizacion realizada.");
+			//Esta de aqui abajo es la manera en la que estaba antes
+		 	transaction.begin();		 	
+		    usuarioSesion.setCorreo(correo);
+		    usuarioSesion.setNombre(nombre);
+		    usuarioSesion.setNombre(apellido);
+		    System.out.println("Actualizacion realizada.");
 			
-			transaction.begin();
-			Usuario eliminar = persistentManager.getObjectById(Usuario.class, actu.getDni());
-			persistentManager.deletePersistent(eliminar);
-		    //Persistimos los datos en la BD
-		    persistentManager.makePersistent(actu);
-
 		    //Imprimimos lo que hemos introducido en la BD
-		    System.out.println("- Updated Usuario: " + actu.getNombre());			   
+		    System.out.println("- Updated Usuario: " + usuarioSesion.getNombre());			   
 			    
 		    transaction.commit();
 		}
@@ -332,6 +289,11 @@ public class EBgestorDAO {
 		    persistentManager.close();
 		}
 		return reses;
+	}
+	
+	public static void indicarSesionDAO(String correo)
+	{
+		usuarioSesion = persistentManager.getObjectById(Usuario.class, correo);
 	}
 	
 	

@@ -3,41 +3,34 @@ package src.server.dto;
 import java.util.ArrayList;
 
 import javax.jdo.annotations.Element;
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 
 public class Usuario {
 	@PrimaryKey
-	private int dni;
+	private String correo;
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	private long id_usuario;
 	private String nombre;
 	private String apellido;
-	private String correo;
-	private int pin;
-	private int idAeropuerto;
 	
-	@Element(column="dni")
+
+	@Element(column="id_usuario")
 	private ArrayList<Reserva> reservasUsu = new ArrayList<Reserva>();	
 	
 	
-	public Usuario(int dni, String nombre, String apellido, String correo) {
+	public Usuario(String nombre, String apellido, String correo) {
 		super();
-		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
 
 	}
 
-
-	public int getDni() {
-		return dni;
-	}
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
 
 	public String getNombre() {
 		return nombre;

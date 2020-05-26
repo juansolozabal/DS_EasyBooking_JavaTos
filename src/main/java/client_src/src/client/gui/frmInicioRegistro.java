@@ -33,7 +33,8 @@ public class frmInicioRegistro extends JFrame
 	private JTextField corretxt;
 	private JTextField apetxt;
 	private JTextField nomtxt;
-	private JLabel nombre, apellido, correo;
+	private JTextField dnitxt;
+	private JLabel nombre, apellido, correo, dni;
 	private static boolean loginResult;
 
 
@@ -208,7 +209,6 @@ public class frmInicioRegistro extends JFrame
 		corretxt.setBounds(275, 150, 160, 25);
 		contentPane.add(corretxt);
 		
-		
 		JButton btnMeterUsuarios = new JButton("Registrarse");
 		btnMeterUsuarios.setBounds(205, 320, 180, 25);
 		btnMeterUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +245,7 @@ public class frmInicioRegistro extends JFrame
 		loginResult = controller.iniciarSesion(t2.getText().toString(), t3.getText().toString());
 		if (loginResult==true)
 			{
+				
 				JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
 				frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
 				datosPasajeros.setVisible(true);
@@ -265,7 +266,7 @@ public class frmInicioRegistro extends JFrame
 	{
 		this.setVisible(false);
 		controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
-//		controller.anyadirUsuario(Integer.parseInt(dnitxt.getText().toString()), nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString(), Integer.parseInt(pin.getText().toString()), Integer.parseInt(idAeropuerto.getText().toString()));
+		controller.anyadirUsuario(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
 		if (loginResult==true)
 		{
 			JOptionPane.showMessageDialog(null, "Registro exitoso!");
