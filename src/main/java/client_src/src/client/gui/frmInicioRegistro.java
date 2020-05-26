@@ -245,7 +245,7 @@ public class frmInicioRegistro extends JFrame
 		loginResult = controller.iniciarSesion(t2.getText().toString(), t3.getText().toString());
 		if (loginResult==true)
 			{
-				
+				//aqui un controller para decirle al dao quien ha iniciado sesion
 				JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
 				frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
 				datosPasajeros.setVisible(true);
@@ -266,7 +266,7 @@ public class frmInicioRegistro extends JFrame
 	{
 		this.setVisible(false);
 		controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
-		controller.anyadirUsuario(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
+		//controller.anyadirUsuario(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
 		if (loginResult==true)
 		{
 			JOptionPane.showMessageDialog(null, "Registro exitoso!");
