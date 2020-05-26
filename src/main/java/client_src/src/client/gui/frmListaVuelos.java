@@ -333,6 +333,10 @@ public class frmListaVuelos extends JFrame{
 
 	private void buscarVuelos()
 	{
+		if(origen.getSelectedItem().equals(destino.getSelectedItem())){
+			JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar un destino factible.","Atencion", JOptionPane.WARNING_MESSAGE);
+		}
+		else{
 
 		contentPane.removeAll();
 		index=0;
@@ -350,7 +354,7 @@ public class frmListaVuelos extends JFrame{
 		}
 		VentanaInicial();
 		contentPane.revalidate();
-		
+		}
 	}
 	
 	private void parametrosBusqueda () {
@@ -368,7 +372,7 @@ public class frmListaVuelos extends JFrame{
 		}
 		else {
 			fechaIda = null;
-			JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar una fecha de ida.");
+			JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar una fecha de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
 		System.out.println("Buscando de " + aeropuerto_origen + " a " + aeropuerto_destino + " para el dia "+ fechaIda);
 
@@ -428,9 +432,9 @@ public class frmListaVuelos extends JFrame{
 		try
 		{
 			calendarIda.getDate();
-			if(numPasajeros<=0)JOptionPane.showMessageDialog(null, "Lo sentimos, debe seleccionar al menos un pasajero.");
-			else if (numPasajeros>10)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede adquirir mas de 10 billetes.");
-			else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.");
+			if(numPasajeros<=0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar al menos un pasajero.","Atencion", JOptionPane.WARNING_MESSAGE);
+			else if (numPasajeros>10)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede adquirir mas de 10 billetes.","Atencion", JOptionPane.WARNING_MESSAGE);
+			else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
 			else
 			{
 				idaCorrecta=true;
@@ -443,13 +447,13 @@ public class frmListaVuelos extends JFrame{
 		}
 		catch(NullPointerException e1)
 		{
-			JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de ida.");
+			JOptionPane.showMessageDialog(contentPane, "Introduzca correctamente la fecha de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
 		try
 		{
 			calendarVuelta.getDate();
-			if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.");
-			else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.");
+			if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
+			else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
 			else
 			{
 				if (idaCorrecta==true && btnIdaYVuelta.isSelected())
@@ -461,7 +465,7 @@ public class frmListaVuelos extends JFrame{
 		}
 		catch(NullPointerException e1)
 		{
-			JOptionPane.showMessageDialog(null, "Introduzca correctamente la fecha de vuelta.");
+			JOptionPane.showMessageDialog(contentPane, "Introduzca correctamente la fecha de vuelta.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 

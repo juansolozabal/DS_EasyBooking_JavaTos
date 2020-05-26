@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -139,33 +140,39 @@ public class frmPasajeros extends JFrame
 	
 	private void buttonSiguiente(ActionEvent evt1)
 	{
+		try{
 		controller.introducirPersonaReserva(Integer.parseInt(textField_2.getText()), textField.getText(), textField_1.getText());
 		Persona pasajero = new Persona(Integer.parseInt(textField_2.getText()), textField.getText(), textField_1.getText());
 		pasajeros.add(pasajero);
-//		textField.setText("");
-//		textField_1.setText("");
-//		textField_2.setText("");		
+		
 		contentPane.removeAll();
-//		textField.updateUI();
-//		textField_1.updateUI();
-//		textField_2.updateUI();
+
 		j++;
 		VentanaInicial();
 		contentPane.revalidate();
+		}catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(contentPane, "Introduzca los datos correctamente.","Atencion", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 	private void buttonPagar(ActionEvent evt2)
 	{
-		//salvaProperties();
-		// TODO hay que pensar como hacer esto. Hay que recoger esto de arriba, quizas
-		//haya que crear una lista auxiliar en la que se guardan los datos de los 
-		//pasajeros. Otra forma mas sencilla es meter los pasajeros de uno en uno
-		// darle aceptar y que se vacien los campos y se llame a introducirPersonaReserva
-		//controller.introducirPersonasReserva(dni, nombre, apellidos);
-		frmPago pago = new frmPago(controller);
-		pago.setVisible(true);
-		this.setVisible(false);
-//		controller.hacerReserva(codVuelo, correo, pasajeros);
+		try{
+			//salvaProperties();
+			// TODO hay que pensar como hacer esto. Hay que recoger esto de arriba, quizas
+			//haya que crear una lista auxiliar en la que se guardan los datos de los 
+			//pasajeros. Otra forma mas sencilla es meter los pasajeros de uno en uno
+			// darle aceptar y que se vacien los campos y se llame a introducirPersonaReserva
+			//controller.introducirPersonasReserva(dni, nombre, apellidos);
+			frmPago pago = new frmPago(controller);
+			pago.setVisible(true);
+			this.setVisible(false);
+	//		controller.hacerReserva(codVuelo, correo, pasajeros);
+		}catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(contentPane, "Introduzca los datos correctamente.","Atencion", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 		
 }
