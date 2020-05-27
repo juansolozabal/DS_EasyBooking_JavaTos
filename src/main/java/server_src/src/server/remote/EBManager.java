@@ -43,8 +43,10 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public void registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
-		EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
+	public boolean registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
+		if (EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo)==true)
+				EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellidos, correo);
+		return EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
 	}
 
 	@Override
@@ -102,30 +104,30 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 	
 	public void anyadirUsuario(String nombre, String apellido, String correo) throws RemoteException {
-		EBgestorDAO.anyadirUsuario(nombre, apellido, correo);
+		EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellido, correo);
 	}
 
 	public void eliminarUsuario(Usuario usu)throws RemoteException {
-		EBgestorDAO.eliminarUsuario(usu);
+		EBgestorDAO.getGestorDAO().eliminarUsuario(usu);
 	}
 	public void actualizarUsuario(String correo, String nombre, String apellido)throws RemoteException {
-		EBgestorDAO.actualizarUsuario(correo, nombre, apellido);
+		EBgestorDAO.getGestorDAO().actualizarUsuario(correo, nombre, apellido);
 	}
 	public void actualizarReserva(Reserva actu)throws RemoteException {
-		EBgestorDAO.actualizarReserva(actu);
+		EBgestorDAO.getGestorDAO().actualizarReserva(actu);
 	}
 
 	public ArrayList<Usuario> selectUsuarios()throws RemoteException {
-		return EBgestorDAO.selectUsuarios();
+		return EBgestorDAO.getGestorDAO().selectUsuarios();
 	}
 
 	public ArrayList<Reserva> selectReservas()throws RemoteException {
-		return EBgestorDAO.selectReservas();
+		return EBgestorDAO.getGestorDAO().selectReservas();
 	}
 
 	@Override
 	public void indicarSesionDAO(String correo, String contrasenya) throws RemoteException {
-		EBgestorDAO.indicarSesionDAO(correo);		
+		EBgestorDAO.getGestorDAO().indicarSesionDAO(correo);		
 	}
 	
 }

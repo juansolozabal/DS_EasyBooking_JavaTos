@@ -344,7 +344,7 @@ public class frmListaVuelos extends JFrame{
 
 		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
 		numBusquedas = vuelosCargados.size();
-
+		numPasajeros = (int)spinner.getValue();
 		for(int i=0; i<numBusquedas; i++)
 		{
 
@@ -426,15 +426,14 @@ public class frmListaVuelos extends JFrame{
 	}
 	
 	private void buttonReservar(ActionEvent evt)
-	{
-		numPasajeros=(Integer)spinner.getValue();	
+	{	
 		boolean idaCorrecta=false;
+		if(numPasajeros==0)numPasajeros=(int) spinner.getValue();
 		try
 		{
-			calendarIda.getDate();
 			if(numPasajeros<=0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar al menos un pasajero.","Atencion", JOptionPane.WARNING_MESSAGE);
 			else if (numPasajeros>10)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede adquirir mas de 10 billetes.","Atencion", JOptionPane.WARNING_MESSAGE);
-			else if (fechaHoy.getDate().compareTo(calendarIda.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
+	//		else if (fechaHoy.getDate().toString().compareTo(vuelosCargados.get(index).getFecha_salida())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de ida anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
 			else
 			{
 				idaCorrecta=true;
@@ -451,25 +450,23 @@ public class frmListaVuelos extends JFrame{
 		}
 		try
 		{
-			calendarVuelta.getDate();
-			if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
-			else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
-			else
-			{
-				if (idaCorrecta==true && btnIdaYVuelta.isSelected())
-				{
-					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
-					inicioregistro.setVisible(true);
-				}
-			}
+	//		calendarVuelta.getDate();
+	//		if (fechaHoy.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de hoy.","Atencion", JOptionPane.WARNING_MESSAGE);
+	//		else if (calendarIda.getDate().compareTo(calendarVuelta.getDate())>0)JOptionPane.showMessageDialog(contentPane, "Lo sentimos, no puede seleccionar una fecha de vuelta anterior a la de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
+//			else
+//			{
+				if (idaCorrecta==true && btnIdaYVuelta.isSelected())JOptionPane.showMessageDialog(contentPane, 
+						"Funcion de ida y vuelta no disponible en estos momentos. Para hacer una "
+						+ "reserva seleccione la opcion de ida. Lamentamos las molestias.","Atencion", JOptionPane.WARNING_MESSAGE);
+//			}
 		}
 		catch(NullPointerException e1)
 		{
 			JOptionPane.showMessageDialog(contentPane, "Introduzca correctamente la fecha de vuelta.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
 	}
-
-	public static int getNumPasajeros() {
+	public static int getNumPasajeros()
+	{
 		return numPasajeros;
-	}	
+	}
 }

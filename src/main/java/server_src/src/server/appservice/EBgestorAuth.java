@@ -40,7 +40,6 @@ public class EBgestorAuth {
 			else
 			{
 				System.out.println("Inicio sesion exitoso");
-				//Usuario user = new Usuario((int)(100000 * Math.random()), "", "", correo);
 				return true;
 			}
 		} catch (Exception e) {
@@ -50,13 +49,27 @@ public class EBgestorAuth {
 		}
 	}
 	
-	public void registrarse (String nombre, String apellidos, String correo)
+	public boolean registrarse (String nombre, String apellidos, String correo)
 	{
 		try {
-			this.authGway.createUser(nombre, apellidos, correo);
+			long contrasenya = 0;
+			contrasenya = this.authGway.createUser(nombre, apellidos, correo);
+			boolean confirmacion = false;
+			if(contrasenya!=0)confirmacion=true;
+			if (confirmacion==false)
+			{
+				System.out.println("Registro no permitido");
+				return false;
+			}
+			else
+			{
+				System.out.println("Registro exitoso");
+				return true;
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 	

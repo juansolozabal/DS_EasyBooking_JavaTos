@@ -39,7 +39,7 @@ public class EBgestorDAO {
 		return gestorDAO;
 	}	
 	
-	public static void anyadirUsuario(String nombre, String apellido, String correo)
+	public void anyadirUsuario(String nombre, String apellido, String correo)
 	{
 		try
         {
@@ -76,7 +76,7 @@ public class EBgestorDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void anyadirReserva(int cod_vuelo, ArrayList<Persona> pasajeros)
+	public void anyadirReserva(int cod_vuelo, ArrayList<Persona> pasajeros)
 	{
 		try
         {
@@ -114,7 +114,7 @@ public class EBgestorDAO {
 		}
 	}
 	
-	public static void eliminarUsuario(Usuario usu)
+	public void eliminarUsuario(Usuario usu)
 	{
 		try
         {
@@ -147,7 +147,7 @@ public class EBgestorDAO {
 	}
 	
 	
-	public static void actualizarUsuario(String correo, String nombre, String apellido)
+	public void actualizarUsuario(String correo, String nombre, String apellido)
 	{
 		try
         {
@@ -183,7 +183,7 @@ public class EBgestorDAO {
 		}
 	}
 
-	public static void actualizarReserva(Reserva actu)
+	public void actualizarReserva(Reserva actu)
 	{
 		try
         {
@@ -224,7 +224,7 @@ public class EBgestorDAO {
 		}
 	}
 	
-	public static ArrayList<Usuario> selectUsuarios()
+	public ArrayList<Usuario> selectUsuarios()
 	{
 		try
         {
@@ -258,7 +258,7 @@ public class EBgestorDAO {
 		return usus;
 	}
 	
-	public static ArrayList<Reserva> selectReservas()
+	public ArrayList<Reserva> selectReservas()
 	{
 		try
         {
@@ -291,7 +291,7 @@ public class EBgestorDAO {
 		return reses;
 	}
 	
-	public static void indicarSesionDAO(String correo)
+	public void indicarSesionDAO(String correo)
 	{
 		usuarioSesion = persistentManager.getObjectById(Usuario.class, correo);
 	}

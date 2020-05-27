@@ -265,7 +265,7 @@ public class frmInicioRegistro extends JFrame
 	private void buttonRegistrarse2(ActionEvent evt)
 	{
 		this.setVisible(false);
-		controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
+		loginResult = controller.registrarse(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
 		//controller.anyadirUsuario(nombre.getText().toString(), apellido.getText().toString(), correo.getText().toString());
 		if (loginResult==true)
 		{

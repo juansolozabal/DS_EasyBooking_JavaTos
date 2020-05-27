@@ -50,14 +50,16 @@ public class EBController {
 		}
 	}
 	
-	public void registrarse(String nombre, String apellidos, String correo)
+	public boolean registrarse(String nombre, String apellidos, String correo)
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.registrarse(nombre, apellidos, correo);
+			return ieb.registrarse(nombre, apellidos, correo);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			System.err.println("$ Error al registrarse: " + e.toString());		}
+			System.err.println("$ Error al registrarse: " + e.toString());	
+			return false;
+			}
 	}
 	
 	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) 
