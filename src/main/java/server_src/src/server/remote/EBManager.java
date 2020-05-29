@@ -47,6 +47,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		boolean registro = EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
 		if (registro)
 				EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellidos, correo);
+				EBgestorDAO.getGestorDAO().indicarSesionDAO(correo);
 		return registro;
 	}
 

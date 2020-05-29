@@ -266,7 +266,6 @@ public class frmInicioRegistro extends JFrame
 	{
 		this.setVisible(false);
 		loginResult = controller.registrarse(nomtxt.getText(), apetxt.getText(), corretxt.getText());
-		controller.anyadirUsuario(nomtxt.getText(), apetxt.getText(), corretxt.getText());
 		if (loginResult==true)
 		{
 			JOptionPane.showMessageDialog(null, "Registro exitoso!");
