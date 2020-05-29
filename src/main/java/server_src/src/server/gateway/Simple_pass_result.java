@@ -30,8 +30,16 @@ public class Simple_pass_result implements M_Printable
 
     public long getContentNumber()
     {
+    	
     	System.out.println("Password: " + content);
-        return Long.parseLong(content);
+    	try{
+    		return Long.parseLong(content);	
+    	}
+    	catch (NumberFormatException n) {
+    		System.out.println("No se puede parsear un objeto de tipo NULL");
+    	}
+    	return (Long) null;
+        
     }
 
     @Override

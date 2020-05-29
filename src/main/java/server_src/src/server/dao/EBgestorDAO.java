@@ -44,7 +44,7 @@ public class EBgestorDAO {
 		try
         {
 			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("../../datanucleus.properties");
+			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("..\\..\\resources\\datanucleus.properties");
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
@@ -65,11 +65,16 @@ public class EBgestorDAO {
 		}
 		
 		finally
-		{		    
-			if (transaction.isActive()) 
-			{
-		        transaction.rollback();
-		    }
+		{		
+			try {
+				if (transaction.isActive()) 
+				{
+			        transaction.rollback();
+			    }
+			}
+			catch (NullPointerException n) {
+				System.out.println("Ha pasado por el catch del DAO.");
+			}
 		    
 		    persistentManager.close();
 		}

@@ -44,9 +44,10 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public boolean registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
-		if (EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo)==true)
+		boolean registro = EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
+		if (registro)
 				EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellidos, correo);
-		return EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
+		return registro;
 	}
 
 	@Override

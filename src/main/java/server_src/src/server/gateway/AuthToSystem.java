@@ -41,8 +41,11 @@ public class AuthToSystem implements IGatewayAuth{
 		Simple_pass_result result_class_password = null;
 		String reply = response.readEntity(String.class);
 		
-	
-		result_class_password = new Simple_pass_result(reply);
+		try {
+			result_class_password = new Simple_pass_result(reply);
+		}
+		catch (Exception e){e.printStackTrace(); e.toString();}
+		result_class_password.print();
 
 		long password = result_class_password.getContentNumber();
 		return password;
