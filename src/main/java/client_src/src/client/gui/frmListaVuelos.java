@@ -76,6 +76,9 @@ public class frmListaVuelos extends JFrame{
 	private Object[] parametros_busqueda;
 	private JTextArea precio, ciudades, fecha, hora, cod_aero_origen, cod_aero_destino;
 	private Color azulFondo, azulClaro;
+	private Date dateIda;
+	private Aeropuerto aeropuerto_origen, aeropuerto_destino;
+	private boolean soloIdaIsSelected;
 	JButton sig, ant;
 
 	public frmListaVuelos(EBController controller) 
@@ -85,7 +88,7 @@ public class frmListaVuelos extends JFrame{
 		if(vuelosCargados==null)cargarVuelos();
 		else buscarVuelos();
 		cargarAeropuertos();
-
+		soloIdaIsSelected = false;
 		
 		VentanaInicial();	
 		
@@ -124,7 +127,6 @@ public class frmListaVuelos extends JFrame{
 			}
 		});
 		contentPane.add(btnIdaYVuelta);
-		btnIdaYVuelta.setSelected(true);
 		idaOidavuelta.add(btnIdaYVuelta);
 		
 		btnIda = new JRadioButton("Solo ida");
@@ -138,6 +140,13 @@ public class frmListaVuelos extends JFrame{
 		});
 		contentPane.add(btnIda);	
 		idaOidavuelta.add(btnIda);
+		
+		if(soloIdaIsSelected) {
+			btnIda.setSelected(true);
+		}
+		else {
+			btnIdaYVuelta.setSelected(true);
+		}
 		
 		origen = new JComboBox();
 		destino = new JComboBox();
@@ -159,10 +168,13 @@ public class frmListaVuelos extends JFrame{
 		calendarIda.setBounds(12, 89, 100, 25);
 		contentPane.add(calendarIda);
 		
+		
 		calendarVuelta = new JDateChooser(null, null, null, new JSpinnerDateEditor()); 
 		calendarVuelta.setForeground(azulClaro);
 		calendarVuelta.setBounds(123, 89, 100, 25);
 		contentPane.add(calendarVuelta);
+		
+		if(soloIdaIsSelected) {calendarVuelta.setVisible(false);}
 	
 		JLabel nBusquedas = new JLabel("N\u00FAmero de busquedas: " + numBusquedas);
 		nBusquedas.setForeground(Color.white);
@@ -304,6 +316,8 @@ public class frmListaVuelos extends JFrame{
 		contentPane.add(ant);
 		if(index==numBusquedas-1)sig.setEnabled(false);
 		if(index==0)			 ant.setEnabled(false);
+		
+		establecerValores();
 
 	}
 	private void buttonSiguiente(ActionEvent evt1)
@@ -337,14 +351,14 @@ public class frmListaVuelos extends JFrame{
 			JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar un destino factible.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
 		else{
-
-		contentPane.removeAll();
+		numPasajeros = (int)spinner.getValue();
 		index=0;
 		parametrosBusqueda();
-
 		vuelosCargados = controller.buscarVuelos(parametros_busqueda);
 		numBusquedas = vuelosCargados.size();
-		numPasajeros = (int)spinner.getValue();
+
+		contentPane.removeAll();
+		
 		for(int i=0; i<numBusquedas; i++)
 		{
 
@@ -358,30 +372,30 @@ public class frmListaVuelos extends JFrame{
 	}
 	
 	private void parametrosBusqueda () {
-		
-		
-		String aeropuerto_origen = origen.getSelectedItem().toString();
-		String aeropuerto_destino = destino.getSelectedItem().toString();
+		aeropuerto_origen = (Aeropuerto) origen.getSelectedItem();
+		aeropuerto_destino = (Aeropuerto) destino.getSelectedItem();
+		String aeropuerto_origen_str = origen.getSelectedItem().toString();
+		String aeropuerto_destino_str = destino.getSelectedItem().toString();
 		String fechaIda;
 		System.out.println("Sacando la fecha obtenida del JCalendar por pantalla:");
 		System.out.println(calendarIda.getDate().toString());
 		if(calendarIda.getDate()!=null) {
-			Date date = calendarIda.getDate();
+			dateIda = calendarIda.getDate();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-			fechaIda = dateFormat.format(date);
+			fechaIda = dateFormat.format(dateIda);
 		}
 		else {
 			fechaIda = null;
 			JOptionPane.showMessageDialog(contentPane, "Lo sentimos, debe seleccionar una fecha de ida.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
-		System.out.println("Buscando de " + aeropuerto_origen + " a " + aeropuerto_destino + " para el dia "+ fechaIda);
+		System.out.println("Buscando de " + aeropuerto_origen_str + " a " + aeropuerto_destino_str + " para el dia "+ fechaIda);
 
 		int free_seats = numPasajeros;
 		
 		
 		parametros_busqueda = new Object[5];
-		parametros_busqueda[0] = aeropuerto_origen;
-		parametros_busqueda[1] = aeropuerto_destino;
+		parametros_busqueda[0] = aeropuerto_origen_str;
+		parametros_busqueda[1] = aeropuerto_destino_str;
 		parametros_busqueda[2] = free_seats;
 		parametros_busqueda[3] = 20000.0; // No filtraremos por precio, de ahi que pongamos un precio maximo demasiado alto.
 		parametros_busqueda[4] = fechaIda;
@@ -400,11 +414,13 @@ public class frmListaVuelos extends JFrame{
 	private void buttonIda(ActionEvent evt)
 	{
 		if(btnIda.isSelected()) calendarVuelta.setVisible(false);
+		soloIdaIsSelected = true;
 	}
 	
 	private void buttonIdaYVuelta(ActionEvent evt)
 	{
 		if(btnIda.isSelected()==false) calendarVuelta.setVisible(true);
+		soloIdaIsSelected = false;
 	}
 	
 	private void buttonLogotipoInicial(ActionEvent evt)
@@ -439,6 +455,7 @@ public class frmListaVuelos extends JFrame{
 				idaCorrecta=true;
 				if(btnIda.isSelected())
 				{
+					reiniciarValores();
 					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
 					inicioregistro.setVisible(true);
 				}
@@ -464,6 +481,43 @@ public class frmListaVuelos extends JFrame{
 		{
 			JOptionPane.showMessageDialog(contentPane, "Introduzca correctamente la fecha de vuelta.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
+	}
+	
+	private void reiniciarValores() {
+		System.out.println("Ha pasado por el metodo de Reiniciar Valores");
+		parametros_busqueda = null;
+		dateIda = null;
+		aeropuerto_destino = null;
+		aeropuerto_origen = null;
+	}
+	
+	private void establecerValores() {
+	System.out.println("Ha pasado por establecer valores");
+		try {
+			if(parametros_busqueda[0] != null) {
+				origen.setSelectedItem(aeropuerto_origen);
+				System.out.println("Origen: " + parametros_busqueda[0]);
+			}
+			if(parametros_busqueda[1] != null) {
+				destino.setSelectedItem(aeropuerto_destino);
+				System.out.println("Destino: " + parametros_busqueda[1]);
+			}
+			if(parametros_busqueda[2] != null) {
+				System.out.println("Numero de pasajeros: " + parametros_busqueda[2]);
+				spinner.setValue(parametros_busqueda[2]);
+				numPasajeros = (int) spinner.getValue();
+			}
+			if(parametros_busqueda[4] != null) {
+				calendarIda.setDate(dateIda);
+			}
+			if(soloIdaIsSelected) {
+				
+			}
+		}
+		catch(NullPointerException n) {
+			System.out.println("Todavia no hay parametros de busqueda en aeropuerto destino.");
+		}
+
 	}
 	public static int getNumPasajeros()
 	{
