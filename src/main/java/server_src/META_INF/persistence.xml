@@ -11,7 +11,7 @@
         <class>src.server.dto.Persona</class>
         <exclude-unlisted-classes/>
         <properties>
-            <property name="javax.jdo.option.ConnectionURL" value="jdbc:hsqldb:mem:datanucleus"/>
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:mysql://remotemysql.com:3306/db4hFGoBHE"/>
             <property name="javax.jdo.option.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
             <property name="javax.jdo.option.ConnectionUserName" value="db4hFGoBHE"/>
             <property name="javax.jdo.option.ConnectionPassword" value="zCt1wUkWlA"/>
