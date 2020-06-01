@@ -164,11 +164,10 @@ public class frmPasajeros extends JFrame
 			//haya que crear una lista auxiliar en la que se guardan los datos de los 
 			//pasajeros. Otra forma mas sencilla es meter los pasajeros de uno en uno
 			// darle aceptar y que se vacien los campos y se llame a introducirPersonaReserva
-			//controller.introducirPersonasReserva(dni, nombre, apellidos);
 			frmPago pago = new frmPago(controller);
 			pago.setVisible(true);
 			this.setVisible(false);
-	//		controller.hacerReserva(codVuelo, correo, pasajeros);
+			controller.hacerReserva(frmListaVuelos.getCodVueloReserva(), frmInicioRegistro.getCorreoSesion(), pasajeros);
 		}catch(Exception e)
 		{
 			JOptionPane.showMessageDialog(contentPane, "Introduzca los datos correctamente.","Atencion", JOptionPane.WARNING_MESSAGE);

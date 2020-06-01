@@ -38,16 +38,21 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	
 	@Override
 	public boolean iniciarSesion(String correo, String contrasenya) throws RemoteException {
-		return EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
+		boolean inicio = EBgestorAuth.getGestorAuth().iniciarSesion(correo, contrasenya);
+		if (inicio){
+				EBgestorDAO.getGestorDAO().indicarSesionDAO(correo);
+		}
+		return inicio;
 
 	}
 
 	@Override
 	public boolean registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
 		boolean registro = EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
-		if (registro)
+		if (registro){
 				EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellidos, correo);
 				EBgestorDAO.getGestorDAO().indicarSesionDAO(correo);
+		}
 		return registro;
 	}
 
@@ -61,8 +66,8 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException {
-		EBgestorPagos.getGestorPagos().hacerReserva(codVuelo, correo, pasajeros);
+	public void hacerReserva(String codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException {
+		EBgestorDAO.getGestorDAO().anyadirReserva(codVuelo, pasajeros);
 		
 	}
 

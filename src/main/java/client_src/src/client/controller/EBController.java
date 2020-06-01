@@ -85,7 +85,7 @@ public class EBController {
 		}
 		return null;
 	}
-	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros)
+	public void hacerReserva(String codVuelo, String correo, ArrayList<Persona> pasajeros)
 	{
 		ieb = rsl.getService();
 		try {
@@ -127,6 +127,17 @@ public class EBController {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al guardar usuario en BD: " + e.toString());		
+		}
+	}
+	
+	public void indicarSesionDAO(String correo, String contrasenya)
+	{
+		ieb = rsl.getService();
+		try {
+			ieb.indicarSesionDAO(correo, contrasenya);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			System.err.println("$ Error al obtener sesion actual de la BD: " + e.toString());		
 		}
 	}
 	

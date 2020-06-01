@@ -15,7 +15,7 @@ public interface IEBManager extends Remote {
 	public boolean iniciarSesion(String correo, String contrasenya) throws RemoteException;
 	public boolean registrarse(String nombre, String apellidos, String correo) throws RemoteException;
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos) throws RemoteException;
-	public void hacerReserva(int codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException;
+	public void hacerReserva(String codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException;
 	public void pagarPayPal(String email, String contrasenya) throws RemoteException;
 	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException;
 	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) throws RemoteException; //Se buscan vuelos en un fecha especifica

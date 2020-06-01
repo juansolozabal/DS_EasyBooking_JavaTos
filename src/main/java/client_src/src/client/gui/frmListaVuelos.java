@@ -79,11 +79,11 @@ public class frmListaVuelos extends JFrame{
 	private Date dateIda;
 	private Aeropuerto aeropuerto_origen, aeropuerto_destino;
 	private boolean soloIdaIsSelected;
+	private static String codVueloReserva;
 	JButton sig, ant;
 
 	public frmListaVuelos(EBController controller) 
 	{
-		System.out.println("Se mete en el constructor.");
 		this.controller = controller;
 		if(vuelosCargados==null)cargarVuelos();
 		else buscarVuelos();
@@ -342,6 +342,10 @@ public class frmListaVuelos extends JFrame{
 		vuelosCargados = controller.getVuelos();
 		numBusquedas = vuelosCargados.size();
 		System.out.println("El numero de vuelos cargados es: " + numBusquedas);
+		for(int i=0; i<numBusquedas; i++)
+		{
+			vuelosCargados.get(i).setCod_vuelo(Integer.toString(i));
+		}
 	}
 	
 
@@ -456,6 +460,7 @@ public class frmListaVuelos extends JFrame{
 				if(btnIda.isSelected())
 				{
 					reiniciarValores();
+					codVueloReserva=vuelosCargados.get(index).getCod_vuelo();
 					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
 					inicioregistro.setVisible(true);
 				}
@@ -522,5 +527,9 @@ public class frmListaVuelos extends JFrame{
 	public static int getNumPasajeros()
 	{
 		return numPasajeros;
+	}
+	public static String getCodVueloReserva()
+	{
+		return codVueloReserva;
 	}
 }

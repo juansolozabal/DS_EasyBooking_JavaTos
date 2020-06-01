@@ -36,6 +36,7 @@ public class frmInicioRegistro extends JFrame
 	private JTextField dnitxt;
 	private JLabel nombre, apellido, correo, dni;
 	private static boolean loginResult;
+	private static String correoSesion;
 
 
 	public frmInicioRegistro(EBController controller)
@@ -268,11 +269,13 @@ public class frmInicioRegistro extends JFrame
 		loginResult = controller.registrarse(nomtxt.getText(), apetxt.getText(), corretxt.getText());
 		if (loginResult==true)
 		{
-			JOptionPane.showMessageDialog(null, "Registro exitoso!");
+			correoSesion=corretxt.getText();
+			JOptionPane.showMessageDialog(contentPane, "Registro exitoso!");
 			frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
 			datosPasajeros.setVisible(true);
+			correoSesion="";
 		}
-	else JOptionPane.showMessageDialog(null, "Registro fallido.");
+	else JOptionPane.showMessageDialog(contentPane, "Registro fallido.");
 	}
 	
 	private void buttonAtras(ActionEvent evt)
@@ -285,5 +288,8 @@ public class frmInicioRegistro extends JFrame
 
 	public static boolean getLoginResult() {
 		return loginResult;
+	}
+	public static String getCorreoSesion() {
+		return correoSesion;
 	}
 }

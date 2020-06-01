@@ -32,10 +32,10 @@ public class EBgestorPagos {
 		pagosGway = new PagosToSystem(args);
 	}
 	
-	public void hacerReserva (int codVuelo, String nomUsuario, ArrayList<Persona> pasajeros)
-	{
-	//	this.pagosGway.hacerReserva(codVuelo, nomUsuario, pasajeros);
-	}
+//	public void hacerReserva (String codVuelo, String nomUsuario, ArrayList<Persona> pasajeros)
+//	{
+//		
+//	}
 	
 	public void pagarPayPal (String email, String contrasenya)
 	{

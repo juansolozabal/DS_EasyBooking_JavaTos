@@ -81,7 +81,7 @@ public class EBgestorDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void anyadirReserva(int cod_vuelo, ArrayList<Persona> pasajeros)
+	public void anyadirReserva(String cod_vuelo, ArrayList<Persona> pasajeros)
 	{
 		try
         {
@@ -298,10 +298,28 @@ public class EBgestorDAO {
 	
 	public void indicarSesionDAO(String correo)
 	{
+		try{
 		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		persistentManager = persistentManagerFactory.getPersistenceManager();
+		transaction = persistentManager.currentTransaction();
+		transaction.begin();
 		usuarioSesion = persistentManager.getObjectById(Usuario.class, correo);
-	}
-	
-	
+	    transaction.commit();
+		}
+
+        catch(Exception ex)
+		{
+			System.err.println("* Exception indicando sesion DAO: " + ex.getMessage());
+		}
+		
+		finally
+		{		    
+			if (transaction.isActive()) 
+			{
+		        transaction.rollback();
+		    }
+		    
+		    persistentManager.close();
+		}
+	}	
 }
