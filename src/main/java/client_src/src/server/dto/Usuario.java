@@ -1,5 +1,6 @@
 package src.server.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.jdo.annotations.Element;
@@ -10,7 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 
-public class Usuario {
+public class Usuario implements Serializable {
 	@PrimaryKey
 	private String correo;
 	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)

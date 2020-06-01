@@ -92,20 +92,23 @@ public class EBgestorDAO {
 		    transaction.begin();		    
 		    
 		    Reserva res = new Reserva(cod_vuelo);
-		    res.setPersonasRes((Set<Persona>) pasajeros);
+		    res.addPersonasRes(pasajeros);
 		    usuarioSesion.getReservas().add(res);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(res);
 
 		    //Imprimimos lo que hemos introducido en la BD
 		    System.out.println("- Inserted into db: " + res.getId_reserva());
+		    for(Persona p: res.getPersonasRes()) {
+		    	System.out.println("- Inserted into db passenger: " + p.getNombre() + " " + p.getApellido());
+		    }
 		    
 		    transaction.commit();
 		}
 
         catch(Exception ex)
 		{
-			System.err.println("* Exception inserting data into db: " + ex.getMessage());
+			System.err.println("* Exception inserting user into db: " + ex.getMessage());
 		}
 		
 		finally

@@ -1,5 +1,6 @@
 package src.server.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Reserva {
+public class Reserva implements Serializable {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
 	private long id_reserva;
@@ -53,7 +54,11 @@ public class Reserva {
 	public void setPersonasRes(Set<Persona> personasRes) {
 		this.personasRes = personasRes;
 	}
-	
+	public void addPersonasRes(ArrayList<Persona> personas) {
+		for (Persona p: personas) {
+			this.personasRes.add(p);
+		}
+	}
 	
 
 }

@@ -13,11 +13,11 @@ import src.server.dto.Vuelo;
 public interface IEBManager extends Remote {
 
 	public boolean iniciarSesion(String correo, String contrasenya) throws RemoteException;
-	public boolean registrarse(String nombre, String apellidos, String correo) throws RemoteException;
+	public boolean registrarse(String nombre, String apellidos, String correo, float amount) throws RemoteException;
 	public void introducirPersonaReserva(int dni, String nombre, String apellidos) throws RemoteException;
 	public void hacerReserva(String codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException;
-	public void pagarPayPal(String email, String contrasenya) throws RemoteException;
-	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException;
+	public void pagarPayPal(String email, float amount, String concepto, String cod_vuelo, ArrayList<Persona> personas) throws RemoteException;
+	public void pagarVisa(String email, float amount, String concepto, String cod_vuelo, ArrayList<Persona> personas) throws RemoteException;
 	public ArrayList<Vuelo> buscarVuelos(Object[] parametros_busqueda) throws RemoteException; //Se buscan vuelos en un fecha especifica
 	public ArrayList<Vuelo> getVuelos() throws RemoteException; //Al arranque del programa se recogeran todos los vuelos
 	public String comprobacionConexion() throws RemoteException;

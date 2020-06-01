@@ -50,11 +50,11 @@ public class EBController {
 		}
 	}
 	
-	public boolean registrarse(String nombre, String apellidos, String correo)
+	public boolean registrarse(String nombre, String apellidos, String correo, float amount)
 	{
 		ieb = rsl.getService();
 		try {
-			return ieb.registrarse(nombre, apellidos, correo);
+			return ieb.registrarse(nombre, apellidos, correo, amount);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al registrarse: " + e.toString());	
@@ -97,22 +97,22 @@ public class EBController {
 	}
 
 	
-	public void pagarPayPal(String email, String contrasenya) 
+	public void pagarPayPal(String email, float amount, String concepto, String cod_vuelo, ArrayList<Persona> personas) 
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.pagarPayPal(email, contrasenya);
+			ieb.pagarPayPal(email, amount, concepto, cod_vuelo, personas);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al pagar con PayPal: " + e.toString());		
 		}
 	}
 	
-	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) 
+	public void pagarVisa(String email, float amount, String concepto, String cod_vuelo, ArrayList<Persona> personas) 
 	{
 		ieb = rsl.getService();
 		try {
-			ieb.pagarVisa(nomTitular, numTarj, venc, cvc);
+			ieb.pagarVisa(email, amount, concepto, cod_vuelo, personas);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			System.err.println("$ Error al pagar con Visa: " + e.toString());		

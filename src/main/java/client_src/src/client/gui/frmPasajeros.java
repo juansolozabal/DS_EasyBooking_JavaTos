@@ -44,11 +44,17 @@ public class frmPasajeros extends JFrame
 	Color azulFondo, azulClaro;
 	JButton sig, btnNewButton;
 	ArrayList<Persona>pasajeros=new ArrayList<>();
+	private float cantidadAPagar;
+	private String email, concepto, codVueloReserva;
 	
-	public frmPasajeros (EBController controller, int numPasajeros)
+	public frmPasajeros (EBController controller, int numPasajeros, float cantidadAPagar, String correo, String codVueloReserva)
 	{
 		this.controller = controller;
+		this.cantidadAPagar = cantidadAPagar;
+		this.email = correo;
+		this.codVueloReserva = codVueloReserva;
 		numeroPasajeros=numPasajeros;
+		concepto = new String();
 		VentanaInicial();				
 	}
 	
@@ -141,7 +147,6 @@ public class frmPasajeros extends JFrame
 	private void buttonSiguiente(ActionEvent evt1)
 	{
 		try{
-		controller.introducirPersonaReserva(Integer.parseInt(textField_2.getText()), textField.getText(), textField_1.getText());
 		Persona pasajero = new Persona(Integer.parseInt(textField_2.getText()), textField.getText(), textField_1.getText());
 		pasajeros.add(pasajero);
 		
@@ -164,14 +169,23 @@ public class frmPasajeros extends JFrame
 			//haya que crear una lista auxiliar en la que se guardan los datos de los 
 			//pasajeros. Otra forma mas sencilla es meter los pasajeros de uno en uno
 			// darle aceptar y que se vacien los campos y se llame a introducirPersonaReserva
-			frmPago pago = new frmPago(controller);
-			pago.setVisible(true);
+//			frmPago pago = new frmPago(controller, cantidadAPagar);
+			concepto = concepto();
+			controller.pagarPayPal(email, cantidadAPagar, concepto, codVueloReserva, pasajeros);
+//			pago.setVisible(true);
 			this.setVisible(false);
-			controller.hacerReserva(frmListaVuelos.getCodVueloReserva(), frmInicioRegistro.getCorreoSesion(), pasajeros);
-		}catch(Exception e)
+		} catch(Exception e)
 		{
 			JOptionPane.showMessageDialog(contentPane, "Introduzca los datos correctamente.","Atencion", JOptionPane.WARNING_MESSAGE);
 		}
+	}
+	
+	private String concepto() {
+		
+		int conYesNo = JOptionPane.showConfirmDialog(contentPane, "¿Desea introducir concepto al pago que se va a efectuar?");
+		if (conYesNo==0) return JOptionPane.showInputDialog(contentPane, "Introduzca el concepto: ");
+		else{return "";}
+		
 	}
 		
 }

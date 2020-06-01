@@ -47,9 +47,12 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public boolean registrarse(String nombre, String apellidos, String correo)	throws RemoteException {
-		boolean registro = EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo);
+	public boolean registrarse(String nombre, String apellidos, String correo, float amount)throws RemoteException {
+		boolean registro = EBgestorAuth.getGestorAuth().registrarse(nombre, apellidos, correo) && 
+				EBgestorPagos.getGestorPagos().crearUsuario(nombre, apellidos, correo, amount);
+		
 		if (registro){
+			System.out.println("Va a llamar al gestorDAO");
 				EBgestorDAO.getGestorDAO().anyadirUsuario(nombre, apellidos, correo);
 				EBgestorDAO.getGestorDAO().indicarSesionDAO(correo);
 		}
@@ -72,24 +75,24 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 	}
 
 	@Override
-	public void pagarVisa(String nomTitular, int numTarj, Date venc, int cvc) throws RemoteException{
-		EBgestorPagos.getGestorPagos().pagarVisa(nomTitular, numTarj, venc, cvc);
+	public void pagarVisa(String email, float amount, String concept, String cod_vuelo, ArrayList<Persona> personas) throws RemoteException{
+		String respuesta = EBgestorPagos.getGestorPagos().pagarVisa(email, amount, concept);
 		
-		//Esto es lo que se haria en caso de tener acceso a la BD
-//		if(EBgestorPagos.getGestorPagos().pagarVisa(nomTitular, numTarj, venc, cvc)!= "False"){
-//			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo);
-//		}
+		if(!respuesta.equals("False")){
+			System.out.println("Se ha introducido en el metodo de guardado de reserva en el DAO.");
+			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo, personas);
+		}
 		
 	}
 
 	@Override
-	public void pagarPayPal(String email, String contrasenya) throws RemoteException{
-		EBgestorPagos.getGestorPagos().pagarPayPal(email, contrasenya);
+	public void pagarPayPal(String email, float amount, String concept, String cod_vuelo, ArrayList<Persona> personas) throws RemoteException{
+		String respuesta = EBgestorPagos.getGestorPagos().pagarVisa(email, amount, concept);
 		
-		//Esto es lo que se haria en caso de tener acceso a la BD
-//		if(EBgestorPagos.getGestorPagos().pagarPayPal(email, contrasenya)!= "False"){
-//			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo);
-//		}
+		if(!respuesta.equals("False")){
+			System.out.println("Se ha introducido en el metodo de guardado de reserva en el DAO.");
+			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo, personas);
+		}
 	}
 
 	@Override

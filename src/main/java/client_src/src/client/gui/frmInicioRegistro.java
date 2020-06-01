@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -34,14 +35,19 @@ public class frmInicioRegistro extends JFrame
 	private JTextField apetxt;
 	private JTextField nomtxt;
 	private JTextField dnitxt;
-	private JLabel nombre, apellido, correo, dni;
+	private JSpinner saldotxt;
+	private JLabel nombre, apellido, correo, dni, saldo;
 	private static boolean loginResult;
 	private static String correoSesion;
+	private float cantidadAPagar;
+	private String codVueloReserva;
 
 
-	public frmInicioRegistro(EBController controller)
+	public frmInicioRegistro(EBController controller, float cantidadAPagar, String codVueloReserva)
 	{
 		this.controller = controller;
+		this.cantidadAPagar = cantidadAPagar;
+		this.codVueloReserva = codVueloReserva;
 		setTitle("EasyBooking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 100, 600, 431);
@@ -210,6 +216,17 @@ public class frmInicioRegistro extends JFrame
 		corretxt.setBounds(275, 150, 160, 25);
 		contentPane.add(corretxt);
 		
+		saldo = new JLabel("Saldo inicial:");
+		saldo.setForeground(Color.white);
+		saldo.setBounds(155, 210, 160, 25);
+		contentPane.add(saldo);
+		
+		saldotxt = new JSpinner();
+		saldotxt.getEditor().getComponent(0).setBackground(Color.white);
+		saldotxt.setBounds(275, 210, 75, 30);
+		contentPane.add(saldotxt);
+		
+		
 		JButton btnMeterUsuarios = new JButton("Registrarse");
 		btnMeterUsuarios.setBounds(205, 320, 180, 25);
 		btnMeterUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +265,7 @@ public class frmInicioRegistro extends JFrame
 			{
 				//aqui un controller para decirle al dao quien ha iniciado sesion
 				JOptionPane.showMessageDialog(null, "Inicio de sesion exitoso!");
-				frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
+				frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros(), cantidadAPagar, corretxt.getText(), codVueloReserva);
 				datosPasajeros.setVisible(true);
 			}
 		else JOptionPane.showMessageDialog(null, "Inicio de sesion fallido.");
@@ -266,12 +283,14 @@ public class frmInicioRegistro extends JFrame
 	private void buttonRegistrarse2(ActionEvent evt)
 	{
 		this.setVisible(false);
-		loginResult = controller.registrarse(nomtxt.getText(), apetxt.getText(), corretxt.getText());
+		float saldo = Float.parseFloat(saldotxt.getValue().toString());
+		loginResult = controller.registrarse(nomtxt.getText(), apetxt.getText(), corretxt.getText(), saldo);
 		if (loginResult==true)
 		{
 			correoSesion=corretxt.getText();
 			JOptionPane.showMessageDialog(contentPane, "Registro exitoso!");
-			frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros());
+			frmPasajeros datosPasajeros = new frmPasajeros(controller, frmListaVuelos.getNumPasajeros(), cantidadAPagar, 
+					correoSesion, codVueloReserva);
 			datosPasajeros.setVisible(true);
 			correoSesion="";
 		}

@@ -79,7 +79,8 @@ public class frmListaVuelos extends JFrame{
 	private Date dateIda;
 	private Aeropuerto aeropuerto_origen, aeropuerto_destino;
 	private boolean soloIdaIsSelected;
-	private static String codVueloReserva;
+	private String codVueloReserva;
+	private float precioReserva;
 	JButton sig, ant;
 
 	public frmListaVuelos(EBController controller) 
@@ -89,6 +90,7 @@ public class frmListaVuelos extends JFrame{
 		else buscarVuelos();
 		cargarAeropuertos();
 		soloIdaIsSelected = false;
+		codVueloReserva = new String();
 		
 		VentanaInicial();	
 		
@@ -434,12 +436,6 @@ public class frmListaVuelos extends JFrame{
 		this.setVisible(false);
 	}
 	
-	private void buttonIrInicioRegistro(ActionEvent evt)
-	{
-		frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
-		inicioregistro.setVisible(true);
-	}
-	
 	private void buttonBuscarVuelos(ActionEvent evt)
 	{
 		buscarVuelos();
@@ -461,7 +457,8 @@ public class frmListaVuelos extends JFrame{
 				{
 					reiniciarValores();
 					codVueloReserva=vuelosCargados.get(index).getCod_vuelo();
-					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller);
+					precioReserva = vuelosCargados.get(index).getPrice();
+					frmInicioRegistro inicioregistro = new frmInicioRegistro(controller, precioReserva, codVueloReserva);
 					inicioregistro.setVisible(true);
 				}
 			}
@@ -527,9 +524,5 @@ public class frmListaVuelos extends JFrame{
 	public static int getNumPasajeros()
 	{
 		return numPasajeros;
-	}
-	public static String getCodVueloReserva()
-	{
-		return codVueloReserva;
 	}
 }

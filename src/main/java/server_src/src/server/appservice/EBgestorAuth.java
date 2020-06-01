@@ -63,12 +63,12 @@ public class EBgestorAuth {
 			}
 			else
 			{
-				System.out.println("Registro exitoso");
+				System.out.println("¡Registro en el microservicio de Autenticacion exitoso!");
 				return true;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.toString();
 			return false;
 		}
 	}

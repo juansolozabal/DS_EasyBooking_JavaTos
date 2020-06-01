@@ -54,7 +54,7 @@ public class frmPago extends JFrame  {
 	private JTextField emailtxt;
 	private JPasswordField contxt;
 
-	public frmPago(EBController controller)
+	public frmPago(EBController controller, float cantidad)
 	{
 		this.controller = controller;
 		fechaHoy = new JDateChooser();
@@ -303,7 +303,7 @@ public class frmPago extends JFrame  {
 		try{
 			vencimientoDate.getDate();
 			if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta esta caducada.");
-			controller.pagarVisa(titulartxt.getText().toString(), Integer.parseInt(n_tarjetatxt.getText()), vencimientoDate.getDate(), Integer.parseInt(cvctxt.getText()));
+//			controller.pagarVisa(titulartxt.getText(), Integer.parseInt(n_tarjetatxt.getText()), vencimientoDate.getDate(), Integer.parseInt(cvctxt.getText()));
 		} 
 		catch(NullPointerException e1)
 		{
@@ -318,7 +318,7 @@ public class frmPago extends JFrame  {
 		try{
 			vencimientoDate.getDate();
 			if (fechaHoy.getDate().compareTo(vencimientoDate.getDate())>0)JOptionPane.showMessageDialog(null, "Lo sentimos, su tarjeta esta caducada.");
-			controller.pagarPayPal(emailtxt.getText().toString(), contxt.getText().toString());
+//			controller.pagarPayPal(emailtxt.getText().toString(), contxt.getText().toString());
 		} 
 		catch(NullPointerException e1)
 		{
