@@ -43,7 +43,7 @@ public class frmPasajeros extends JFrame
 	private static int numeroPasajeros=0;
 	Color azulFondo, azulClaro;
 	JButton sig, btnNewButton;
-	ArrayList<Persona>pasajeros=new ArrayList<>();
+	ArrayList<Persona>pasajeros;
 	private float cantidadAPagar;
 	private String email, concepto, codVueloReserva;
 	
@@ -53,6 +53,7 @@ public class frmPasajeros extends JFrame
 		this.cantidadAPagar = cantidadAPagar;
 		this.email = correo;
 		this.codVueloReserva = codVueloReserva;
+		this.pasajeros = new ArrayList<>();
 		numeroPasajeros=numPasajeros;
 		concepto = new String();
 		VentanaInicial();				
@@ -170,6 +171,9 @@ public class frmPasajeros extends JFrame
 			//pasajeros. Otra forma mas sencilla es meter los pasajeros de uno en uno
 			// darle aceptar y que se vacien los campos y se llame a introducirPersonaReserva
 //			frmPago pago = new frmPago(controller, cantidadAPagar);
+			Persona pasajero = new Persona(Integer.parseInt(textField_2.getText()), textField.getText(), textField_1.getText());
+			pasajeros.add(pasajero);
+			
 			concepto = concepto();
 			controller.pagarPayPal(email, cantidadAPagar, concepto, codVueloReserva, pasajeros);
 //			pago.setVisible(true);

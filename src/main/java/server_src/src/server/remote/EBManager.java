@@ -70,7 +70,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 
 	@Override
 	public void hacerReserva(String codVuelo, String correo, ArrayList<Persona> pasajeros) throws RemoteException {
-		EBgestorDAO.getGestorDAO().anyadirReserva(codVuelo, pasajeros);
+		EBgestorDAO.getGestorDAO().anyadirReserva(correo, codVuelo, pasajeros);
 		
 	}
 
@@ -80,7 +80,11 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		
 		if(!respuesta.equals("False")){
 			System.out.println("Se ha introducido en el metodo de guardado de reserva en el DAO.");
-			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo, personas);
+			System.out.println("Tamanyo del ArrayList en EBManager: " + personas.size());
+		    for(Persona p: personas) {
+		    	System.out.println("Personas a introducir en EBManager: " + p.getNombre() + " " + p.getApellido());
+		    }
+			EBgestorDAO.getGestorDAO().anyadirReserva(email, cod_vuelo, personas);
 		}
 		
 	}
@@ -91,7 +95,7 @@ public class EBManager extends UnicastRemoteObject implements IEBManager{
 		
 		if(!respuesta.equals("False")){
 			System.out.println("Se ha introducido en el metodo de guardado de reserva en el DAO.");
-			EBgestorDAO.getGestorDAO().anyadirReserva(cod_vuelo, personas);
+			EBgestorDAO.getGestorDAO().anyadirReserva(email, cod_vuelo, personas);
 		}
 	}
 

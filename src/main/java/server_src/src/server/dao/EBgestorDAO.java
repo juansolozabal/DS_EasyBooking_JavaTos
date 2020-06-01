@@ -28,7 +28,11 @@ public class EBgestorDAO {
 	private static ArrayList<Reserva> reses;
 	private static Usuario usuarioSesion;
 
-	private EBgestorDAO(){}
+	private EBgestorDAO(){
+		
+		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		usuarioSesion = new Usuario(null, null, null);
+	}
 	
 	public static EBgestorDAO getGestorDAO()
 	{
@@ -44,7 +48,6 @@ public class EBgestorDAO {
 		try
         {
 			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
@@ -52,6 +55,8 @@ public class EBgestorDAO {
 		    Usuario usu = new Usuario(nombre, apellido, correo);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(usu);
+
+			usuarioSesion = persistentManager.getObjectById(Usuario.class, correo);
 
 		    //Imprimimos lo que hemos introducido en la BD
 		    System.out.println("- Inserted into db: " + usu.getNombre());
@@ -61,7 +66,7 @@ public class EBgestorDAO {
 
         catch(Exception ex)
 		{
-			System.err.println("* Exception inserting data into db: " + ex.getMessage());
+			System.err.println("* Exception inserting user into db: " + ex.getMessage());
 		}
 		
 		finally
@@ -76,39 +81,51 @@ public class EBgestorDAO {
 				System.out.println("Ha pasado por el catch del DAO.");
 			}
 		    
-		    persistentManager.close();
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void anyadirReserva(String cod_vuelo, ArrayList<Persona> pasajeros)
+	public void anyadirReserva(String correo, String cod_vuelo, ArrayList<Persona> pasajeros)
 	{
 		try
         {
-			//Duda con la linea que viene a continuacion
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+//			selectUsuarios();
+//			System.out.println("Correo a comparar: " + correo);
+//			for (Usuario u: usus) {
+//				System.out.println("Usuarios en la BD: " + u.getCorreo());
+//				if(correo.equals(u.getCorreo())) {
+//					usuarioSesion = u;
+//				}
+//			}
+//			System.out.println("Tamanyo del ArrayList: " + pasajeros.size());
 			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();		    
 		    
+		    System.out.println("Imprimiendo cod_vuelo: " + cod_vuelo);
 		    Reserva res = new Reserva(cod_vuelo);
+		    
+		    System.out.println("Reserva creada.");
 		    res.addPersonasRes(pasajeros);
+		    
+		    System.out.println("- Usuario actualmente en sesion: " + usuarioSesion.getNombre() + usuarioSesion.getApellido());
+
 		    usuarioSesion.getReservas().add(res);
 		    //Persistimos los datos en la BD
 		    persistentManager.makePersistent(res);
-
+		    persistentManager.makePersistent(usuarioSesion);
+		    System.out.println("Se ha hecho la reserva persitente.");
 		    //Imprimimos lo que hemos introducido en la BD
-		    System.out.println("- Inserted into db: " + res.getId_reserva());
+//		    System.out.println("- Inserted into db: " + res.getId_reserva());
 		    for(Persona p: res.getPersonasRes()) {
 		    	System.out.println("- Inserted into db passenger: " + p.getNombre() + " " + p.getApellido());
 		    }
 		    
 		    transaction.commit();
-		}
+        }
 
         catch(Exception ex)
 		{
-			System.err.println("* Exception inserting user into db: " + ex.getMessage());
+			System.err.println("* Exception inserting Reserva into db: " + ex.getMessage());
 		}
 		
 		finally
@@ -126,7 +143,6 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 		    transaction.begin();
 		    
@@ -159,7 +175,6 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 
 			//Esta de aqui abajo es la manera en la que estaba antes
@@ -195,7 +210,6 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 			transaction = persistentManager.currentTransaction();
 
 			//Esta de aqui abajo es la manera en la que estaba antes
@@ -236,7 +250,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 			System.out.println("");
 			transaction.begin();
@@ -270,7 +284,7 @@ public class EBgestorDAO {
 	{
 		try
         {
-			persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+			persistentManager = persistentManagerFactory.getPersistenceManager();
 			transaction = persistentManager.currentTransaction();
 			System.out.println("");
 			transaction.begin();
@@ -302,7 +316,6 @@ public class EBgestorDAO {
 	public void indicarSesionDAO(String correo)
 	{
 		try{
-		persistentManagerFactory = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		persistentManager = persistentManagerFactory.getPersistenceManager();
 		transaction = persistentManager.currentTransaction();
 		transaction.begin();

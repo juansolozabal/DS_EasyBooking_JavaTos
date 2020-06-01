@@ -112,6 +112,10 @@ public class EBController {
 	{
 		ieb = rsl.getService();
 		try {
+			System.out.println("Tamanyo del ArrayList en EBController: " + personas.size());
+		    for(Persona p: personas) {
+		    	System.out.println("Personas a introducir en EBController: " + p.getNombre() + " " + p.getApellido());
+		    }
 			ieb.pagarVisa(email, amount, concepto, cod_vuelo, personas);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
